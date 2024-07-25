@@ -250,3 +250,205 @@ Deletes an existing notebook.
       "message": "Notebook couldn't be found"
     }
     ```
+
+
+# Notes
+## **Get notes of current user - Returns all the notes of the current user**
+
+Require Authentication: true
+
+_**Request**_
+* Method: GET
+* URL: /api/notes
+* Body: none
+
+_**Successful Response**_
+* Status Code: 200
+* Headers:
+_Content-Type: application/json_
+* Body:
+>
+> [
+>
+> {
+> “id”: 1,
+> “title”: “Test Note 1”,
+> “content”: “This is a test note”,
+> “notebookId”: 1,
+> “userId”: 1,
+> “created_at”: “2024-07-24 19:42:13.424242”,
+> “updated_at”: null
+> },
+>
+> {
+> “id”: 2,
+> “Title”: “Test Note 2”,
+> “Content”: “This is another test note”,
+> “NotebookId”: 2,
+> “userId”: 1,
+> “created_at”: “2024-07-24 19:42:13.424243”,
+> “updated_at”: null
+> }
+>
+> ]
+
+## **Create a note - creates a new note ready to be updated**
+
+Require Authentication: true
+
+_**Request**_
+* Method: POST
+*URL: /api/notes
+* Body:
+
+> {
+>
+> “Title” : “Testing Clevernote”,
+>
+> “Content”: “Note for testing 1”
+>
+> }
+
+_**Successful Response**_
+* Status Code: 201
+* Headers:
+_Content-Type: application/json_
+* Body:
+
+> [
+>
+> {
+> “id”: 5,
+> “Title”: “Testing Clevernote”,
+> “Content”: “Note for testing 1”,
+> “NotebookId”: 4,
+> “userId”: 3,
+> “created_at”: “2024-07-24 19:58:13.4242”
+> “Updated_at”: null
+> }
+>
+> ]
+
+**_Error Response_**
+* Status Code: 400
+* Headers:
+_Content-Type: application/json_
+* Body:
+
+> {
+>
+> “Message”: “Bad Request”,
+>
+> “errors”:
+>  {
+> “title” : “Title is required”,
+> “content” : “Content is required”
+> }
+>
+> }
+
+## **Update a note - update a note, autosave**
+_**Request**_
+* Method: PUT
+* URL: /api/notes/:noteid
+* Headers:
+_Content-Type: application/json_
+* Body:
+>
+> {
+>
+> “Title”: “Edit Title 1”,
+>
+> “Content”: “Edit this content”,
+>
+> “NotebookId”: 5
+>
+> }
+
+_**Successful Response**_
+* Status Code: 200
+* Headers:
+_Content-Type: application/json_
+* Body:
+>
+> {
+>
+> “Id” : 1,
+> “Title”: “Edit Title 1”,
+> “Content”: “Edit this content”,
+> “NotebookId”: 5,
+> “userId”: 3,
+> “created_at”: “2024-07-24 19:58:13.4242”,
+> “Updated_at”: “2024-07-24 20:16:42.1313”
+>
+> }
+
+_**Error Response 1**_
+* Status Code: 400
+* Headers:
+_Content-Type: application/json_
+* Body:
+>
+> 	{
+>
+> “Message”: “Bad Request”,
+>
+> “errors”:
+>  {
+> “title” : “Title is required”,
+> “content” : “Content is required”
+> }
+>
+> }
+
+**_Error Response 2_**
+* Status Code: 404
+* Headers:
+_Content-Type: application/json_
+* Body:
+
+> {
+> “Message” : “Note couldn’t be found”
+> }
+
+## **Delete a note - delete a note, update shows the note was deleted without refresh**
+
+Require Authentication: true
+
+_**Request**_
+* Method: DELETE
+* URL: /api/notes/:noteid
+* Body: none
+
+_**Successful Response**_
+* Status Code: 200
+* Headers:
+_Content-Type: application/json_
+* Body:
+
+> {
+> “Message” : “Note deleted successfully
+> }
+
+_**Error Response **_
+* Status Code: 404
+* Headers:
+_Content-Type: application/json_
+* Body:
+
+> {
+> “Message” : “Note couldn’t be found”
+> }
+
+> Potential API to add in the future for admin reference: get detail of all notes.
+> It could possibly include:
+> * noteId
+> * title
+> * created_at
+> * updated_at
+> * character_count
+> * word_count
+> * spaces_count
+> * paragraph_count
+> * total_updates
+> * last_updated
