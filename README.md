@@ -1119,3 +1119,180 @@ A logged-in user can delete a tag
 "Message": "Tag could not be found"
 }
 
+
+
+
+
+# API Reference ‐ Frontend
+
+## Notebooks
+
+### All Notebooks
+
+* URL: "/notebooks"
+* Auth Required: True
+* Content:
+  * This will show a list of all the user's notebooks
+
+### Selected Notebook
+
+* URL: "/notebooks/:id"
+* Auth Required: True
+* Content:
+  * This will show a list of all the notes inside the selected notebook
+
+### Edit Selected Notebook
+
+* URL: "/notebooks/:id/edit"
+* Auth Required: True
+* Content:
+  * This will have a form to edit the notebook
+
+# Notes
+
+## Tasks
+
+**GET /tasks**
+
+* Fetches a list of tasks for the logged-in user.
+* Displays task details such as title, description, status, due date, and priority.
+
+**POST /tasks**
+
+* Creates a new task with the provided details.
+
+Request Body:
+
+```json
+{
+
+"title": "Task Title",
+
+"description": "Task Description",
+
+"status": "pending",
+
+"due_date": "YYYY-MM-DD",
+
+"priority": "low|medium|high"
+
+}
+```
+
+**PUT /tasks/**
+
+* Updates an existing task with new details.
+
+Request Body:
+
+```json
+{
+
+"title": "Updated Task Title",
+
+"description": "Updated Task Description",
+
+"status": "pending|completed",
+
+"due_date": "YYYY-MM-DD",
+
+"priority": "low|medium|high"
+
+}
+```
+
+**DELETE /tasks/**
+
+* Deletes the specified task.
+
+#### Task Details Page
+
+This page displays the details of a single task, including options to edit or delete the task.
+
+**GET /tasks/**
+
+* Fetches the details of a specific task by its ID.
+* Displays task details such as title, description, status, due date, and priority.
+
+**POST /tasks/status**
+
+* Updates the status of the specified task.
+* Request Body:
+
+Request Body:
+
+```json
+{
+
+"status": "pending|completed"
+
+}
+```
+
+**POST /tasks/priority**
+
+* Updates the priority of the specified task.
+
+Request Body:
+
+```json
+{
+
+"priority": "low|medium|high"
+
+}
+```
+
+#### Potential Additional Endpoints
+
+These endpoints allow for managing task attributes such as reminders and tags.
+
+**POST /tasks/reminder**
+
+* Sets a reminder for the specified task.
+
+Request Body:
+
+```json
+{
+
+"reminder_time": "HH:MM",
+
+"reminder_date": "YYYY-MM-DD"
+
+}
+````
+
+**DELETE /tasks/reminder**
+
+* Removes the reminder for the specified task.
+
+**POST /tasks/tags**
+
+* Adds tags to the specified task.
+
+Request Body:
+
+```json
+{
+
+"tags": ["tag1", "tag2"]
+
+}
+```
+
+**DELETE /tasks/tags**
+
+* Removes tags from the specified task.
+
+Request Body:
+
+```json
+{
+
+"tags": ["tag1", "tag2"]
+
+}
+```
+
+# Tags
