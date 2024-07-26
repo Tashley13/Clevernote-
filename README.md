@@ -1,6 +1,6 @@
 # Clevernote-
 
-# API Docs
+# API Reference - Backend
 
 ## NOTEBOOKS
 
@@ -250,6 +250,474 @@ Deletes an existing notebook.
       "message": "Notebook couldn't be found"
     }
     ```
+
+# Tasks
+
+#### Create a New Task
+
+A logged-in user can create a new task.
+
+**POST** `/api/tasks`
+
+**Require Authentication:** True
+
+**Request Body:**
+
+```json
+
+{
+
+"title": "Buy groceries",
+
+"description": "Get milk, bread, and eggs",
+
+"status": "pending",
+
+"due_date": "2024-08-01"
+
+}
+```
+**Response:**
+
+**Status Code:** 201
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+{
+
+"id": 1,
+
+"user_id": 1,
+
+"title": "Buy groceries",
+
+"description": "Get milk, bread, and eggs",
+
+"status": "pending",
+
+"due_date": "2024-08-01",
+
+"created_at": "2024-07-24T14:15:22Z",
+
+"updated_at": "2024-07-24T14:15:22Z"
+
+}
+```
+**Error Response:**
+
+**Status Code:** 400
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+{
+
+"message": "Bad Request",
+
+"errors": { "title" : "Title is required", "description" : "Description is required" }
+
+}
+```
+
+
+
+#### View All Tasks
+
+A logged-in user can view all of their tasks.
+
+**GET**`/api/tasks`
+
+**Require Authentication:** True
+
+**Succesful Response:**
+
+**Status Code:** 200
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+
+[
+
+{
+
+"id": 1,
+
+"user_id": 1,
+
+"title": "Buy groceries",
+
+"description": "Get milk, bread, and eggs",
+
+"status": "pending",
+
+"due_date": "2024-08-01",
+
+"created_at": "2024-07-24T14:15:22Z",
+
+"updated_at": "2024-07-24T14:15:22Z"
+
+},
+
+{
+
+"id": 2,
+
+"user_id": 1,
+
+"title": "Finish project",
+
+"description": "Complete the Clevernote project",
+
+"status": "completed",
+
+"due_date": "2024-07-25",
+
+"created_at": "2024-07-24T14:20:22Z",
+
+"updated_at": "2024-07-24T14:20:22Z"
+
+}
+
+]
+```
+
+**Status Code:** 401
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+{
+
+"message": "Unauthorized"
+
+}
+```
+
+
+### View a Single Task
+
+A logged-in user can view a specific task.
+
+**GET** `/api/tasks/:id`
+
+**Require Authentication:** True
+
+**Succesful Response:**
+```json
+{
+
+"id": 1,
+
+"user_id": 1,
+
+"title": "Buy groceries",
+
+"description": "Get milk, bread, and eggs",
+
+"status": "pending",
+
+"due_date": "2024-08-01",
+
+"created_at": "2024-07-24T14:15:22Z",
+
+"updated_at": "2024-07-24T14:15:22Z"
+
+}
+```
+
+**Error Response:**
+
+**Status Code:** 404
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+{
+
+"message": "Task not found"
+
+}
+```
+
+#### Update a Task
+
+A logged-in user can update an existing task.
+
+**PUT** `/api/tasks/:id`
+
+**Require Authentication:** True
+
+**Request Body:**
+```json
+{
+
+"title": "Buy groceries and vegetables",
+
+"description": "Get milk, bread, eggs, and carrots",
+
+"status": "pending",
+
+"due_date": "2024-08-02"
+
+}
+```
+**Successful Response:**
+
+**Status Code:** 200
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+{
+
+"id": 1,
+
+"user_id": 1,
+
+"title": "Buy groceries and vegetables",
+
+"description": "Get milk, bread, eggs, and carrots",
+
+"status": "pending",
+
+"due_date": "2024-08-02",
+
+"created_at": "2024-07-24T14:15:22Z",
+
+"updated_at": "2024-07-24T14:30:22Z"
+
+}
+```
+**Error Response:**
+
+**Status Code:** 400
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+{
+
+"message": "Bad Request",
+
+"errors": { "title" : "Title is required", "description" : "Description is required" }
+
+}
+```
+#### Delete a Task
+
+A logged-in user can delete a task.
+
+**DELETE** `/api/tasks/:id`
+
+**Require Authentication:** True
+
+**Successful Response:**
+
+**Status Code:** 200
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+{
+
+"message": "Task deleted successfully."
+
+}
+```
+**Error Response:**
+
+**Status Code:** 404
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+{
+
+"message": "Task not found"
+
+}
+```
+### Mark Task as Completed
+
+A logged-in user can mark a task as completed.
+
+**PUT** `/api/tasks/:id/completed`
+
+**Require Authentication:** True
+
+**Request Body:**
+```json
+{
+
+"status": "completed"
+
+}
+```
+**Succesful Response:**
+
+**Status Code: 200**
+
+**Headers: Content-Type:** application/json
+
+**Body:**
+```json
+{
+
+"id": 1,
+
+"user_id": 1,
+
+"title": "Buy groceries",
+
+"description": "Get milk, bread, and eggs",
+
+"status": "completed",
+
+"due_date": "2024-08-01",
+
+"created_at": "2024-07-24T14:15:22Z",
+
+"updated_at": "2024-07-24T14:45:22Z"
+
+}
+```
+**Error Response:**
+
+**Status Code:** 400
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+{
+
+"message": "Bad Request",
+
+"errors": { "status" : "Status is required" }
+
+}
+```
+### Search Tasks by Title
+
+A logged-in user can search for tasks by title.
+
+**GET** `/api/tasks/search?title=:title`
+
+**Require Authentication:** True
+
+**Successful Response:**
+
+**Status Code:** 200
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+[
+
+{
+
+"id": 1,
+
+"user_id": 1,
+
+"title": "Buy groceries",
+
+"description": "Get milk, bread, and eggs",
+
+"status": "pending",
+
+"due_date": "2024-08-01",
+
+"created_at": "2024-07-24T14:15:22Z",
+
+"updated_at": "2024-07-24T14:15:22Z"
+
+}
+
+]
+```
+**Error Response:**
+
+**Status Code:** 404
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+{
+
+"message": "No tasks found"
+
+}
+```
+
+### Filtering Tasks by Status
+
+A logged-in user can filter tasks by their status.
+
+**GET** `/api/tasks?status=:status`
+
+**Require Authentication:** True
+
+**Succesful Response:**
+
+**Status Code:** 200
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+[
+
+{
+
+"id": 2,
+
+"user_id": 1,
+
+"title": "Finish project",
+
+"description": "Complete the Clevernote project",
+
+"status": "completed",
+
+"due_date": "2024-07-25",
+
+"created_at": "2024-07-24T14:20:22Z",
+
+"updated_at": "2024-07-24T14:20:22Z"
+
+}
+
+]
+```
+**Error Response:**
+
+**Status Code:** 404
+
+**Headers:** Content-Type: application/json
+
+**Body:**
+```json
+{
+
+"message": "No tasks found"
+
+}
+```
+
 
 
 # Notes
