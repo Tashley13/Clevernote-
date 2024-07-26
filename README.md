@@ -920,3 +920,202 @@ _Content-Type: application/json_
 > * paragraph_count
 > * total_updates
 > * last_updated
+
+## Get all tags from current user
+
+A logged-in user can view all of their created tags
+
+**Require Authentication:** True
+
+**_Request:_**
+
+* Method: GET
+* URL: /api/tags
+* Headers: Content-Type: application/json
+* Body: none
+
+**_Successful Response:_**
+* Status Code: 200
+* Headers: Content-Type: application/json
+* Body:
+[
+{
+"id": 1
+"tagName": "Test Tag 1"
+"createdAt": 2024-07-25 19:58:13.4242"
+},
+{
+"id": 2
+"tagName": "Test Tag 2"
+"createdAt": 2024-07-25 19:58:13.4242"
+}
+]
+
+## Search for notes associated with a tag
+
+A logged-in user can view their notes which have a specific tag associated with them
+
+**Require Authentication:** True
+
+**_Request:_**
+
+* Method: GET
+* URL: /api/tags/:tagId/notes
+* Headers: Content-Type: application/json
+* Body:
+{
+"id": 1
+"tagName": "Test Tag 1"
+}
+
+**Successful Response:**
+
+* Status Code: 200
+* Headers: _Content-Type: application/json_
+* Body:
+
+{
+"id": 1,
+"tagName": "Test Tag 1"
+"createdAt": "2024-07-25 19:58:13.4242"
+"updatedAt": null
+"noteId": 1
+"title": "Sample Note 1"
+"content": "Sample Note Content Here"
+}
+
+**_Error Response:_**
+
+* Status Code: 404
+* Headers: Content-Type: application/json
+* Body:
+{
+"Message": "Tag could not be found"
+}
+
+## **Create a tag
+
+A logged-in user can create new tags
+
+**Require Authentication:** True
+
+_**Request:**_
+
+* Method: POST
+* URL: /api/tags
+* Body:
+
+{
+tagName: "Test Tag 1"
+}
+
+**Successful Response:**
+
+* Status Code: 200
+* Headers: _Content-Type: application/json_
+* Body:
+
+{
+"id": 1,
+"tagName": "Test Tag 1"
+"createdAt": "2024-07-25 19:58:13.4242"
+"updatedAt": null
+}
+
+
+**_Error Response_:**
+
+* Status Code: 400
+* Headers: _Content-Type: application/json_
+* Body:
+{
+"Message": "Bad Request",
+
+"errors":
+{
+"tagName": "Tag name is required"
+}
+}
+
+## Update a tag
+
+A logged-in user can edit and update their tags
+
+**Required Authentication:** True
+
+_**Request:**_
+
+* Method: PUT
+* URL: /api/tags/:tagId
+* Body:
+
+{
+tagName: "Update Tag 1"
+}
+
+**Successful Response:**
+
+* Status Code: 200
+* Headers: _Content-Type: application/json_
+* Body:
+
+[
+{
+"id": 1,
+"tagName": "Update Tag 1"
+"createdAt": "2024-07-25 19:58:13.4242"
+"updatedAt": 2024-07-25 20:58:13.4242
+}
+]
+
+**_Error Response_:**
+
+* Status Code: 400
+* Headers: _Content-Type: application/json_
+* Body:
+{
+"Message": "Bad Request",
+
+"errors":
+{
+"tagName": "Tag name is required"
+}
+}
+
+**_Error Response 2_:**
+
+* Status Code: 404
+* Headers: **_Content-Type: application/json_**
+* Body:
+{
+"Message": "Tag could not be found"
+}
+
+## Delete a tag
+
+A logged-in user can delete a tag
+
+**Require Authentication:** True
+
+**_Request:_**
+* Method: DELETE
+* URL: /api/tags/:tagId
+* Body: none
+
+**_Successful Response:_**
+* Status Code: 200
+* Headers: Content-Type: application/json
+* Body:
+{
+"Message": "Tag deleted successfully"
+}
+
+**_Error Response:_**
+
+* Status Code: 404
+* Headers: Content-Type: application/json
+* Body:
+{
+"Message": "Tag could not be found"
+}
+
