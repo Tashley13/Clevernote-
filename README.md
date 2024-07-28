@@ -920,3 +920,379 @@ _Content-Type: application/json_
 > * paragraph_count
 > * total_updates
 > * last_updated
+
+## Get all tags from current user
+
+A logged-in user can view all of their created tags
+
+**Require Authentication:** True
+
+**_Request:_**
+
+* Method: GET
+* URL: /api/tags
+* Headers: Content-Type: application/json
+* Body: none
+
+**_Successful Response:_**
+* Status Code: 200
+* Headers: Content-Type: application/json
+* Body:
+[
+{
+"id": 1
+"tagName": "Test Tag 1"
+"createdAt": 2024-07-25 19:58:13.4242"
+},
+{
+"id": 2
+"tagName": "Test Tag 2"
+"createdAt": 2024-07-25 19:58:13.4242"
+}
+]
+
+## Search for notes associated with a tag
+
+A logged-in user can view their notes which have a specific tag associated with them
+
+**Require Authentication:** True
+
+**_Request:_**
+
+* Method: GET
+* URL: /api/tags/:tagId/notes
+* Headers: Content-Type: application/json
+* Body:
+{
+"id": 1
+"tagName": "Test Tag 1"
+}
+
+**Successful Response:**
+
+* Status Code: 200
+* Headers: _Content-Type: application/json_
+* Body:
+
+{
+"id": 1,
+"tagName": "Test Tag 1"
+"createdAt": "2024-07-25 19:58:13.4242"
+"updatedAt": null
+"noteId": 1
+"title": "Sample Note 1"
+"content": "Sample Note Content Here"
+}
+
+**_Error Response:_**
+
+* Status Code: 404
+* Headers: Content-Type: application/json
+* Body:
+{
+"Message": "Tag could not be found"
+}
+
+## **Create a tag
+
+A logged-in user can create new tags
+
+**Require Authentication:** True
+
+_**Request:**_
+
+* Method: POST
+* URL: /api/tags
+* Body:
+
+{
+tagName: "Test Tag 1"
+}
+
+**Successful Response:**
+
+* Status Code: 200
+* Headers: _Content-Type: application/json_
+* Body:
+
+{
+"id": 1,
+"tagName": "Test Tag 1"
+"createdAt": "2024-07-25 19:58:13.4242"
+"updatedAt": null
+}
+
+
+**_Error Response_:**
+
+* Status Code: 400
+* Headers: _Content-Type: application/json_
+* Body:
+{
+"Message": "Bad Request",
+
+"errors":
+{
+"tagName": "Tag name is required"
+}
+}
+
+## Update a tag
+
+A logged-in user can edit and update their tags
+
+**Required Authentication:** True
+
+_**Request:**_
+
+* Method: PUT
+* URL: /api/tags/:tagId
+* Body:
+
+{
+tagName: "Update Tag 1"
+}
+
+**Successful Response:**
+
+* Status Code: 200
+* Headers: _Content-Type: application/json_
+* Body:
+
+[
+{
+"id": 1,
+"tagName": "Update Tag 1"
+"createdAt": "2024-07-25 19:58:13.4242"
+"updatedAt": 2024-07-25 20:58:13.4242
+}
+]
+
+**_Error Response_:**
+
+* Status Code: 400
+* Headers: _Content-Type: application/json_
+* Body:
+{
+"Message": "Bad Request",
+
+"errors":
+{
+"tagName": "Tag name is required"
+}
+}
+
+**_Error Response 2_:**
+
+* Status Code: 404
+* Headers: **_Content-Type: application/json_**
+* Body:
+{
+"Message": "Tag could not be found"
+}
+
+## Delete a tag
+
+A logged-in user can delete a tag
+
+**Require Authentication:** True
+
+**_Request:_**
+* Method: DELETE
+* URL: /api/tags/:tagId
+* Body: none
+
+**_Successful Response:_**
+* Status Code: 200
+* Headers: Content-Type: application/json
+* Body:
+{
+"Message": "Tag deleted successfully"
+}
+
+**_Error Response:_**
+
+* Status Code: 404
+* Headers: Content-Type: application/json
+* Body:
+{
+"Message": "Tag could not be found"
+}
+
+
+
+
+
+# API Reference ‐ Frontend
+
+## Notebooks
+
+### All Notebooks
+
+* URL: "/notebooks"
+* Auth Required: True
+* Content:
+  * This will show a list of all the user's notebooks
+
+### Selected Notebook
+
+* URL: "/notebooks/:id"
+* Auth Required: True
+* Content:
+  * This will show a list of all the notes inside the selected notebook
+
+### Edit Selected Notebook
+
+* URL: "/notebooks/:id/edit"
+* Auth Required: True
+* Content:
+  * This will have a form to edit the notebook
+
+# Notes
+
+## Tasks
+
+**GET /tasks**
+
+* Fetches a list of tasks for the logged-in user.
+* Displays task details such as title, description, status, due date, and priority.
+
+**POST /tasks**
+
+* Creates a new task with the provided details.
+
+Request Body:
+
+```json
+{
+
+"title": "Task Title",
+
+"description": "Task Description",
+
+"status": "pending",
+
+"due_date": "YYYY-MM-DD",
+
+"priority": "low|medium|high"
+
+}
+```
+
+**PUT /tasks/**
+
+* Updates an existing task with new details.
+
+Request Body:
+
+```json
+{
+
+"title": "Updated Task Title",
+
+"description": "Updated Task Description",
+
+"status": "pending|completed",
+
+"due_date": "YYYY-MM-DD",
+
+"priority": "low|medium|high"
+
+}
+```
+
+**DELETE /tasks/**
+
+* Deletes the specified task.
+
+#### Task Details Page
+
+This page displays the details of a single task, including options to edit or delete the task.
+
+**GET /tasks/**
+
+* Fetches the details of a specific task by its ID.
+* Displays task details such as title, description, status, due date, and priority.
+
+**POST /tasks/status**
+
+* Updates the status of the specified task.
+* Request Body:
+
+Request Body:
+
+```json
+{
+
+"status": "pending|completed"
+
+}
+```
+
+**POST /tasks/priority**
+
+* Updates the priority of the specified task.
+
+Request Body:
+
+```json
+{
+
+"priority": "low|medium|high"
+
+}
+```
+
+#### Potential Additional Endpoints
+
+These endpoints allow for managing task attributes such as reminders and tags.
+
+**POST /tasks/reminder**
+
+* Sets a reminder for the specified task.
+
+Request Body:
+
+```json
+{
+
+"reminder_time": "HH:MM",
+
+"reminder_date": "YYYY-MM-DD"
+
+}
+````
+
+**DELETE /tasks/reminder**
+
+* Removes the reminder for the specified task.
+
+**POST /tasks/tags**
+
+* Adds tags to the specified task.
+
+Request Body:
+
+```json
+{
+
+"tags": ["tag1", "tag2"]
+
+}
+```
+
+**DELETE /tasks/tags**
+
+* Removes tags from the specified task.
+
+Request Body:
+
+```json
+{
+
+"tags": ["tag1", "tag2"]
+
+}
+```
+
+# Tags
