@@ -1,3 +1,4 @@
+from note_tag import Note_Tag
 from .db import db, environment, SCHEMA
 from datetime import datetime
 
@@ -19,3 +20,5 @@ class Tag(db.Model):
 			'created_at': self.created_at,
 			'updated_at': self.updated_at
 		}
+
+note = db.relationship('Note', back_populates='tags', secondary = Note_Tag)
