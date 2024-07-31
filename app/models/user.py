@@ -14,6 +14,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    notebooks = db.relationship('Notebook', back_populates='user')
+
     #created a relationship between users and tasks per the DB schema
     tasks = db.relationship('Task', back_populates='user', cascade='all, delete-orphan')
 
