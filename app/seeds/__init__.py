@@ -3,6 +3,8 @@ from .users import seed_users, undo_users
 from .notebooks import seed_notebooks, undo_notebooks
 from .tasks import seed_tasks, undo_tasks
 from .notes import seed_notes, undo_notes
+from .tags import seed_tags, undo_tags
+from .tag-notes import seed_note_tags, undo_note_tags
 
 from app.models.db import db, environment, SCHEMA
 
@@ -22,10 +24,14 @@ def seed():
         undo_users()
         undo_notebooks()
         undo_tasks()
+        undo_tags()
+        undo_note_tags()
     seed_users()
     seed_notebooks()
     seed_users()
     seed_tasks()
+    seed_tags()
+    seed_note_tags()
     # Add other seed functions here
 
 
@@ -35,4 +41,6 @@ def undo():
     undo_users()
     undo_notebooks()
     undo_tasks()
+    undo_tags()
+    undo_note_tags()
     # Add other undo functions here
