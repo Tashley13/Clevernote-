@@ -14,7 +14,7 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'app'))
 
 # Import your models here to ensure they are registered with Alembic
-from models import db, User, Task
+from models import db, User, Task, Note, Tag, Notebook, Note_Tag
 
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")

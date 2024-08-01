@@ -1,5 +1,5 @@
 from sqlalchemy.orm import relationship
-from note_tag import Note_Tag
+from .note_tag import Note_Tag
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
@@ -14,12 +14,12 @@ class Note(db.Model):
     content = db.Column(db.String)
     notebookId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('notebooks.id')), nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    created_at = db.Column(db.datetime)
-    updated_at = db.Column(db.datetime)
+    # created_at = db.Column(db.datetime)
+    # updated_at = db.Column(db.datetime)
 
     user = db.relationship('User', back_populates='notes')
     notebook = db.relationship('Notebook', back_populates='notes')
-    tag = db.relationship('Tag', back_populates='notes', secondary = note_tag)
+    tag = db.relationship('Tag', back_populates='notes', secondary = notes_tags)
 
     def to_dict(self):
         return {
@@ -28,6 +28,6 @@ class Note(db.Model):
             'content' : self.content,
             'notebookId' : self.notebookId,
             'userId' : self.userId,
-            'created_at': self.created_at,
-            'updated_at' : self.updated_at
+            # 'created_at': self.created_at,
+            # 'updated_at' : self.updated_at
         }
