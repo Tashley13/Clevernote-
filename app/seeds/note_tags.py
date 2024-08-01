@@ -3,19 +3,19 @@ from sqlalchemy.sql import text
 
 def seed_note_tags():
 	test_note_tag_1 = Note_Tag(
-		tag_id=1
+		tag_id=1,
         note_id=4
 	)
 	test_note_tag_2 = Note_Tag(
-		tag_id=2
+		tag_id=2,
         note_id=3
 	)
 	demo_note_tag_1 = Note_Tag(
-		tag_id=3
+		tag_id=3,
         note_id=2
 	)
 	demo_note_tag_2 = Note_Tag(
-		tag_id=4
+		tag_id=4,
         note_id=1
 	)
 

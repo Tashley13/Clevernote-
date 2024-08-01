@@ -6,7 +6,6 @@ def seed_notes():
 
     janes_notes = Note(title='Jane\' Notes', content='Jane content', notebookId=1, userId=1)
 
-
     pauls_notes = Note(title='Paul\'s Notes', content='Paul content', notebookId=2, userId=2)
 
     bobbys_notes = Note(title='Bobby\'s Notes', content='Bobby content', notebookId=3, userId=3)
@@ -20,7 +19,7 @@ def seed_notes():
 
 
 def undo_notes():
-    if environment == 'production'
+    if environment == 'production':
          db.session.execute(f"TRUNCATE table {SCHEMA}.notes RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM notes"))

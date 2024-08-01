@@ -14,12 +14,12 @@ class Note(db.Model):
     content = db.Column(db.String)
     notebookId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('notebooks.id')), nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    created_at = db.Column(db.datetime)
-    updated_at = db.Column(db.datetime)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    user = db.relationship('User', back_populates='notes')
-    notebook = db.relationship('Notebook', back_populates='notes')
-    tag = db.relationship('Tag', back_populates='notes', secondary = notes_tags)
+    # user = db.relationship('User', back_populates='notes')
+    # notebook = db.relationship('Notebook', back_populates='notes')
+    tag = db.relationship('Tag', back_populates='notes', secondary = Note_Tag)
 
     def to_dict(self):
         return {
