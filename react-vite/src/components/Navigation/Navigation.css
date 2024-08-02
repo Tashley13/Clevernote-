@@ -2,13 +2,15 @@
   position: absolute;
 }
 
-nav {
+#nav-main {
+  position: relative;
   border: 1px solid rgb(197, 197, 197);
   border-radius: 4px;
   margin: 5px;
   background-color: rgb(46, 46, 46);
   width: 250px;
   padding: 12px;
+  transition: all 200ms ease-in-out;
 }
 
 #nav-list {
@@ -16,6 +18,19 @@ nav {
   padding: none;
 }
 
-.primary-btn{
-  
+#nav-close-btn {
+  position: absolute;
+  font-size: 20px;
+  height: 40px;
+  bottom: 20px;
+  right: -18px;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 4px;
+  background-color: rgb(134, 134, 134);
+
+  transition: all 200ms ease-in-out;
+}
+
+#viewer-icon {
+  transition: all 200ms ease-in-out;
 }
