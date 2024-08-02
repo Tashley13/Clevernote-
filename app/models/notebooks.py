@@ -1,3 +1,4 @@
+from sqlalchemy.orm import relationship
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
@@ -15,6 +16,7 @@ class Notebook(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     user = db.relationship('User', back_populates='notebooks')
+    notes = db.relationship('Note', back_populates='notebooks')
 
     def _repr_(self):
           return f'Notebook {self.title}'
