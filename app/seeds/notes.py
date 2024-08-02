@@ -26,7 +26,7 @@ def seed_notes():
 
 
 def undo_notes():
-    if environment == 'production'
+    if environment == 'production':
          db.session.execute(f"TRUNCATE table {SCHEMA}.notes RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM notes"))

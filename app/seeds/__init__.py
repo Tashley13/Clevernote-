@@ -3,7 +3,7 @@ from .users import seed_users, undo_users
 from .notebooks import seed_notebooks, undo_notebooks
 from .tasks import seed_tasks, undo_tasks
 from .notes import seed_notes, undo_notes
-from .tag-notes import seed_note_tags, undo_note_tags
+from .tag_notes import seed_note_tags, undo_note_tags
 from .tags import seed_tags, undo_tags
 
 from app.models.db import db, environment, SCHEMA

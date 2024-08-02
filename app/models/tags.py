@@ -1,4 +1,4 @@
-from note_tag import Note_Tag
+from .note_tag import Note_Tag
 from .db import db, environment, SCHEMA
 from datetime import datetime
 
