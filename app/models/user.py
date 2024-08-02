@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
 
     #created a relationship between users and tasks per the DB schema
     tasks = db.relationship('Task', back_populates='user', cascade='all, delete-orphan')
+    notes = db.relationship('Note', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password(self):
