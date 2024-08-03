@@ -34,3 +34,40 @@
 #viewer-icon {
   transition: all 200ms ease-in-out;
 }
+
+.big-btn-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-btn-primary{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 4px;
+  text-decoration: none;
+  color:rgb(14, 14, 14);
+  height: 45px;
+  margin: 4px 0;
+}
+
+.nav-btn-primary > * {
+  margin: 0 4px;
+}
+
+.green{
+  background-color: rgb(96, 223, 117);
+}
+
+.green:hover {
+  background-color: rgb(149, 230, 162);
+}
+
+.purple{
+  background-color: rgb(200, 120, 224);
+}
+
+.purple:hover{
+  background-color: rgb(204, 143, 223);
+}

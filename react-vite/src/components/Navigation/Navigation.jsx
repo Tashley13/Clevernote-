@@ -2,13 +2,13 @@ import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navigation.css";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faFileLines } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 function Navigation() {
   const [navOpen, setNavOpen] = useState(true)
 
-  const navViewChanger = (e) => {
+  const navViewChanger = () => {
     let navMain = document.getElementById("nav-main")
     let arrow = document.getElementById("viewer-icon")
     setNavOpen(!navOpen)
@@ -27,8 +27,13 @@ function Navigation() {
           <li className="nav-list-profile">
             <ProfileButton />
           </li>
+          <div className="big-btn-container">
+              <NavLink className='nav-btn-primary green' to="/"><FontAwesomeIcon icon={faFileLines} /> <span>Note</span></NavLink>
+
+              <NavLink className='nav-btn-primary purple' to="/">Task</NavLink>
+          </div>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink className='nav-btn-primary' to="/"></NavLink>
           </li>
         </ul>
       <button id="nav-close-btn" onClick={navViewChanger}>
