@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navigation.css";
-import { faArrowRight, faFileLines } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faFileLines, faListCheck } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 function Navigation() {
@@ -30,7 +30,7 @@ function Navigation() {
           <div className="big-btn-container">
               <NavLink className='nav-btn-primary green' to="/"><FontAwesomeIcon icon={faFileLines} /> <span>Note</span></NavLink>
 
-              <NavLink className='nav-btn-primary purple' to="/">Task</NavLink>
+              <NavLink className='nav-btn-primary purple' to="/"> <FontAwesomeIcon icon={faListCheck} />Task</NavLink>
           </div>
           <li>
             <NavLink className='nav-btn-primary' to="/"></NavLink>
