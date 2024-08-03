@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fontawesome/react-fontawesome";
 import "./Navigation.css";
 import { faArrowRight, faFileLines, faListCheck } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
