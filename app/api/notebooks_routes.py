@@ -28,6 +28,8 @@ def create_notebook():
     return jsonify(new_notebook.to_dict())
 
 # PUT update a notebook
+@notebook_routes.route('/:notebookId', methods=['PUT'])
+@login_required
 def update_notebook(notebook_id):
     notebook = Notebook.query.get(notebook_id)
 
@@ -54,6 +56,8 @@ def get_notebook_by_id(notebookId):
     return notebook.to_dict()
 
 # DELETE a specific notebook
+@notebook_routes.route('/:notebookId', methods=["DELETE"])
+@login_required
 def delete_notebook(notebook_id):
     notebook = Notebook.query.get(notebook_id)
 

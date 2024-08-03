@@ -71,3 +71,7 @@
 .purple:hover{
   background-color: rgb(204, 143, 223);
 }
+
+.text-white {
+  color:white;
+}
