@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navigation.css";
-import { faArrowRight, faFileLines, faListCheck } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faBook, faFileLines, faHouse, faListCheck, faTags } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 function Navigation() {
@@ -11,7 +11,7 @@ function Navigation() {
   const navViewChanger = () => {
     const navMain = document.getElementById("nav-main")
     const arrow = document.getElementById("viewer-icon")
-    const innerText = document.querySelectorAll('.nav-primary-btn-inner-text')
+    const innerText = document.querySelectorAll('.nav-inner-text')
     setNavOpen(!navOpen)
 
     if(navOpen){
@@ -38,29 +38,30 @@ function Navigation() {
           <div className="big-btn-container">
               <NavLink className='nav-btn-primary green' to="/">
                 <FontAwesomeIcon icon={faFileLines} />
-                <span className="nav-primary-btn-inner-text">Note</span>
+                <span className="nav-inner-text">Note</span>
               </NavLink>
 
               <NavLink className='nav-btn-primary purple' to="/">
                 <FontAwesomeIcon icon={faListCheck} />
-                <span className="nav-primary-btn-inner-text">Task</span>
+                <span className="nav-inner-text">Task</span>
               </NavLink>
           </div>
           <li>
-            <NavLink className='nav-btn-primary text-white' to="/">Home</NavLink>
+            <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faHouse} /><span className="nav-inner-text">Home</span></NavLink>
           </li>
           <li>
-            <NavLink className='nav-btn-primary text-white' to="/">Notes</NavLink>
+            <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faFileLines} /><span className="nav-inner-text">Notes</span></NavLink>
           </li>
           <li>
-            <NavLink className='nav-btn-primary text-white' to="/">Tasks</NavLink>
+            <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faListCheck} /><span className="nav-inner-text">Tasks</span></NavLink>
           </li>
           <li>
-            <NavLink className='nav-btn-primary text-white' to="/">Notebooks</NavLink>
+            <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faBook} /><span className="nav-inner-text">Notebooks</span></NavLink>
           </li>
           <li>
-            <NavLink className='nav-btn-primary text-white' to="/">Tags</NavLink>
+            <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faTags} /><span className="nav-inner-text">Tags</span></NavLink>
           </li>
+          {/* Maybe add a trash feature */}
         </ul>
       <button id="nav-close-btn" onClick={navViewChanger}>
         <FontAwesomeIcon id="viewer-icon" icon={faArrowRight} />
