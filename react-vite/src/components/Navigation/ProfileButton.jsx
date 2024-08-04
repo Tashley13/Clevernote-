@@ -5,6 +5,7 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import './profileButton.css'
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ function ProfileButton() {
   };
 
   return (
-    <>
+    <div id="main-profile-container">
       <button onClick={toggleMenu}>
         <FaUserCircle />
       </button>
@@ -70,7 +71,7 @@ function ProfileButton() {
           )}
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

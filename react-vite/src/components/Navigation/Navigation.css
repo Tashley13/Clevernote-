@@ -84,3 +84,8 @@
 .text-white:hover{
   background-color: rgb(119, 119, 119);
 }
+
+.nav-list-profile {
+  display: flex;
+  justify-content: center;
+}

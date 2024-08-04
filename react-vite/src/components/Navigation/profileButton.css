@@ -1,0 +1,40 @@
+button{
+    cursor: pointer;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+    align-self: center;
+}
+
+button:hover{
+    background-color:rgb(202, 202, 202) ;
+}
+
+.profile-dropdown {
+    position: absolute;
+    background-color: white;
+    list-style: none;
+    padding: 8px 12px;
+    border-radius: 0px 4px 4px 4px;
+    width: 100px;
+    left: 15px;
+    bottom: -65px;
+}
+
+.profile-dropdown > li {
+    border-bottom: 1px gray solid;
+    padding: 3px 5px;
+    cursor: pointer;
+}
+
+.profile-dropdown > li:hover {
+    background-color: lightgray;
+}
+
+#main-profile-container{
+    position: relative;
+}
