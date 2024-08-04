@@ -2,11 +2,15 @@ import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navigation.css";
-import { faArrowRight, faBook, faFileLines, faHouse, faListCheck, faTags } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faBook, faFileLines, faHouse, faListCheck, faTags, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function Navigation() {
   const [navOpen, setNavOpen] = useState(true)
+  const { user } = useSelector(state => state.session)
+
+  console.log (user)
 
   const navViewChanger = () => {
     const navMain = document.getElementById("nav-main")
@@ -33,7 +37,25 @@ function Navigation() {
       <nav id="nav-main">
         <ul id="nav-list">
           <li className="nav-list-profile">
-            <ProfileButton />
+            {!user ?
+              <ProfileButton /> :
+
+                <div id="nav-logged-in-profile">
+                  <ProfileButton />
+                  {/* {user.profileURL ?
+                    <img className="nav-profile-picture" src={user?.profileURL}/>:
+                    <FontAwesomeIcon className="nav-profile-picture" icon={faUser} />
+                  } */}
+                  {
+                    navOpen &&
+                    <div>
+                      <p>{user.username}</p>
+                      <p>{user.email}</p>
+                    </div>
+                  }
+                </div>
+
+            }
           </li>
           <div className="big-btn-container">
               <NavLink className='nav-btn-primary green' to="/">
