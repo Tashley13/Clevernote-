@@ -42,10 +42,6 @@ function Navigation() {
 
                 <div id="nav-logged-in-profile">
                   <ProfileButton />
-                  {/* {user.profileURL ?
-                    <img className="nav-profile-picture" src={user?.profileURL}/>:
-                    <FontAwesomeIcon className="nav-profile-picture" icon={faUser} />
-                  } */}
                   {
                     navOpen &&
                     <div>
