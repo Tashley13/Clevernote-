@@ -1,9 +1,9 @@
-// import React from 'react';
+import './HomePage.css';
 
 const HomePage = () => {
   return (
-    <div>
-      <h1>Welcome to Clevernote!</h1>
+    <div className="homepage-container">
+     
     </div>
   );
 };
