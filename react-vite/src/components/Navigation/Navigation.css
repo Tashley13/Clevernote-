@@ -82,5 +82,36 @@
 }
 
 .text-white:hover{
-  background-color: rgb(119, 119, 119);
+  background-color: #777777;
+}
+
+.nav-list-profile {
+  display: flex;
+  justify-content: center;
+}
+
+#nav-logged-in-profile{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#nav-logged-in-profile div > p {
+  color: white;
+  margin: 0;
+  font-size: 18px;
+}
+
+.nav-profile-picture {
+  border: 1px solid #777777;
+  padding: 10px;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.nav-profile-picture:hover {
+  background-color: #777777;
 }
