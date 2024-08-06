@@ -21,7 +21,7 @@ def create_tag():
 	return jsonify(new_tag.to_dict())
 
 # PUT update tag
-@tag_routes.route('/:tagId', methods=["PUT"])
+@tag_routes.route('/<int:id>', methods=["PUT"])
 def update_tag(tag_id):
 	edit_tag = Tag.query.get(tag_id)
 
@@ -47,3 +47,10 @@ def delete_tag(tag_id):
 
 	return jsonify({'message': 'Tag deleted successfully'})
 
+@tag_routes.route('/search')
+def search_by_tag():
+	search_tag = Tag.query.filter(Tag.tag_name.ilike(f'%{tag_name}%'). Tag.user_id == current_user.id).all()
+
+	if not search_tag:
+		return jsonify({'error': 'Tag not found'})
+	return jsonify([tag.to_dict() for tag in search_tag])
