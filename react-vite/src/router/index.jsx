@@ -5,7 +5,6 @@ import Layout from './Layout';
 import HomePage from '../components/HomePage';
 import NotebookList from '../components/NotebookList';
 import NotebookDetail from '../components/NotebookDetail';
-import NotebookEdit from '../components/NotebookEdit';
 import NoteList from '../components/NoteList';
 import NoteDetail from '../components/NoteDetail';
 import TaskList from '../components/TaskList';
@@ -16,6 +15,7 @@ import TagList from '../components/TagList';
 import TagDetail from '../components/TagDetail';
 import TagCreate from '../components/TagCreate';
 import TagEdit from '../components/TagEdit';
+import NotebookEdit from '../components/NotebookEdit/NotebookEdit';
 
 
 

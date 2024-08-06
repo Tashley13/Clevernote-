@@ -17,6 +17,7 @@ button:hover{
 .profile-dropdown {
     position: absolute;
     background-color: white;
+    color: black;
     list-style: none;
     padding: 8px 12px;
     border-radius: 0px 4px 4px 4px;

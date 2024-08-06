@@ -10,8 +10,6 @@ function Navigation() {
   const [navOpen, setNavOpen] = useState(true)
   const { user } = useSelector(state => state.session)
 
-  console.log (user)
-
   const navViewChanger = () => {
     const navMain = document.getElementById("nav-main")
     const arrow = document.getElementById("viewer-icon")
@@ -19,7 +17,7 @@ function Navigation() {
     setNavOpen(!navOpen)
 
     if(navOpen){
-      navMain.style.width = '50px'
+      navMain.style.width = '90px'
       arrow.style.rotate = '360deg'
       innerText.forEach(el => {
         el.style.display = "none"
