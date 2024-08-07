@@ -56,5 +56,5 @@ def delete_note(userId, notebookId, id): #need to call the userid and id of curr
     #delete the note through the session
     db.session.commit()
     #commit the session
-    return jsonify{'message' : 'Note successfully deleted'}
+    return jsonify({'message' : 'Note successfully deleted'})
     #return successful deletion method

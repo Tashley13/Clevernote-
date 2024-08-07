@@ -52,3 +52,18 @@ const deleteNote = (noteId) => {
 //update a note
 
 //delete a note
+
+const initialState = {
+    byid: {}, //load only the actual notes with ids as keys
+    allIds: [] //grab all the ids
+};
+
+const noteReducer = (state= initialState, action) => {
+    switch (action.type) {
+        case LOAD_NOTES:
+        const newState = { ...state } // spread the state
+
+    }
+}
+
+export default noteReducer;
