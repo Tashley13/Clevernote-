@@ -1,4 +1,5 @@
-from note_tag import Note_Tag
+from sqlalchemy.orm import relationship
+# from .note_tag import note_tag
 from .db import db, environment, SCHEMA
 from datetime import datetime
 
@@ -21,4 +22,4 @@ class Tag(db.Model):
 			'updated_at': self.updated_at
 		}
 
-note = db.relationship('Note', back_populates='tags', secondary = Note_Tag)
+	# notes = db.relationship('Note', back_populates='tags', secondary = note_tag)

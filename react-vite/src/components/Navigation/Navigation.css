@@ -1,3 +1,118 @@
 .profile-dropdown {
   position: absolute;
 }
+
+nav#nav-main {
+  position: relative;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 4px;
+  margin: 5px;
+  background-color: rgb(46, 46, 46);
+  width: 250px;
+  transition: all 200ms ease-in-out;
+}
+
+#nav-list {
+  list-style: none;
+  padding: none;
+  width: 100%;
+}
+
+#nav-list > li{
+  margin: 10px 0;
+}
+
+#nav-close-btn {
+  position: absolute;
+  font-size: 20px;
+  height: 40px;
+  bottom: 20px;
+  right: -18px;
+  border: 1px solid rgb(155, 155, 155);
+  border-radius: 4px;
+  background-color: rgb(134, 134, 134);
+  width: 30px;
+  transition: all 200ms ease-in-out;
+}
+
+#viewer-icon {
+  transition: all 200ms ease-in-out;
+  rotate: 180deg;
+}
+
+.big-btn-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-btn-primary{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 4px;
+  text-decoration: none;
+  color:rgb(14, 14, 14);
+  height: 45px;
+  margin: 4px 0;
+}
+
+.nav-btn-primary > * {
+  margin: 0 4px;
+}
+
+.green{
+  background-color: rgb(96, 223, 117);
+}
+
+.green:hover {
+  background-color: rgb(149, 230, 162);
+}
+
+.purple{
+  background-color: rgb(200, 120, 224);
+}
+
+.purple:hover{
+  background-color: rgb(204, 143, 223);
+}
+
+.text-white {
+  color:white;
+  height: 25px;
+}
+
+.text-white:hover{
+  background-color: #777777;
+}
+
+.nav-list-profile {
+  display: flex;
+  justify-content: center;
+}
+
+#nav-logged-in-profile{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#nav-logged-in-profile div > p {
+  color: white;
+  margin: 0;
+  font-size: 18px;
+}
+
+.nav-profile-picture {
+  border: 1px solid #777777;
+  padding: 10px;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.nav-profile-picture:hover {
+  background-color: #777777;
+}
