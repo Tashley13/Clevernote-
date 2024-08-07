@@ -3,19 +3,19 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import HomePage from '../components/HomePage';
-import NotebookListPage from '../components/NotebookListPage';
-import NotebookDetailPage from '../components/NotebookDetailPage';
-import NotebookEditPage from '../components/NotebookEditPage';
-import NoteListPage from '../components/NoteListPage';
-import NoteDetailPage from '../components/NoteDetailPage';
-import TaskListPage from '../components/TaskListPage';
-import TaskDetailPage from '../components/TaskDetailPage';
-import TaskCreatePage from '../components/TaskCreatePage';
-import TaskEditPage from '../components/TaskEditPage';
-import TagListPage from '../components/TagListPage';
-import TagDetailPage from '../components/TagDetailPage';
-import TagCreatePage from '../components/TagCreatePage';
-import TagEditPage from '../components/TagEditPage';
+import NotebookList from '../components/NotebookList';
+import NotebookDetail from '../components/NotebookDetail';
+import NoteList from '../components/NoteList';
+import NoteDetail from '../components/NoteDetail';
+import TaskList from '../components/TaskList';
+import TaskDetail from '../components/TaskDetail';
+import TaskCreate from '../components/TaskCreate';
+import TaskEdit from '../components/TaskEdit';
+import TagList from '../components/TagList';
+import TagDetail from '../components/TagDetail';
+import TagCreate from '../components/TagCreate';
+import TagEdit from '../components/TagEdit';
+import NotebookEdit from '../components/NotebookEdit/NotebookEdit';
 
 
 
@@ -37,55 +37,55 @@ export const router = createBrowserRouter([
       },
       {
         path: "notebooks",
-        element: <NotebookListPage />,
+        element: <NotebookList />,
       },
       {
         path: "notebooks/:id",
-        element: <NotebookDetailPage />,
+        element: <NotebookDetail />,
       },
       {
         path: "notebooks/:id/edit",
-        element: <NotebookEditPage />,
+        element: <NotebookEdit />,
       },
       {
         path: "notes",
-        element: <NoteListPage />,
+        element: <NoteList />,
       },
       {
         path: "notes/:noteid",
-        element: <NoteDetailPage />,
+        element: <NoteDetail />,
       },
       {
         path: "tasks",
-        element: <TaskListPage />,
+        element: <TaskList />,
       },
       {
         path: "tasks/:id",
-        element: <TaskDetailPage />,
+        element: <TaskDetail />,
       },
       {
         path: "tasks/new",
-        element: <TaskCreatePage />,
+        element: <TaskCreate />,
       },
       {
         path: "tasks/:id/edit",
-        element: <TaskEditPage />,
+        element: <TaskEdit/>,
       },
       {
         path: "tags",
-        element: <TagListPage />,
+        element: <TagList />,
       },
       {
         path: "tags/:tagId",
-        element: <TagDetailPage />,
+        element: <TagDetail />,
       },
       {
         path: "tags/new",
-        element: <TagCreatePage />,
+        element: <TagCreate />,
       },
       {
         path: "tags/:tagId/edit",
-        element: <TagEditPage />,
+        element: <TagEdit />,
       },
     ],
   },
