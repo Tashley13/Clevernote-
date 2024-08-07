@@ -4,6 +4,11 @@ from app.models import Tag, db
 
 tag_routes = Blueprint('tags', __name__, url_prefix="/tags")
 
+#GET returns all tags
+@tag_routes.route('', methods=['GET'])
+def get_tags():
+	tags = Tag.query.filter_by(user_id = current_user.id).all()
+	return jsonify([tag.to_dict() for tag in tags])
 
 # POST create a new tag
 @tag_routes.route('/', methods=["POST"])
@@ -22,8 +27,8 @@ def create_tag():
 
 # PUT update tag
 @tag_routes.route('/<int:id>', methods=["PUT"])
-def update_tag(tag_id):
-	edit_tag = Tag.query.get(tag_id)
+def update_tag(id):
+	edit_tag = Tag.query.get(id)
 
 	if edit_tag is None:
 		return jsonify({'error': 'Tag not found'})
@@ -36,8 +41,9 @@ def update_tag(tag_id):
 
 	return jsonify(edit_tag.to_dict())
 
-def delete_tag(tag_id):
-	dead_tag = Tag.query.get(tag_id)
+@tag_routes.route('/<int:id>', methods=["DELETE"])
+def delete_tag(id):
+	dead_tag = Tag.query.get(id)
 
 	if dead_tag is None:
 		return jsonify({'error': 'Tag not found'})
