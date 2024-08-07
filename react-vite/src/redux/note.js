@@ -40,3 +40,15 @@ const deleteNote = (noteId) => {
         noteId
     }
 }
+
+//thunks
+
+//get all notes of user
+
+//get details of a note
+
+//create a note
+
+//update a note
+
+//delete a note
