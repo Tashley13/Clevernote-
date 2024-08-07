@@ -6,9 +6,9 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from .models import db, User, Note, Notebook, Tag, Task, note_tag
 from .api.user_routes import user_routes
+from .api.notes_routes import notes_routes
 from .api.auth_routes import auth_routes
 from .api.notebooks_routes import notebook_routes
-from .api.notes_routes import notes_routes
 from .api.tag_routes import tag_routes
 from .seeds import seed_commands
 from .config import Config
