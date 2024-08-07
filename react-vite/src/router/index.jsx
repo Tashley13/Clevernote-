@@ -16,6 +16,7 @@ import TagDetail from '../components/TagDetail';
 import TagCreate from '../components/TagCreate';
 import TagEdit from '../components/TagEdit';
 import NotebookEdit from '../components/NotebookEdit/NotebookEdit';
+import FeatureTable from '../components/FeatureTable/FeatureTable';
 
 
 
@@ -37,7 +38,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "notebooks",
-        element: <NotebookList />,
+        element: <FeatureTable />,
       },
       {
         path: "notebooks/:id",
