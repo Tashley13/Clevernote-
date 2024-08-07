@@ -6,9 +6,13 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+import notebookReducer from "./notebooks";
+import taskReducer from "./tasks";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  notebook: notebookReducer,
+  tasks: taskReducer,
 });
 
 let enhancer;
