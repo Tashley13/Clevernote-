@@ -30,7 +30,7 @@ def create_note(userId, notebookId): #need to call userid and notebookid?
 
 
 # UPDATE route - update the note for a current user
-@note_routes.route('/notes/<int:noteId>', methods=["PUT"]) #
+@note_routes.route('/notes/<int:noteId>', methods=["PUT"]) #need to access the id integer
 # @login_required
 def update_note(userId, notebookId, id): #need to call userid, notebookid, and id of current note
     #need to pull previous notes title and content
@@ -56,5 +56,5 @@ def delete_note(userId, notebookId, id): #need to call the userid and id of curr
     #delete the note through the session
     db.session.commit()
     #commit the session
-    return jsonify{'message' : 'Note successfully deleted'}
+    return jsonify({'message' : 'Note successfully deleted'})
     #return successful deletion method
