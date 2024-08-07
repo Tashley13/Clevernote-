@@ -2,7 +2,7 @@ from app.models import db, Note, User, Tag, Notebook, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_notes():
-    demo_notes= Note(title='Demo Notes', content='Demo content', notebookId=4, userId=4)
+    demo_notes= Note(title='Demo Notes', content='Demo content', notebookId=1, userId=3)
 
     janes_notes = Note(title='Jane\' Notes', content='Jane content', notebookId=1, userId=1)
 
