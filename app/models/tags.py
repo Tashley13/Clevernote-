@@ -1,5 +1,4 @@
 from sqlalchemy.orm import relationship
-# from .note_tag import note_tag
 from .db import db, environment, SCHEMA
 from datetime import datetime
 
