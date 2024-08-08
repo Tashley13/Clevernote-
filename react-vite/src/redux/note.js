@@ -44,7 +44,9 @@ const deleteNote = (noteId) => {
 //thunks
 
 //get all notes of user
-
+export const getAllNotesUser = () => async (dispatch) => {
+    const response = await
+}
 //get details of a note
 
 //create a note
@@ -62,7 +64,7 @@ const noteReducer = (state= initialState, action) => {
     switch (action.type) {
         case LOAD_NOTES:
         const newState = { ...state } // spread the state
-        console.log('hello')
+        // console.log(action.byid)
     }
 }
 
