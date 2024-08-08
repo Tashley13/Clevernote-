@@ -74,15 +74,14 @@ function Navigation() {
           <li>
             <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faListCheck} /><span className="nav-inner-text">Tasks</span></NavLink>
           </li>
-          <li>
+          
             <OpenModalMenuItem
                   className='nav-btn-primary text-white'
-                  itemText={`Notebooks`}
+                  itemText={navOpen ? `Notebooks` : ''}
                   modalComponent={<NotebookAddModal />}
                   icon = {faBook}
                 />
-            {/* <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faBook} /><span className="nav-inner-text">Notebooks</span></NavLink> */}
-          </li>
+
           <li>
             <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faTags} /><span className="nav-inner-text">Tags</span></NavLink>
           </li>
