@@ -45,7 +45,17 @@ const deleteNote = (noteId) => {
 
 //get all notes of user
 export const getAllNotesUser = () => async (dispatch) => {
-    const response = await
+    const response = await fetch("/api/notes")
+
+    if (response.ok) {
+        const data = await response.json()
+
+        if(data.errors) {
+            return;
+        }
+        dispatch(loadNotes(data))
+        return data
+    }
 }
 //get details of a note
 

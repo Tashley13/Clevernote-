@@ -30,7 +30,7 @@ def create_note(userId, notebookId): #need to call userid and notebookid?
 
 
 # UPDATE route - update the note for a current user
-@note_routes.route('/notes/<int:noteId>', methods=["PUT"]) #
+@notes_routes.route('/notes/<int:noteId>', methods=["PUT"]) #
 # @login_required
 def update_note(userId, notebookId, id): #need to call userid, notebookid, and id of current note
     #need to pull previous notes title and content
