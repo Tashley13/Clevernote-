@@ -1,4 +1,3 @@
-
 const CREATE_TAG = 'tags/createTag'
 const UPDATE_TAG = 'tags/updateTag'
 const DELETE_TAG = 'tags/deleteTag'
@@ -24,15 +23,94 @@ const loadTag = (payload) => ({
 	payload
 })
 
+export const thunkCreateTag = () => async (dispatch) => {
+	const res = await fetch("/api/tags")
+
+	if (res.ok) {
+		const data = await res.json()
+
+		if(data.errors) {
+			return;
+		}
+
+		dispatch(createTag(data))
+	}
+}
+
+export const thunkEditTag = (tag) => async (dispatch) => {
+	const res = await fetch(`/api/tags/${tag.id}`, {
+		method: 'PUT',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(tag)
+	})
+
+	if (res.ok) {
+		const data = await res.json()
+
+		if(data.errors) {
+			return;
+		}
+
+		dispatch(updateTag(data))
+	}
+}
+
+export const thunkDeleteTag = (tag) => async (dispatch) => {
+	const res = await fetch(`/api/tags/${tag.id}`, {
+		method: 'DELETE',
+		headers: { 'Content-Type': 'application/json' },
+		body: json.stringify(tag)
+	})
+
+	if (res.ok) {
+		const data = await res.json()
+
+		if (data.errors) {
+			return;
+		}
+
+		dispatch(deleteTag(data))
+	}
+}
+
+export const thunkGetTag = () => async (dispatch) => {
+	const res = await fetch('/api/tags/')
+
+	if (res.ok) {
+		const data = await res.json()
+
+		if (data.errors) {
+			return;
+		}
+
+		dispatch(loadTag(data))
+	}
+}
+
 const initialState = {};
 
 const tagReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case LOAD_TAG: {
+			const newState = {}
+			action.payload.newTag.forEach(tag => {
+				newState[tag.id] = tag
+			});
+			return newState
+		}
 		case CREATE_TAG: {
 			const newState = {}
 			newState[action.payload.newTag.id] = action.payload.newTag
+		}
+		case UPDATE_TAG: {
+			return state.map(tag => tag.id === action.tag.id ? action.tag : tag)
+		}
+		case DELETE_TAG: {
+			return state.filter(tag => tag.id !== action.tag.id)
 		}
 		default:
 			return state
 	}
 }
+
+export default tagReducer;
