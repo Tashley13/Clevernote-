@@ -12,7 +12,9 @@ import taskReducer from "./tasks";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  tags: tagReducer
+  tags: tagReducer,
+  notebooks: notebookReducer,
+  tasks: taskReducer
 });
 
 let enhancer;
