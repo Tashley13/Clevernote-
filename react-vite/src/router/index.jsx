@@ -9,7 +9,7 @@ import NoteList from '../components/NoteList';
 import NoteDetail from '../components/NoteDetail';
 import TaskList from '../components/TaskList';
 import TaskDetail from '../components/TaskDetail';
-import TaskCreate from '../components/TaskCreate';
+import CreateTaskModal from '../components/CreateTaskModal';
 import TaskEdit from '../components/TaskEdit';
 import TagList from '../components/TagList';
 import TagDetail from '../components/TagDetail';
@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "tasks/new",
-        element: <TaskCreate />,
+        element: <CreateTaskModal />,
       },
       {
         path: "tasks/:id/edit",
