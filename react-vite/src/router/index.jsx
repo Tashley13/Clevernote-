@@ -3,7 +3,6 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import HomePage from '../components/HomePage';
-import NotebookList from '../components/NotebookList';
 import NotebookDetail from '../components/NotebookDetail';
 import NoteList from '../components/NoteList';
 import NoteDetail from '../components/NoteDetail';
