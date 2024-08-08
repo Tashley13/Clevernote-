@@ -62,7 +62,7 @@ const noteReducer = (state= initialState, action) => {
     switch (action.type) {
         case LOAD_NOTES:
         const newState = { ...state } // spread the state
-
+        console.log('hello')
     }
 }
 
