@@ -49,7 +49,7 @@ export const getAllNotesUser = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-        console.log('DATA: ', data)
+        // console.log('DATA: ', data)
         if(data.errors) {
             return;
         }
@@ -58,12 +58,53 @@ export const getAllNotesUser = () => async (dispatch) => {
     }
 }
 //get details of a note
+export const getNoteDetails = () => async (dispatch) => {
 
+}
 //create a note
-
+export const createNote = (note) => async (dispatch) => {
+    const response = await fetch("/api/notes", {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(note)
+    });
+    if (response.ok) {
+        const newNote = await response.json();
+        dispatch(addNotes(newNote))
+        return newNote
+    }
+}
 //update a note
+export const editUserNote = (note) => async (dispatch) => {
+    const response = await fetch(`/api/notes/${note.id}`, {
+        method: "PUT",
+        headers: {
+            'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify(note)
+    })
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(updateNotes(data));
+        return data;
+    }
+    return response;
+}
 
 //delete a note
+export const deleteUserNote = (noteId) => async (dispatch) => {
+    const response = await fetch(`/api/notes/${noteId}`, {
+        method: "DELETE",
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(deleteNote(noteId));
+        return data
+    }
+    return response
+}
 
 const initialState = {
     byid: {}, //load only the actual notes with ids as keys
@@ -73,8 +114,18 @@ const initialState = {
 const noteReducer = (state= initialState, action) => {
     switch (action.type) {
         case LOAD_NOTES:
-        const newState = { ...state } // spread the state
-        console.log(action.byid)
+            return newState = { ...state } // spread the state
+        // console.log(action.byid)
+        case DETAIL_NOTE:
+            return newState = { ...state }
+        case ADD_NOTE:
+            return newState = { ...state }
+        case UPDATE_NOTE:
+            return newState = { ...state }
+        case DELETE_NOTE:
+            return newState = { ...state }
+        default:
+            return state
     }
 }
 
