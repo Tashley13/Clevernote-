@@ -6,7 +6,6 @@ import configureStore from "./redux/store";
 import { router } from "./router";
 import * as sessionActions from "./redux/session";
 import * as noteActions from "./redux/note"
-//import modal and modal provider from context folder
 import "./index.css";
 import "./normilize.css"
 
@@ -18,11 +17,10 @@ if (import.meta.env.MODE !== "production") {
   window.noteActions = noteActions;
 }
 
+//place modal and modal provider below
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-      //modal provider call here
     <ReduxProvider store={store}>
-      //insert modal
       <RouterProvider router={router} />
     </ReduxProvider>
   </React.StrictMode>

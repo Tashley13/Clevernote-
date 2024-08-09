@@ -49,7 +49,7 @@ export const getAllNotesUser = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-        // console.log('DATA: ', data)
+        console.log('DATA: ', data)
         if(data.errors) {
             return;
         }
@@ -58,9 +58,9 @@ export const getAllNotesUser = () => async (dispatch) => {
     }
 }
 //get details of a note
-export const getNoteDetails = () => async (dispatch) => {
+// export const getNoteDetails = () => async (dispatch) => {
 
-}
+// }
 //create a note
 export const createNote = (note) => async (dispatch) => {
     const response = await fetch("/api/notes", {
@@ -70,10 +70,11 @@ export const createNote = (note) => async (dispatch) => {
         },
         body: JSON.stringify(note)
     });
+
     if (response.ok) {
         const newNote = await response.json();
         dispatch(addNotes(newNote))
-        return newNote
+        return newNote;
     }
 }
 //update a note
@@ -113,17 +114,27 @@ const initialState = {
 
 const noteReducer = (state= initialState, action) => {
     switch (action.type) {
-        case LOAD_NOTES:
-            return newState = { ...state } // spread the state
+        case LOAD_NOTES: {
+            const newState = { ...state};
+            return newState // spread the state
         // console.log(action.byid)
-        case DETAIL_NOTE:
-            return newState = { ...state }
-        case ADD_NOTE:
-            return newState = { ...state }
-        case UPDATE_NOTE:
-            return newState = { ...state }
-        case DELETE_NOTE:
-            return newState = { ...state }
+        }
+        case DETAIL_NOTE: {
+            const newState = { ...state};
+            return newState // spread the state
+        }
+        case ADD_NOTE: {
+            const newState = { ...state};
+            return newState // spread the state
+        }
+        case UPDATE_NOTE: {
+            const newState = { ...state};
+            return newState // spread the state
+        }
+        case DELETE_NOTE: {
+            const newState = { ...state};
+            return newState // spread the state
+        }
         default:
             return state
     }
