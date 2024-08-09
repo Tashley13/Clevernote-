@@ -5,15 +5,16 @@ from app.models import Notebook, db
 notebook_routes = Blueprint('notebooks', __name__, url_prefix="/notebooks")
 
 # GET all notebooks for the current user
-@notebook_routes.route('/')
-@login_required
+@notebook_routes.route('')
+# @login_required
 def get_notebooks():
     notebooks = Notebook.query.filter_by(user_id=current_user.id).all()
+    # notebooks = Notebook.query.all()
     return jsonify({'notebooks': [book.to_dict() for book in notebooks]})
 
 # POST create a new notebook for the current user
-@notebook_routes.route('/', methods=["POST"])
-@login_required
+@notebook_routes.route('', methods=["POST"])
+# @login_required
 def create_notebook():
     title = request.json.get('title')
 
