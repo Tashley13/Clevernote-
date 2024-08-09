@@ -3,7 +3,6 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import HomePage from '../components/HomePage';
-import NotebookList from '../components/NotebookList';
 import NotebookDetail from '../components/NotebookDetail';
 import NoteList from '../components/NoteList';
 import NoteDetail from '../components/NoteDetail';
@@ -16,6 +15,7 @@ import TagDetail from '../components/TagDetail';
 import TagCreate from '../components/TagCreate';
 import TagEdit from '../components/TagEdit';
 import NotebookEdit from '../components/NotebookEdit/NotebookEdit';
+import FeatureTable from '../components/FeatureTable/FeatureTable';
 
 
 
@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "notebooks",
-        element: <NotebookList />,
+        element: <FeatureTable />,
       },
       {
         path: "notebooks/:id",

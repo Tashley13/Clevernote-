@@ -7,6 +7,9 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useModal } from "../../context/Modal"; // Import useModal
 import CreateTaskModal from "../CreateTaskModal"; // Import CreateTaskModal
+import OpenModalMenuItem from "./OpenModalMenuItem";
+import NotebookAddModal from "../NotebookAddModal/NotebookAddModal";
+
 
 function Navigation() {
   const [navOpen, setNavOpen] = useState(true);
@@ -39,48 +42,58 @@ function Navigation() {
   };
 
   return (
-    <nav id="nav-main">
-      <ul id="nav-list">
-        <li className="nav-list-profile">
-          {!user ?
-            <ProfileButton /> :
-            <div id="nav-logged-in-profile">
-              <ProfileButton />
-              {navOpen && (
-                <div>
-                  <p>{user.username}</p>
-                  <p>{user.email}</p>
+      <nav id="nav-main">
+        <ul id="nav-list">
+          <li className="nav-list-profile">
+            {!user ?
+              <ProfileButton /> :
+
+                <div id="nav-logged-in-profile">
+                  <ProfileButton />
+                  {
+                    navOpen &&
+                    <div>
+                      <p>{user.username}</p>
+                      <p>{user.email}</p>
+                    </div>
+                  }
                 </div>
-              )}
-            </div>
-          }
-        </li>
-        <div className="big-btn-container">
-          <NavLink className='nav-btn-primary green' to="/">
-            <FontAwesomeIcon icon={faFileLines} />
-            <span className="nav-inner-text">Note</span>
-          </NavLink>
-          <button className='nav-btn-primary purple' onClick={openTaskModal}>
-            <FontAwesomeIcon icon={faListCheck} />
-            <span className="nav-inner-text">Task</span>
-          </button>
-        </div>
-        <li>
-          <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faHouse} /><span className="nav-inner-text">Home</span></NavLink>
-        </li>
-        <li>
-          <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faFileLines} /><span className="nav-inner-text">Notes</span></NavLink>
-        </li>
-        <li>
-          <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faListCheck} /><span className="nav-inner-text">Tasks</span></NavLink>
-        </li>
-        <li>
-          <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faBook} /><span className="nav-inner-text">Notebooks</span></NavLink>
-        </li>
-        <li>
-          <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faTags} /><span className="nav-inner-text">Tags</span></NavLink>
-        </li>
-      </ul>
+
+            }
+          </li>
+          <div className="big-btn-container">
+              <NavLink className='nav-btn-primary green' to="/">
+                <FontAwesomeIcon icon={faFileLines} />
+                <span className="nav-inner-text">Note</span>
+              </NavLink>
+
+              <NavLink className='nav-btn-primary purple' to="/">
+                <FontAwesomeIcon icon={faListCheck} />
+                <span className="nav-inner-text">Task</span>
+              </NavLink>
+          </div>
+          <li>
+            <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faHouse} /><span className="nav-inner-text">Home</span></NavLink>
+          </li>
+          <li>
+            <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faFileLines} /><span className="nav-inner-text">Notes</span></NavLink>
+          </li>
+          <li>
+            <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faListCheck} /><span className="nav-inner-text">Tasks</span></NavLink>
+          </li>
+
+          <OpenModalMenuItem
+                  className='nav-btn-primary text-white'
+                  itemText={navOpen ? `Notebooks` : ''}
+                  modalComponent={<NotebookAddModal />}
+                  icon = {faBook}
+                />
+
+          <li>
+            <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faTags} /><span className="nav-inner-text">Tags</span></NavLink>
+          </li>
+          {/* Maybe add a trash feature */}
+        </ul>
       <button id="nav-close-btn" onClick={navViewChanger}>
         <FontAwesomeIcon id="viewer-icon" icon={faArrowRight} />
       </button>
