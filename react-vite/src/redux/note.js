@@ -49,7 +49,7 @@ export const getAllNotesUser = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-        console.log('DATA: ', data)
+        // console.log('DATA: ', data)
         if(data.errors) {
             return;
         }
@@ -115,9 +115,7 @@ const initialState = {
 const noteReducer = (state= initialState, action) => {
     switch (action.type) {
         case LOAD_NOTES: {
-            const newState = { ...state};
-            return newState // spread the state
-        // console.log(action.byid)
+            return action.notes
         }
         case DETAIL_NOTE: {
             const newState = { ...state};
