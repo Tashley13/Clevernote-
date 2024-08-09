@@ -18,7 +18,7 @@ function OpenModalMenuItem({
   };
 
   return (
-    <li className={className} onClick={onClick}>{icon && <FontAwesomeIcon icon={icon}/>} {itemText}</li>
+    <li className={className} style={{cursor: 'pointer'}} onClick={onClick}>{icon && <FontAwesomeIcon icon={icon}/>} {itemText}</li>
   );
 }
 

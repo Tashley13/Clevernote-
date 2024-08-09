@@ -15,7 +15,7 @@ const NotebookAddModal = () => {
     const { closeModal } = useModal();
 
     const handleChange = (e) => {
-        setData(e.target.value)
+        setData(prev => ({...prev, title: e.target.value}))
         if(errors.title){
             setErrors('')
         }
@@ -23,6 +23,7 @@ const NotebookAddModal = () => {
 
     const submitAddNotebook = async (e) => {
         e.preventDefault()
+        setErrors({title: ''})
         if(data.title){
            const newNotebook = await dispatch(thunkAddNotebook({title: data.title}))
 

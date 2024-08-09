@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import './FeatureTable.css'
 import { thunkGetNotebooks } from '../../redux/notebooks'
 import { useEffect } from 'react'
+import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
+import NotebookAddModal from '../NotebookAddModal/NotebookAddModal'
 
 const FeatureTable = () => {
 
@@ -18,10 +20,16 @@ const FeatureTable = () => {
         allNotebooks ?
             <div id='table-main-container'>
                 <h1>Notebooks</h1>
-                <h3>{Object.keys(allNotebooks).length} {Object.keys(allNotebooks).length === 1 ? 'notebook' : 'notebooks'}</h3>
-
+                <div id='table-top-toolbar'>
+                    <h3>{Object.keys(allNotebooks).length} {Object.keys(allNotebooks).length === 1 ? 'notebook' : 'notebooks'}</h3>
+                    <OpenModalMenuItem
+                        className="toolbar-btn"
+                        itemText={"Create a Notebook"}
+                        modalComponent={<NotebookAddModal />}
+                        />
+                </div>
                 <table id='feature-table-container'>
-                    <tr className='feature-tr-properies'>
+                    <tr className='feature-tr-properties'>
                         <th>Name</th>
                         <th>Note Count</th>
                         <th>Created at</th>
