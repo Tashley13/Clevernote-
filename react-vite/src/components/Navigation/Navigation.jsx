@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useModal } from "../../context/Modal"; // Import useModal
 import CreateTaskModal from "../CreateTaskModal"; // Import CreateTaskModal
+import TagCreate from "../TagCreate/TagCreate";
 
 function Navigation() {
   const [navOpen, setNavOpen] = useState(true);
@@ -36,6 +37,10 @@ function Navigation() {
 
   const openTaskModal = () => {
     setModalContent(<CreateTaskModal />); // Set the modal content to CreateTaskModal
+  };
+
+  const openTagModal = () => {
+    setModalContent(<TagCreate />)
   };
 
   return (
@@ -78,7 +83,7 @@ function Navigation() {
           <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faBook} /><span className="nav-inner-text">Notebooks</span></NavLink>
         </li>
         <li>
-          <NavLink className='nav-btn-primary text-white' to="/"><FontAwesomeIcon icon={faTags} /><span className="nav-inner-text">Tags</span></NavLink>
+          <NavLink className='nav-btn-primary text-white' onClick={openTagModal}><FontAwesomeIcon icon={faTags} /><span className="nav-inner-text">Tags</span></NavLink>
         </li>
       </ul>
       <button id="nav-close-btn" onClick={navViewChanger}>

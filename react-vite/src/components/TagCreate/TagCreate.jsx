@@ -22,7 +22,7 @@ const TagCreate = () => {
       <h1>Create Tag</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label> Tag Name </label>
+          <label>Tag Name</label>
           <input
           type="text"
           value={tagName}
