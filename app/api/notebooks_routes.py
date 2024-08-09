@@ -13,8 +13,8 @@ def get_notebooks():
     return jsonify({'notebooks': [book.to_dict() for book in notebooks]})
 
 # POST create a new notebook for the current user
-@notebook_routes.route('/', methods=["POST"])
-@login_required
+@notebook_routes.route('', methods=["POST"])
+# @login_required
 def create_notebook():
     title = request.json.get('title')
 
