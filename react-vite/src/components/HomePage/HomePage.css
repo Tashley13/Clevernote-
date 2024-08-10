@@ -1,23 +1,32 @@
-.homepage {
+/* Ensure the layout is split between the navigation and content */
+#split-layout {
     display: flex;
     height: 100vh;
-    /* Full height of the viewport */
+    width: 100vw;
 }
 
-.content {
-    flex: 3;
+/* Adjust the homepage container to occupy the remaining space */
+.homepage-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     padding: 20px;
-    /* Add any additional styling for your main content */
 }
+
 
 .tasks-sidebar {
-    flex: 1;
+    flex: 0 0 300px;
+
     padding: 20px;
     background-color: #272727;
     color: white;
     overflow-y: auto;
+    margin-left: auto;
+    margin-right: 20px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+
 }
 
 .task-list h2 {
@@ -28,10 +37,11 @@
 .task-list ul {
     list-style: none;
     padding: 0;
+    width: 100%;
 }
 
 .task-list li {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .task {
@@ -41,6 +51,8 @@
     padding: 10px;
     border-radius: 4px;
     background-color: #333;
+    width: 100%;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .task.completed {
