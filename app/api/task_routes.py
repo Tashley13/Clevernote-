@@ -3,7 +3,7 @@ from app.models import db, Task
 from datetime import datetime, timezone
 from flask_login import login_required, current_user
 
-task_routes = Blueprint('tasks', __name__)
+task_routes = Blueprint('tasks', __name__, url_prefix='/api/tasks')
 
 
 # Create a new task
