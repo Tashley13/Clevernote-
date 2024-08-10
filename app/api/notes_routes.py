@@ -7,29 +7,30 @@ from datetime import datetime, timezone
 
 notes_routes = Blueprint('notes', __name__, url_prefix="/notes") #create blueprint for notes
 
+
 # READ route - get all notes of current user
 @notes_routes.route('/notes')
 # @login_required
 def get_notes():
     print('Hello World Check 123')
-    notes = Note.query.all()
-    print('NOTES: ', notes)
-    return jsonify({'notes' : [note.to_dict() ]})
+    # notes = Note.query.all()
+    # print('NOTES: ', notes)
+    return ({'notes' : [note.to_dict() ]})
 
 
-# # CREATE route - create a note for current user
-# @notes_routes.route('/notes', methods=["POST"])
-# # @login_required
-# def create_note(userId, notebookId): #need to call userid and notebookid?
-#     new_note= Note(title='Untitled', user_id=userId, notebook_id=notebookId, content="")
-#     #create a new note with a placeholder title of 'Untitled' and blank content
-#     #match the userId and notebookId
-#     db.session.add(new_note)
-#     #add the new note to the session
-#     db.session.commit()
-#     #commit the session
-#     return jsonify(new_note.to_dict())
-#     #return the note, sending into a dictionary for access later
+# CREATE route - create a note for current user
+@notes_routes.route('/notes', methods=["POST"])
+# @login_required
+def create_note(userId, notebookId): #need to call userid and notebookid?
+    new_note= Note(title='Untitled', user_id=userId, notebook_id=notebookId, content="")
+    #create a new note with a placeholder title of 'Untitled' and blank content
+    #match the userId and notebookId
+    db.session.add(new_note)
+    #add the new note to the session
+    db.session.commit()
+    #commit the session
+    return jsonify(new_note.to_dict())
+    #return the note, sending into a dictionary for access later
 
 
 # # UPDATE route - update the note for a current user

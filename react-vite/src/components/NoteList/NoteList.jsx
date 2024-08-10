@@ -10,12 +10,13 @@ const NoteList = () => {
   // const { noteId } = useParams();
   // const loggedIn = useSelector((state) => state.session.user) // create log in credential check
   const allNotes = useSelector((state)=> state.notes)
-  console.log('NOTES: ', allNotes)
-
+  // console.log('NOTES: ', allNotes)
+  console.log(noteActions.getAllNotesUser.data)
   useEffect(() => {
     console.log('useEffect succesfully mounted')
 
       dispatch(noteActions.getAllNotesUser());
+
 
   }, [dispatch])
 
@@ -27,6 +28,7 @@ const NoteList = () => {
         <li>Note 2</li>
         <li>Note 3</li>
       </ul>
+      <p>{allNotes.byId} </p>
     </div>
   );
 };

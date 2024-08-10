@@ -8,6 +8,7 @@ notebook_routes = Blueprint('notebooks', __name__, url_prefix="/notebooks")
 @notebook_routes.route('')
 # @login_required
 def get_notebooks():
+    print('Hello World Check 123')
     notebooks = Notebook.query.filter_by(user_id=current_user.id).all()
     # notebooks = Notebook.query.all()
     return jsonify({'notebooks': [book.to_dict() for book in notebooks]})

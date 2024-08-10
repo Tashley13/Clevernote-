@@ -49,7 +49,7 @@ export const getAllNotesUser = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-        console.log('DATA: ', data)
+        // console.log('DATA: ', data)
         if(data.errors) {
             console.errors("Errors: ", data.errors);
             return;
@@ -109,8 +109,8 @@ export const deleteUserNote = (noteId) => async (dispatch) => {
 }
 
 const initialState = {
-    byid: {}, //load only the actual notes with ids as keys
-    allIds: [] //grab all the ids
+    // byid: {}, //load only the actual notes with ids as keys
+    // allIds: [] //grab all the ids
 };
 
 const noteReducer = (state= initialState, action) => {
