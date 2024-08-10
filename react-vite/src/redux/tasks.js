@@ -27,10 +27,19 @@ const deleteTask = (taskId) => ({
 
 // Thunk Actions
 export const fetchTasks = () => async (dispatch) => {
-  const response = await fetch('/api/tasks');
-  const data = await response.json();
-  if (response.ok) {
-    dispatch(getTasks(data));
+  try {
+    const response = await fetch('/api/tasks');
+
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(getTasks(data));
+    } else {
+      const errorText = await response.text();
+      console.error('Error response:', errorText);
+    }
+  } catch (error) {
+    console.error('Network or other error:', error);
+
   }
 };
 
