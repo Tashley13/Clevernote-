@@ -14,12 +14,9 @@ import noteReducer from "./note";
 const rootReducer = combineReducers({
   session: sessionReducer,
   tags: tagReducer,
-<<<<<<< HEAD
-  notes: noteReducer
-=======
+  notes: noteReducer,
   notebooks: notebookReducer,
   tasks: taskReducer
->>>>>>> 129a738502e1cfd28f5015038e95f0ca635c4c7a
 });
 
 let enhancer;
