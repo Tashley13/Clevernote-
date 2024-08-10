@@ -59,7 +59,7 @@ export const thunkDeleteTag = (tag) => async (dispatch) => {
 	const res = await fetch(`/api/tags/${tag.id}`, {
 		method: 'DELETE',
 		headers: { 'Content-Type': 'application/json' },
-		body: json.stringify(tag)
+		body: JSON.stringify(tag)
 	})
 
 	if (res.ok) {
@@ -100,7 +100,7 @@ const tagReducer = (state = initialState, action) => {
 		}
 		case CREATE_TAG: {
 			const newState = {}
-			newState[action.payload.newTag.id] = action.payload.newTag
+			return newState[action.payload.newTag.id] = action.payload.newTag
 		}
 		case UPDATE_TAG: {
 			return state.map(tag => tag.id === action.tag.id ? action.tag : tag)

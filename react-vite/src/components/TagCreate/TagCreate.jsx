@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {createTag} from '../../redux/tags';
+import {useState} from 'react';
+import {thunkCreateTag} from '../../redux/tags';
 import { useDispatch } from "react-redux";
 import { useModal } from '../../context/Modal';
 
@@ -14,7 +14,7 @@ const TagCreate = () => {
     const newTag = {
       tagName
     }
-    dispatch(createTag(newTag)).then(() => {closeModal()})
+    dispatch(thunkCreateTag(newTag)).then(() => {closeModal()})
   }
 
   return (
