@@ -8,16 +8,16 @@ const NoteList = () => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   // const { noteId } = useParams();
-  const loggedIn = useSelector((state) => state.session.user) // create log in credential check
+  // const loggedIn = useSelector((state) => state.session.user) // create log in credential check
   const allNotes = useSelector((state)=> state.notes)
   console.log('NOTES: ', allNotes)
 
   useEffect(() => {
-    console.log('succesfully mounted')
-    if (loggedIn) {
-      dispatch(noteActions.getAllNotesUser())
-    }
-  }, [dispatch, loggedIn])
+    console.log('useEffect succesfully mounted')
+
+      dispatch(noteActions.getAllNotesUser());
+
+  }, [dispatch])
 
   return (
     <div>

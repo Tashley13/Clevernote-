@@ -45,12 +45,13 @@ const deleteNote = (noteId) => {
 
 //get all notes of user
 export const getAllNotesUser = () => async (dispatch) => {
-    const response = await fetch("/api/notes")
+    const response = await fetch('/api/notes')
 
     if (response.ok) {
         const data = await response.json()
-        // console.log('DATA: ', data)
+        console.log('DATA: ', data)
         if(data.errors) {
+            console.errors("Errors: ", data.errors);
             return;
         }
         dispatch(loadNotes(data))
@@ -113,26 +114,28 @@ const initialState = {
 };
 
 const noteReducer = (state= initialState, action) => {
+    const newState = { ...state }
     switch (action.type) {
-        case LOAD_NOTES: {
-            return action.notes
-        }
-        case DETAIL_NOTE: {
-            const newState = { ...state};
+        case LOAD_NOTES:
+            console.log('NEW STATEL ', newState)
+            return newState
+
+        case DETAIL_NOTE:
+
             return newState // spread the state
-        }
-        case ADD_NOTE: {
-            const newState = { ...state};
+
+        case ADD_NOTE:
+
             return newState // spread the state
-        }
-        case UPDATE_NOTE: {
-            const newState = { ...state};
+
+        case UPDATE_NOTE:
+
             return newState // spread the state
-        }
-        case DELETE_NOTE: {
-            const newState = { ...state};
+
+        case DELETE_NOTE:
+
             return newState // spread the state
-        }
+
         default:
             return state
     }
