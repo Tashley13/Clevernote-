@@ -5,7 +5,7 @@ import "./Navigation.css";
 import { faArrowRight, faBook, faFileLines, faHouse, faListCheck, faTags} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useModal } from "../../context/Modal"; 
+import { useModal } from "../../context/Modal";
 import CreateTaskModal from "../CreateTaskModal";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import NotebookAddModal from "../NotebookAddModal/NotebookAddModal";
@@ -87,12 +87,14 @@ function Navigation() {
             <span className="nav-inner-text">Tasks</span>
           </NavLink>
         </li>
-        <OpenModalMenuItem
-          className="nav-btn-primary text-white"
-          itemText={navOpen ? `Notebooks` : ""}
-          modalComponent={<NotebookAddModal />}
-          icon={faBook}
-        />
+
+        <li>
+          <NavLink className="nav-btn-primary text-white" to="/notebooks">
+            <FontAwesomeIcon icon={faBook} />
+            <span className="nav-inner-text">Notebooks</span>
+          </NavLink>
+        </li>
+        
         <li>
           <NavLink className="nav-btn-primary text-white" to="/">
             <FontAwesomeIcon icon={faTags} />
