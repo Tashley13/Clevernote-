@@ -14,7 +14,7 @@ def get_tags():
 @tag_routes.route('/', methods=["POST"])
 # @login_required
 def create_tag():
-	tag_name = request.json.get('tag_name')
+	tag_name = request.json.get('tagName')
 
 	if not tag_name:
 		return jsonify({'error': "Tag name is required"})
