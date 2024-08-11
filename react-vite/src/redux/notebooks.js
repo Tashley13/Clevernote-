@@ -22,12 +22,11 @@ export const thunkGetNotebooks = () => async (dispatch) =>{
 
     if(res.ok){
         const data = await res.json()
-
         if(data.errors){
             return;
         }
 
-        dispatch(setNotebooks(data))
+        dispatch(setNotebooks({...data.notebooks}))
     }
 }
 
@@ -91,16 +90,16 @@ export const thunkDeleteANotebook = (notebookId) => async (dispatch) =>{
     }
 }
 
-const initialState = { notebooks: null };
+const initialState = { };
 
 function notebookReducer(state = initialState, action) {
     switch (action.type) {
       case SET_NOTEBOOKS:
-        return { ...state, notebooks: action.payload };
+        return { ...state, allNotebooks: {...action.payload} };
       case ADD_NOTEBOOK:
-        return { ...state, notebooks: {...state.notebooks, [action.payload.id]: action.payload} };
+        return { ...state, allNotebooks: {...state.allNotebooks, [action.payload.id]: action.payload} };
       case REMOVE_NOTEBOOK:
-        delete state.notebooks[action.payload]
+        delete state.allNotebooks[action.payload]
         return state;
       default:
         return state;
