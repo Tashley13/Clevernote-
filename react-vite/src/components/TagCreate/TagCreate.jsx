@@ -8,7 +8,7 @@ const TagCreate = () => {
   const dispatch = useDispatch()
   const [tagName, setTagName] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const newTag = {

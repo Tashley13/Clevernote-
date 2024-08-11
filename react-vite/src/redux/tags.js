@@ -23,8 +23,12 @@ const loadTag = (payload) => ({
 	payload
 })
 
-export const thunkCreateTag = () => async (dispatch) => {
-	const res = await fetch("/api/tags")
+export const thunkCreateTag = (tag) => async (dispatch) => {
+	const res = await fetch("/api/tags/", {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(tag)
+	})
 
 	if (res.ok) {
 		const data = await res.json()
@@ -34,6 +38,7 @@ export const thunkCreateTag = () => async (dispatch) => {
 		}
 
 		dispatch(createTag(data))
+		return data
 	}
 }
 
@@ -100,7 +105,9 @@ const tagReducer = (state = initialState, action) => {
 		}
 		case CREATE_TAG: {
 			const newState = {}
-			return newState[action.payload.newTag.id] = action.payload.newTag
+			console.log('TEST ---> ', action.payload.data)
+			newState[action.payload.id] = action.payload
+			return {...state, ...newState}
 		}
 		case UPDATE_TAG: {
 			return state.map(tag => tag.id === action.tag.id ? action.tag : tag)
