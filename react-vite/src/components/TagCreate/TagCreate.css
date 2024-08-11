@@ -1,0 +1,10 @@
+.tag-form {
+	background-color: #202020;
+	padding: 20px;
+	border-radius: 4px;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
