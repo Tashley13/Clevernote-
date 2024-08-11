@@ -1,47 +1,42 @@
 /* Ensure the layout is split between the navigation and content */
-#split-layout {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-}
 
 
 .homepage-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
     flex-grow: 1;
     padding: 20px;
 }
 
 
-.tasks-sidebar {
+.feature-tile {
     flex: 0 0 300px;
-
     padding: 20px;
     background-color: #272727;
     color: white;
     overflow-y: auto;
-    margin-left: auto;
-    margin-right: 20px;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 
 }
 
-.task-list h2 {
+.feature-tile h2 {
     text-align: center;
 
     margin-bottom: 20px;
 }
 
-.task-list ul {
+.feature-tile ul {
     list-style: none;
     padding: 0;
     width: 100%;
 }
 
-.task-list li {
+.feature-tile li {
     margin-bottom: 10px;
 }
 
