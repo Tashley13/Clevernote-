@@ -18,10 +18,10 @@ const TagCreate = () => {
   }
 
   return (
-    <div>
+    <div className="modal-container">
+      <form onSubmit={handleSubmit} className='tag-form'>
       <h1>Create Tag</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
+        <div className='form-group'>
           <label>Tag Name</label>
           <input
           type="text"
@@ -30,7 +30,7 @@ const TagCreate = () => {
           required
           />
         </div>
-        <button type="submit">Create Tag</button>
+        <button className='submit-button' type="submit">Create Tag</button>
       </form>
     </div>
   );
