@@ -98,14 +98,14 @@ const tagReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case LOAD_TAG: {
 			const newState = {}
-			action.payload.newTag.forEach(tag => {
+			console.log('TEST ---> ', action.payload)
+			action.payload.forEach(tag => {
 				newState[tag.id] = tag
 			});
-			return newState
+			return {...newState}
 		}
 		case CREATE_TAG: {
 			const newState = {}
-			console.log('TEST ---> ', action.payload.data)
 			newState[action.payload.id] = action.payload
 			return {...state, ...newState}
 		}

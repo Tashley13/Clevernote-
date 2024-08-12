@@ -2,13 +2,14 @@ import {useState} from 'react';
 import {thunkCreateTag} from '../../redux/tags';
 import { useDispatch } from "react-redux";
 import { useModal } from '../../context/Modal';
+import './TagCreate.css'
 
 const TagCreate = () => {
   const { closeModal } = useModal();
   const dispatch = useDispatch()
   const [tagName, setTagName] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     const newTag = {
@@ -18,10 +19,9 @@ const TagCreate = () => {
   }
 
   return (
-    <div className="modal-container">
       <form onSubmit={handleSubmit} className='tag-form'>
-      <h1>Create Tag</h1>
-        <div className='form-group'>
+      <h2>Create Tag</h2>
+        <div>
           <label>Tag Name</label>
           <input
           type="text"
@@ -32,7 +32,6 @@ const TagCreate = () => {
         </div>
         <button className='submit-button' type="submit">Create Tag</button>
       </form>
-    </div>
   );
 };
 
