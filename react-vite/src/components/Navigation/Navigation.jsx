@@ -64,7 +64,7 @@ function Navigation() {
           )}
         </li>
         <div className="big-btn-container">
-          <NavLink className="nav-btn-primary green" to="/notes/:noteid">
+          <NavLink className="nav-btn-primary green" to="/notes/:noteId">
             <FontAwesomeIcon icon={faFileLines} />
             <span className="nav-inner-text">Note</span>
           </NavLink>
