@@ -1,8 +1,20 @@
+import TagEdit from "../TagEdit"
+import { useModal } from "../../context/Modal";
+
+
 const TagDetail = ({ tag }) => {
+
+  const { setModalContent } = useModal();
+
+  const openEditTagModal = () => {
+    setModalContent(<TagEdit />)
+  }
+
   return (
-    <ul>
-    <li>{tag.tag_name}</li>
-  </ul>
+    <div>
+    {tag.tag_name}
+    <button onClick={openEditTagModal}>Edit</button>
+    </div>
   );
 };
 
