@@ -1,10 +1,9 @@
-const TagDetail = () => {
+const TagDetail = ({ tag }) => {
   return (
-    <div>
-      <h1>Tag Detail</h1>
-      {/* Add more content as needed */}
-    </div>
+    <ul>
+    <li>{tag.tag_name}</li>
+  </ul>
   );
 };
 
-export default TagDetail;
+export default TagDetail

@@ -11,7 +11,7 @@ def get_tags():
 	return jsonify([tag.to_dict() for tag in tags])
 
 # POST create a new tag
-@tag_routes.route('/', methods=["POST"])
+@tag_routes.route('', methods=["POST"])
 # @login_required
 def create_tag():
 	tag_name = request.json.get('tagName')
