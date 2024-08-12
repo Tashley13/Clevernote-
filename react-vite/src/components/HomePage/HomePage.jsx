@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTasks } from '../../redux/tasks';
+import './HomePage.css'
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -11,22 +12,60 @@ const HomePage = () => {
   }, [dispatch]);
 
   return (
-    <div id="split-layout">
-      <nav id="nav-main">
-        {/* Your existing navigation */}
-      </nav>
-      <div className="homepage-container">
-        <div className="tasks-sidebar">
-          <h2>My Tasks</h2>
-          {/* Render tasks here */}
+    <div className="homepage-container">
+
+      <div className="feature-tile">
+        <h2>My Notes</h2>
+        {/* Render tasks here */}
+        <ul>
           {tasks && tasks.map(task => (
-            <div key={task.id} className="task">
+            <li key={task.id} className="task">
               <p>{task.title}</p>
               <p>{task.due_date}</p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
+
+      <div className="feature-tile">
+        <h2>My Tasks</h2>
+        {/* Render tasks here */}
+        <ul>
+          {tasks && tasks.map(task => (
+            <li key={task.id} className="task">
+              <p>{task.title}</p>
+              <p>{task.due_date}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="feature-tile">
+        <h2>My Notebooks</h2>
+        {/* Render tasks here */}
+        <ul>
+          {tasks && tasks.map(task => (
+            <li key={task.id} className="task">
+              <p>{task.title}</p>
+              <p>{task.due_date}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="feature-tile">
+        <h2>My Tags</h2>
+        {/* Render tasks here */}
+        <ul>
+          {tasks && tasks.map(task => (
+            <li key={task.id} className="task">
+              <p>{task.title}</p>
+              <p>{task.due_date}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
     </div>
   );
 };
