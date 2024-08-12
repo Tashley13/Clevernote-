@@ -10,8 +10,13 @@ def get_tags():
 	tags = Tag.query.filter_by(user_id = current_user.id).all()
 	return jsonify([tag.to_dict() for tag in tags])
 
+@tag_routes.route('/<int:id>', methods=['GET'])
+def get_details(id):
+	tag = Tag.query.get(id)
+	return jsonify([tag.to_dict()])
+
 # POST create a new tag
-@tag_routes.route('/', methods=["POST"])
+@tag_routes.route('', methods=["POST"])
 # @login_required
 def create_tag():
 	tag_name = request.json.get('tagName')
@@ -19,7 +24,7 @@ def create_tag():
 	if not tag_name:
 		return jsonify({'error': "Tag name is required"})
 
-	new_tag = Tag(tag_name=tag_name)
+	new_tag = Tag(tag_name=tag_name, user_id=current_user.id)
 	db.session.add(new_tag)
 	db.session.commit()
 

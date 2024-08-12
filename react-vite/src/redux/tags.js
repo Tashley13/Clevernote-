@@ -2,6 +2,12 @@ const CREATE_TAG = 'tags/createTag'
 const UPDATE_TAG = 'tags/updateTag'
 const DELETE_TAG = 'tags/deleteTag'
 const LOAD_TAG = 'tags/loadTag'
+const LOAD_DETAILS = 'tags/loadDetails'
+
+const loadDetails = (payload) => ({
+	type: LOAD_DETAILS,
+	payload
+})
 
 const createTag = (payload) => ({
 	type: CREATE_TAG,
@@ -24,7 +30,7 @@ const loadTag = (payload) => ({
 })
 
 export const thunkCreateTag = (tag) => async (dispatch) => {
-	const res = await fetch("/api/tags/", {
+	const res = await fetch("/api/tags", {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(tag)
@@ -79,7 +85,7 @@ export const thunkDeleteTag = (tag) => async (dispatch) => {
 }
 
 export const thunkGetTag = () => async (dispatch) => {
-	const res = await fetch('/api/tags/')
+	const res = await fetch('/api/tags')
 
 	if (res.ok) {
 		const data = await res.json()
@@ -92,20 +98,37 @@ export const thunkGetTag = () => async (dispatch) => {
 	}
 }
 
+export const thunkGetDetails = (tag) => async (dispatch) => {
+	const res = await fetch(`/api/tags/${tag}`)
+
+	if (res.ok) {
+		const data = await res.json()
+
+		if (data.errors) {
+			return;
+		}
+
+		dispatch(loadDetails(data))
+	}
+}
+
 const initialState = {};
 
 const tagReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case LOAD_TAG: {
 			const newState = {}
-			action.payload.newTag.forEach(tag => {
+			action.payload.forEach(tag => {
 				newState[tag.id] = tag
 			});
-			return newState
+			return {...newState}
+		}
+		case LOAD_DETAILS: {
+			console.log('TEST ---> ', action.payload)
+			return {...action.payload}
 		}
 		case CREATE_TAG: {
 			const newState = {}
-			console.log('TEST ---> ', action.payload.data)
 			newState[action.payload.id] = action.payload
 			return {...state, ...newState}
 		}
