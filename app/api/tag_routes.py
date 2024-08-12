@@ -19,7 +19,7 @@ def create_tag():
 	if not tag_name:
 		return jsonify({'error': "Tag name is required"})
 
-	new_tag = Tag(tag_name=tag_name)
+	new_tag = Tag(tag_name=tag_name, user_id=current_user.id)
 	db.session.add(new_tag)
 	db.session.commit()
 
