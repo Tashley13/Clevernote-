@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import './NotebookAdd.css'
-import { thunkAddNotebook, thunkGetNotebooks } from '../../redux/notebooks'
+import { thunkAddNotebook, thunkEditANotebook, thunkGetNotebooks } from '../../redux/notebooks'
 import { useDispatch } from 'react-redux'
 import { useModal } from '../../context/Modal'
 
-const NotebookAddModal = () => {
+const NotebookAddModal = ({notebook}) => {
+
     const [data, setData] = useState({
-        title: ''
+        title: notebook ? notebook.title : ''
     })
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({
@@ -24,15 +25,24 @@ const NotebookAddModal = () => {
     const submitAddNotebook = async (e) => {
         e.preventDefault()
         setErrors({title: ''})
+        const isSuccessfulData = async (notebook) => {
+            if(notebook?.errors){
+                setErrors(notebook.errors)
+            }else{
+                    await dispatch(thunkGetNotebooks())
+                    closeModal()
+            }
+        }
         if(data.title){
-           const newNotebook = await dispatch(thunkAddNotebook({title: data.title}))
 
-           if(newNotebook?.errors){
-            setErrors(newNotebook.errors)
-           }else{
-                await dispatch(thunkGetNotebooks())
-                closeModal()
-           }
+            if(!notebook){
+                const newNotebook = await dispatch(thunkAddNotebook({title: data.title}))
+
+                await isSuccessfulData(newNotebook)
+            }else{
+                const updatedNotebook = await dispatch(thunkEditANotebook(notebook.id, data.title))
+                await isSuccessfulData(updatedNotebook)
+            }
         }else{
             setErrors({title: "Cannot be empty"})
         }
@@ -41,13 +51,13 @@ const NotebookAddModal = () => {
 
     return (
         <form id='notebook-add-form'>
-            <h2>Add a Notebook</h2>
+            <h2>{notebook ? 'Edit a Notebook' : "Add a Notebook"}</h2>
             <div>
                 <label>Name</label>
                 <input value={data.title} onChange={handleChange} type='text' />
                 <p className='error'>{errors.title}</p>
             </div>
-            <button onClick={submitAddNotebook}>Create</button>
+            <button onClick={submitAddNotebook}>Submit</button>
         </form>
     )
 }

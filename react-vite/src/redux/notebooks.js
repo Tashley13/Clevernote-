@@ -50,13 +50,13 @@ export const thunkAddNotebook = (newNotebook) => async (dispatch) =>{
     }
 }
 
-export const thunkEditANotebook = (notebookId) => async (dispatch) =>{
+export const thunkEditANotebook = (notebookId, title) => async (dispatch) =>{
     const res = await fetch(`/api/notebooks/${+notebookId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({notebook_id: notebookId})
+        body: JSON.stringify({notebook_id: notebookId, title: title})
     })
 
     if(res.ok){
@@ -71,7 +71,7 @@ export const thunkEditANotebook = (notebookId) => async (dispatch) =>{
 }
 
 export const thunkDeleteANotebook = (notebookId) => async (dispatch) =>{
-    const res = await fetch(`/api/notebooks/${+ notebookId}`, {
+    const res = await fetch(`/api/notebooks/${+notebookId}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"

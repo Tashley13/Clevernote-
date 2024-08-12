@@ -4,15 +4,54 @@ import { thunkGetNotebooks } from '../../redux/notebooks'
 import { useEffect } from 'react'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import NotebookAddModal from '../NotebookAddModal/NotebookAddModal'
+import { faPenToSquare } from '@fortawesome/free-regular-svg-icons/faPenToSquare'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import NotebookDeleteModal from '../NotebookAddModal/NotebookDeleteModal'
 
-const FeatureTable = () => {
+const NoteCell = ({note}) => {
+    return (
+        <tr className='feature-tr-data'>
+            <th>{note.title}</th>
+            <th>{3}</th>
+            <th>{note.created_at}</th>
+        </tr>
+    )
+}
+
+const NotebookCell = ({notebook}) => {
+
+    return (
+        <>
+            <tr className='feature-tr-data'>
+                <th>{notebook.title}</th>
+                <th>{3}</th>
+                <th>{notebook.created_at}</th>
+                <th id='cell-menu'>
+                <OpenModalMenuItem
+                        className='cell-menu-btn blue'
+                        icon={faPenToSquare}
+                        modalComponent={<NotebookAddModal notebook={notebook} />}
+                        />
+
+                <OpenModalMenuItem
+                    className='cell-menu-btn red'
+                    icon={faTrash}
+                    modalComponent={<NotebookDeleteModal notebookId={notebook.id} />}
+                    />
+
+                </th>
+            </tr>
+        </>
+    )
+}
+
+const FeatureTable = ({type}) => {
 
     const { allNotebooks } = useSelector(state => state.notebooks)
 
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(thunkGetNotebooks())
-
 
     }, [dispatch])
 
@@ -29,20 +68,18 @@ const FeatureTable = () => {
                         />
                 </div>
                 <table id='feature-table-container'>
-                    <tr className='feature-tr-properties'>
-                        <th>Name</th>
-                        <th>Note Count</th>
-                        <th>Created at</th>
-                    </tr>
-                    {Object.values(allNotebooks).map(el => {
-                    return (
-                        <tr className='feature-tr-data'>
-                            <th>{el.title}</th>
-                            <th>{3}</th>
-                            <th>{el.created_at}</th>
+                    <tbody>
+                        <tr className='feature-tr-properties'>
+                            <th>Name</th>
+                            <th>Note Count</th>
+                            <th>Created at</th>
                         </tr>
-                    )
-                })}
+                        {Object.values(allNotebooks).map((el, key) => {
+                        return (
+                            <NotebookCell notebook={el} key={key} />
+                        )
+                        })}
+                    </tbody>
 
                 </table>
             </div>
