@@ -1,3 +1,3 @@
 import TagDetail from './TagDetail';
 
-export default TagDetail;
+export default TagDetail
