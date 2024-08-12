@@ -1,10 +1,43 @@
+import Quill from 'quill';
+import { useEffect } from "react";
+import { useDispatch, useSelector} from "react-redux";
+import React, { useRef, useState } from 'react';
+import { useParams } from "react-router-dom";
+import * as noteActions from "../../redux/note";
+import Editor from 'quill/core/editor';
 // import React from 'react';
+//to view users notes
+
+
 
 const NoteDetail = () => {
+
+  const dispatch = useDispatch();
+  const { noteId, userId } = useParams()
+  const [lastChange, setLastChange] = useState()
+  // console.log('USERID: ', userId)
+
+  //use a ref to access the quill instance directly
+  const quillRef = useRef();
+
+
   return (
     <div>
-      <h1>Note Details</h1>
-      <p>Details about the selected note will be displayed here.</p>
+      <div className="title">
+        <input
+          type="text"
+          value={title}
+          //enter on change for update title
+          />
+          <div className='editor-container'>
+            <Editor
+            ref={quillRef}
+            defaultValue= {new Delta()
+              .insert('Insert Thoughts Here')}
+            onTextChange={setLastChange} //need to update updated_at
+            />
+          </div>
+      </div>
     </div>
   );
 };

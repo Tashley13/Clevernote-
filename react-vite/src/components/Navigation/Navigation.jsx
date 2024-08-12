@@ -64,7 +64,7 @@ function Navigation() {
           )}
         </li>
         <div className="big-btn-container">
-          <NavLink className="nav-btn-primary green" to="/">
+          <NavLink className="nav-btn-primary green" to="/notes/:noteid">
             <FontAwesomeIcon icon={faFileLines} />
             <span className="nav-inner-text">Note</span>
           </NavLink>
@@ -80,7 +80,7 @@ function Navigation() {
           </NavLink>
         </li>
         <li>
-          <NavLink className="nav-btn-primary text-white" to="/">
+          <NavLink className="nav-btn-primary text-white" to="/notes">
             <FontAwesomeIcon icon={faFileLines} />
             <span className="nav-inner-text">Notes</span>
           </NavLink>
@@ -98,7 +98,7 @@ function Navigation() {
             <span className="nav-inner-text">Notebooks</span>
           </NavLink>
         </li>
-        
+
         <li>
 				<NavLink className='nav-btn-primary text-white' onClick={openTagModal}><FontAwesomeIcon icon={faTags} /><span className="nav-inner-text">Tags</span></NavLink>
         </li>

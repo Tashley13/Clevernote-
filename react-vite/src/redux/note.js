@@ -71,10 +71,14 @@ const initialState = {
 };
 
 const noteReducer = (state= initialState, action) => {
+    const newState = { ...state }
     switch (action.type) {
         case LOAD_NOTES:
-        const newState = { ...state } // spread the state
+             // spread the state
+            return newState
         // console.log(action.byid)
+        default:
+            return state
     }
 }
 
