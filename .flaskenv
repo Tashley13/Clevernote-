@@ -1,3 +1,6 @@
 FLASK_APP=app
+FLASK_ENV = development
 FLASK_DEBUG=true
 FLASK_RUN_PORT=8000
+DATABASE_URL=sqlite:///dev.db
+SECRET_KEY=0ab34b41ba6b2b2a750f9d0b2c33f63a

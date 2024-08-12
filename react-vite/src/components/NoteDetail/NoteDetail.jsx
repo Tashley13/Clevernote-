@@ -1,6 +1,6 @@
-import Quill from 'quill';
-import { useEffect } from "react";
-import { useDispatch, useSelector} from "react-redux";
+// import Quill from 'quill';
+// import { useEffect } from "react";
+import { useDispatch} from "react-redux";
 import React, { useRef, useState } from 'react';
 import { useParams } from "react-router-dom";
 import * as noteActions from "../../redux/note";
@@ -26,17 +26,10 @@ const NoteDetail = () => {
       <div className="title">
         <input
           type="text"
-          value={title}
+          // value={title}
           //enter on change for update title
           />
-          <div className='editor-container'>
-            <Editor
-            ref={quillRef}
-            defaultValue= {new Delta()
-              .insert('Insert Thoughts Here')}
-            onTextChange={setLastChange} //need to update updated_at
-            />
-          </div>
+
       </div>
     </div>
   );
