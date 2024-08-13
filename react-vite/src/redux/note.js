@@ -105,22 +105,25 @@ export const deleteUserNote = (noteId) => async (dispatch) => {
 }
 
 const initialState = {
-    // byid: {}, //load only the actual notes with ids as keys
-    // allIds: [] //grab all the ids
+    byid: {}, //load only the actual notes with ids as keys
+    allIds: [] //grab all the ids
 };
 
 const noteReducer = (state= initialState, action) => {
     switch (action.type) {
         case LOAD_NOTES: {
-
-            const newState = {}
+            const notesbyId={};
             action.notes.forEach(note => {
-                newState[note.id] = note
-            })
-            return {...newState}
+                notesbyId[note.id] = note;
+            });
+            return {
+                ...state,
+                byId: notesbyId,
+                allIds: action.notes.map(note=>note.id)
+            }
         }
-        case DETAIL_NOTE:
-            return action.note
+        // case DETAIL_NOTE:
+        //     return action.note
         case ADD_NOTE: {
             const newState = {}
             newState[action.note.id]=action.note
