@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request #import request
 #request allows users to send HTTP/1.1 requests
-# from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import db, Note
 from datetime import datetime, timezone
 
