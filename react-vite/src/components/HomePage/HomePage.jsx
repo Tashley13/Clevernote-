@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <div className="homepage-container">
 
-      <div className="feature-tile">
+      <div className="notes-feature-tile">
         <h2>My Notes</h2>
         {/* Render tasks here */}
         <ul>
@@ -27,7 +27,7 @@ const HomePage = () => {
         </ul>
       </div>
 
-      <div className="feature-tile">
+      <div className="tasks-feature-tile">
         <h2>My Tasks</h2>
         {/* Render tasks here */}
         <ul>
@@ -40,7 +40,7 @@ const HomePage = () => {
         </ul>
       </div>
 
-      <div className="feature-tile">
+      <div className="notebooks-feature-tile">
         <h2>My Notebooks</h2>
         {/* Render tasks here */}
         <ul>
@@ -53,7 +53,7 @@ const HomePage = () => {
         </ul>
       </div>
 
-      <div className="feature-tile">
+      <div className="tags-feature-tile">
         <h2>My Tags</h2>
         {/* Render tasks here */}
         <ul>

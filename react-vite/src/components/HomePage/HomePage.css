@@ -1,6 +1,4 @@
 /* Ensure the layout is split between the navigation and content */
-
-
 .homepage-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -10,7 +8,7 @@
     padding: 20px;
 }
 
-
+/* Common styles for all feature tiles */
 .feature-tile {
     flex: 0 0 300px;
     padding: 20px;
@@ -21,12 +19,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
 }
 
 .feature-tile h2 {
     text-align: center;
-
     margin-bottom: 20px;
 }
 
@@ -40,6 +36,7 @@
     margin-bottom: 10px;
 }
 
+/* Task item styling */
 .task {
     display: flex;
     justify-content: space-between;
@@ -54,4 +51,26 @@
 .task.completed {
     text-decoration: line-through;
     color: grey;
+}
+
+/* Specific styles for each feature tile (Notes, Tasks, Notebooks, Tags) */
+
+/* Notes section */
+.notes-feature-tile {
+    /* Add any custom styles specific to the Notes tile here */
+}
+
+/* Tasks section */
+.tasks-feature-tile {
+    /* Add any custom styles specific to the Tasks tile here */
+}
+
+/* Notebooks section */
+.notebooks-feature-tile {
+    /* Add any custom styles specific to the Notebooks tile here */
+}
+
+/* Tags section */
+.tags-feature-tile {
+    /* Add any custom styles specific to the Tags tile here */
 }
