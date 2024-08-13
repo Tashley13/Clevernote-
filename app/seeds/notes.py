@@ -2,7 +2,7 @@ from app.models import db, Note, User, Tag, Notebook, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_notes():
-    demo_notes= Note(title='Demo Notes', content='Demo content', notebookId=4, userId=4)
+    demo_notes= Note(title='Demo Notes', content='Demo content', notebookId=1, userId=3)
 
     janes_notes = Note(title='Jane\' Notes', content='Jane content', notebookId=1, userId=1)
 
@@ -10,10 +10,10 @@ def seed_notes():
 
     bobbys_notes = Note(title='Bobby\'s Notes', content='Bobby content', notebookId=3, userId=3)
 
-    tag1=Tag(tag_name='tag 1')
-    tag2=Tag(tag_name='tag 2')
-    tag3=Tag(tag_name='tag 3')
-    tag4=Tag(tag_name='tag 4')
+    tag1=Tag(tag_name='tag 1', user_id=1)
+    tag2=Tag(tag_name='tag 2', user_id=1)
+    tag3=Tag(tag_name='tag 3', user_id=1)
+    tag4=Tag(tag_name='tag 4', user_id=1)
 
     demo_notes.tags.append(tag1)
     janes_notes.tags.append(tag2)

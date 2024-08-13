@@ -6,9 +6,11 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from .models import db, User, Note, Notebook, Tag, Task, note_tag
 from .api.user_routes import user_routes
+from .api.notes_routes import notes_routes
 from .api.auth_routes import auth_routes
 from .api.notebooks_routes import notebook_routes
-from .api.notes_routes import notes_routes
+from .api.tag_routes import tag_routes
+from .api.task_routes import task_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -18,11 +20,9 @@ app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
 
-
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
-
 
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
@@ -32,18 +32,15 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(notebook_routes, url_prefix='/api/notebooks')
 app.register_blueprint(notes_routes, url_prefix='/api/notes')
+app.register_blueprint(tag_routes, url_prefix='/api/tags')
+app.register_blueprint(task_routes, url_prefix='/api/tasks')
 db.init_app(app)
 Migrate(app, db)
 
 # Application Security
 CORS(app)
 
-
-# Since we are deploying with Docker and Flask,
-# we won't be using a buildpack when we deploy to Heroku.
-# Therefore, we need to make sure that in production any
-# request made over http is redirected to https.
-# Well.........
+# Redirect HTTP to HTTPS in production
 @app.before_request
 def https_redirect():
     if os.environ.get('FLASK_ENV') == 'production':
@@ -52,7 +49,7 @@ def https_redirect():
             code = 301
             return redirect(url, code=code)
 
-
+# Inject CSRF token into cookies
 @app.after_request
 def inject_csrf_token(response):
     response.set_cookie(
@@ -64,7 +61,7 @@ def inject_csrf_token(response):
         httponly=True)
     return response
 
-
+# API documentation route
 @app.route("/api/docs")
 def api_help():
     """
@@ -77,6 +74,7 @@ def api_help():
     return route_list
 
 
+# React root route for handling frontend routing
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
@@ -90,6 +88,7 @@ def react_root(path):
     return app.send_static_file('index.html')
 
 
+# 404 Error handler to serve the React app for unknown routes
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')

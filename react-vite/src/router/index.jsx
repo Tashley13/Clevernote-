@@ -3,19 +3,19 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import HomePage from '../components/HomePage';
-import NotebookList from '../components/NotebookList';
 import NotebookDetail from '../components/NotebookDetail';
 import NoteList from '../components/NoteList';
 import NoteDetail from '../components/NoteDetail';
 import TaskList from '../components/TaskList';
 import TaskDetail from '../components/TaskDetail';
-import TaskCreate from '../components/TaskCreate';
+import CreateTaskModal from '../components/CreateTaskModal';
 import TaskEdit from '../components/TaskEdit';
 import TagList from '../components/TagList';
 import TagDetail from '../components/TagDetail';
 import TagCreate from '../components/TagCreate';
 import TagEdit from '../components/TagEdit';
 import NotebookEdit from '../components/NotebookEdit/NotebookEdit';
+import FeatureTable from '../components/FeatureTable/FeatureTable';
 
 
 
@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "notebooks",
-        element: <NotebookList />,
+        element: <FeatureTable />,
       },
       {
         path: "notebooks/:id",
@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "tasks/new",
-        element: <TaskCreate />,
+        element: <CreateTaskModal />,
       },
       {
         path: "tasks/:id/edit",

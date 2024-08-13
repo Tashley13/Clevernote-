@@ -2,21 +2,16 @@ from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
+# Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User.query.filter_by(username='Demo').first()
-    if not demo:
-        demo = User(username='Demo', email='demo@aa.io', password='password')
-        db.session.add(demo)
+    demo = User(username='Demo', email='demo@aa.io', password='password')
+    db.session.add(demo)
 
-    marnie = User.query.filter_by(username='marnie').first()
-    if not marnie:
-        marnie = User(username='marnie', email='marnie@aa.io', password='password')
-        db.session.add(marnie)
+    marnie = User(username='marnie', email='marnie@aa.io', password='password')
+    db.session.add(marnie)
 
-    bobbie = User.query.filter_by(username='bobbie').first()
-    if not bobbie:
-        bobbie = User(username='bobbie', email='bobbie@aa.io', password='password')
-        db.session.add(bobbie)
+    bobbie = User(username='bobbie', email='bobbie@aa.io', password='password')
+    db.session.add(bobbie)
 
     db.session.commit()
 

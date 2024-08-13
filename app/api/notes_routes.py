@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify, request #import request
 #request allows users to send HTTP/1.1 requests
 # from flask_login import login_required
 from app.models import db, Note
+from datetime import datetime, timezone
+
 
 notes_routes = Blueprint('notes', __name__, url_prefix="/notes") #create blueprint for notes
 
@@ -11,11 +13,11 @@ notes_routes = Blueprint('notes', __name__, url_prefix="/notes") #create bluepri
 def get_notes():
     # return 'Hello World Check'
     notes = Note.query.all()
-    return jsonify({'notes' : [book_to_dict() for note in notes]})
+    return jsonify({'notes' : [note.to_dict() for note in notes]})
 
 
 # CREATE route - create a note for current user
-@note_routes.route('/notes', methods=["POST"])
+@notes_routes.route('/notes', methods=["POST"])
 # @login_required
 def create_note(userId, notebookId): #need to call userid and notebookid?
     new_note= Note(title='Untitled', user_id=userId, notebook_id=notebookId, content="")
@@ -30,7 +32,7 @@ def create_note(userId, notebookId): #need to call userid and notebookid?
 
 
 # UPDATE route - update the note for a current user
-@note_routes.route('/notes/<int:noteId>', methods=["PUT"]) #need to access the id integer
+@notes_routes.route('/notes/<int:noteId>', methods=["PUT"]) #need to access the id integer
 # @login_required
 def update_note(userId, notebookId, id): #need to call userid, notebookid, and id of current note
     #need to pull previous notes title and content
@@ -38,16 +40,16 @@ def update_note(userId, notebookId, id): #need to call userid, notebookid, and i
     #create an updated note variable that matches the correct note through id
     updated_note = Note.query.filter(Note.id == id).first()
     #update the title, content, and updated_at
-    updated_note.title = data.get('title', update_note.title)
-    updated_note.content = data.get('content', update_note.content)
-    updated_note.updated_at = DateTime.utcnow
+    updated_note.title = current_data.get('title', update_note.title)
+    updated_note.content = current_data.get('content', update_note.content)
+    updated_note.updated_at = datetime.utcnow
     #commit the session
     db.session.commit()
     #return the note, sending into the a dictionary for access later
     return jsonify(update_note.to_dict())
 
 # DELETE route - delete a note for a current user
-@note_routes.route('/notes/:noteId', methods=["DELETE"])
+@notes_routes.route('/notes/:noteId', methods=["DELETE"])
 # @login_required
 def delete_note(userId, notebookId, id): #need to call the userid and id of current note
     note = Note.query.filter(Note.id == id).first()
