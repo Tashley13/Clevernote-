@@ -63,18 +63,23 @@ const FeatureTable = ({type}) => {
     const NOTEBOOK_PROPERTIES = ['Name', 'Note Count', 'Created at', 'Priority']
     const NOTE_PROPERTIES = ['Title', '', 'Created at', 'Priority']
 
+    const state = useSelector(state => state)
     const [data, setData] = useState({})
-
-    // const { allNotebooks } = useSelector(state => state.notebooks
-
     const dispatch = useDispatch()
 
-    switch(type){
-        case 'Notebook': {
-            setData(useSelector(state=>state.notebooks.allNotebooks))
+
+    useEffect(() => {
+        switch(type){
+            case 'Notebook': {
+                setData(state?.notebooks?.allNotebooks)
+            }
+            break;
+            case 'Task': {
+                setData(state?.tasks)
+            }
+            break;
         }
-        break;
-    }
+    }, [state])
 
     useEffect(() => {
         dispatch(thunkGetNotebooks())
@@ -83,9 +88,9 @@ const FeatureTable = ({type}) => {
     return (
         data ?
             <div id='table-main-container'>
-                <h1>Notebooks</h1>
+                <h1>{`${type}s`}</h1>
                 <div id='table-top-toolbar'>
-                    <h3>{Object.keys(data).length} {Object.keys(data).length === 1 ? 'notebook' : 'notebooks'}</h3>
+                    <h3>{Object.keys(data).length} {Object.keys(data).length === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`}</h3>
                     <OpenModalMenuItem
                         className="toolbar-btn"
                         itemText={"Create a Notebook"}
@@ -95,14 +100,29 @@ const FeatureTable = ({type}) => {
                 <table id='feature-table-container'>
                     <tbody>
                         <tr className='feature-tr-properties'>
-                            <th>Name</th>
-                            <th>Note Count</th>
-                            <th>Created at</th>
+                            {type === 'Notebook' ? NOTEBOOK_PROPERTIES.map(el =>(
+                                <th>{el}</th>
+                            )):
+                            type === 'Task' ? TASK_PROPERTIES.map(el => (
+                                <th>{el}</th>
+                            )):
+                            NOTE_PROPERTIES.map(el => (
+                                <th>{el}</th>
+                            ))
+                            }
+
                         </tr>
                         {Object.values(data).map((el, key) => {
-                        return (
-                            <NotebookCell notebook={el} key={key} />
-                        )
+                            if(type === 'Notebook'){
+                                return <NotebookCell notebook={el} key={key} />
+                            }
+                            if(type === 'Task'){
+                                return <TaskCell task={el} key={key}/>
+                            }else{
+                                return <NoteCell note={el} key={key}/>
+                            }
+
+
                         })}
                     </tbody>
 
