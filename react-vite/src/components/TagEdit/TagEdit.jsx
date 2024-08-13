@@ -1,26 +1,28 @@
 import {thunkEditTag, thunkGetDetails} from '../../redux/tags';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 
-
 const TagEdit = () => {
+  const {tagId} = useParams()
   const { closeModal } = useModal();
+	const navigate = useNavigate()
   const dispatch = useDispatch()
   const [tagName, setTagName] = useState('')
-  const {tagId} = useParams()
   const tag = useSelector(state => state.tags)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const editTag = {
-      tagName: tagName || tag.tagName
+    const payload = {
+      id: tagId,
+      tag_name: tagName || tag.tagName
     }
 
-    const updatedTag = await dispatch(thunkEditTag(editTag)).then(() => {closeModal()})
-    console.log(updatedTag)
+    const updatedTag = dispatch(thunkEditTag(payload)).then(navigate('/tags'))
+		closeModal()
+    return updatedTag
   }
 
   useEffect(() => {

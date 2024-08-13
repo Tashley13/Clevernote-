@@ -18,7 +18,6 @@ const TagDetail = () => {
     dispatch(thunkGetDetails(tagId)).then(() => setIsLoaded(true))
   }, [tagId, dispatch])
 
-  console.log('TEST 2 ----->', tag)
   return (
     isLoaded ? (
     <div>
