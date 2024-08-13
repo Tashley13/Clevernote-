@@ -43,6 +43,32 @@
     color: rgb(255, 202, 104);
 }
 
+.feature-tr-data{
+    position: relative;
+}
+
 tr:nth-child(even){
     background-color: rgb(51, 51, 51);
+}
+
+#cell-menu {
+    position: absolute;
+    display: flex;
+    right: 5px;
+    align-items: center;
+    height: 100%;
+}
+
+#cell-menu .cell-menu-btn{
+    list-style: none;
+    margin: 0 8px;
+    cursor: pointer;
+}
+
+#cell-menu .red{
+    color: #ff7272;
+}
+
+#cell-menu .blue{
+    color: #72a4ff;
 }
