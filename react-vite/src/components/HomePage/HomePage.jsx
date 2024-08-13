@@ -6,7 +6,7 @@ import './HomePage.css'
 const HomePage = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(state => state.tasks);
-
+  console.log("TASKS: ", typeof tasks)
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);

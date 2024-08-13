@@ -13,18 +13,30 @@ const NoteList = () => {
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.session.user);
   const userId=loggedIn.id;
-  // const notes = useSelector((state) => state.notes)
-  // console.log("NOTES: ", notes)
+  const notes = useSelector((state) => state.notes);
+  const note = Object.values(notes)
+  // console.log(note[0])
 
 
   useEffect(()=> {
-    dispatch(noteActions.getAllNotesUser())
-  }, [dispatch, userId])
+    dispatch(noteActions.getDetailsofUserNote())
+  }, [dispatch])
+
+  if (!note.length) {
+      return <div>Loading...</div>
+  }
 
   return (
-    <div>
-
-    </div>
+<div className='notes-display'>
+  <ul>
+    {note.length && note.map(note=> (
+      <li key={note.id} className="note">
+        <p>{note.title}</p>
+        <p>{note.content}</p>
+      </li>
+    ))}
+  </ul>
+</div>
   );
 };
 

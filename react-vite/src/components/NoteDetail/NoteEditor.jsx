@@ -1,51 +1,55 @@
-import Quill from "quill";
-import React, { forwardRef, useEffect, useLayoutEffect, useRef } from "react";
+import React, { forwardRef, useEffect, useLayoutEffect, useRef } from 'react';
 
-//create Editor to import into NoteList component
+// Editor is an uncontrolled React component
 const NoteEditor = forwardRef(
-    ({defaultValue, onTextChange, onSelectionChange }, ref ) => {
-        const containerRef = useRef(null);//create a container DOM element reference
-        const defaultValueRef = useRef(defaultValue); //store initial default value of note
-        const onTextChangeRef = useRef(onTextChange); //track text changes
-        const onSelectionChangeRef = useRef(onSelectionChange); //track toolbar selection
+  ({ readOnly, defaultValue, onTextChange, onSelectionChange }, ref) => {
+    const containerRef = useRef(null);
+    const defaultValueRef = useRef(defaultValue);
+    const onTextChangeRef = useRef(onTextChange);
+    const onSelectionChangeRef = useRef(onSelectionChange);
 
-        useLayoutEffect(() => { //useLayoutEffect fires nefre the browser repaints the screen
-            onTextChangeRef.current = onTextChange; //watch for text changes
-            onSelectionChangeRef.current = onSelectionChange //watch for selection changes
-        });
+    useLayoutEffect(() => {
+      onTextChangeRef.current = onTextChange;
+      onSelectionChangeRef.current = onSelectionChange;
+    });
 
-        useEffect(() => {
-            const container = containerRef.current;
-            const editorContainer = container.appendChild(
+    useEffect(() => {
+      ref.current?.enable(!readOnly);
+    }, [ref, readOnly]);
 
-            container.ownerDocument.createElement('div'),
-            );
-            const quill = new Quill(editorContainer, {
-                theme: 'snow'
-            });
+    useEffect(() => {
+      const container = containerRef.current;
+      const editorContainer = container.appendChild(
+        container.ownerDocument.createElement('div'),
+      );
+      const quill = new Quill(editorContainer, {
+        theme: 'snow',
+      });
 
-            ref.current=quill;
+      ref.current = quill;
 
-            if (defaultValueRef.current) {
-                quill.setContents(defaultValueRef.current);
-            }
+      if (defaultValueRef.current) {
+        quill.setContents(defaultValueRef.current);
+      }
 
-            quill.on(Quill.events.SELECTION_CHANGE,
-                (...args) => {
-                    onSelectionChangeRef.current?.(...args);
-                }
-            );
+      quill.on(Quill.events.TEXT_CHANGE, (...args) => {
+        onTextChangeRef.current?.(...args);
+      });
 
-            return () => {
-                ref.current = null;
-                container.innerHTML = '';
-            };
-        }, [ref]); //listen for ref
+      quill.on(Quill.events.SELECTION_CHANGE, (...args) => {
+        onSelectionChangeRef.current?.(...args);
+      });
 
-        return <div ref={containerRef}></div>
-    }
-)
+      return () => {
+        ref.current = null;
+        container.innerHTML = '';
+      };
+    }, [ref]);
 
-NoteEditor.displayName = 'NoteEditor'
+    return <div ref={containerRef}></div>;
+  },
+);
+
+NoteEditor.displayName = 'NoteEditor';
 
 export default NoteEditor;

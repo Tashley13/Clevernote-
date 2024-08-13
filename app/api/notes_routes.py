@@ -12,7 +12,9 @@ notes_routes = Blueprint('notes', __name__, url_prefix="/notes") #create bluepri
 # @login_required
 def get_notes():
     notes = Note.query.all()
-    return jsonify({'notes' : [note.to_dict() for note in notes]})
+    return jsonify([note.to_dict() for note in notes])
+
+#create notes route that pulls from notes of current user
 
 
 # CREATE route - create a note for current user

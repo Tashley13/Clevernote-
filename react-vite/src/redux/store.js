@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   tags: tagReducer,
   notebooks: notebookReducer,
   tasks: taskReducer,
-  // notes: noteReducer,
+  notes: noteReducer,
 });
 
 let enhancer;
