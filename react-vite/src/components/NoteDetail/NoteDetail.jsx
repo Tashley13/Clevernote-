@@ -1,4 +1,4 @@
-// import Quill from 'quill';
+import Quill from 'quill';
 // import { useEffect } from "react";
 import { useDispatch} from "react-redux";
 import React, { useRef, useState } from 'react';

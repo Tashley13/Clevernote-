@@ -1,40 +1,59 @@
-// import Quill from 'quill';
-import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from "react-router-dom";
-import * as noteActions from "../../redux/note";
-import NoteEditor from "../NoteList";
+import Quill from 'quill';
+import  { useRef, useState } from 'react';
+import NoteEditor from './NoteEditor.jsx';
+
+const Delta = Quill.import('delta');
 // import React from 'react';
 //to create a note
 
-const quillDelta = Quill.import('delta')
+
 
 
 const NoteList = () => {
 
-  const dispatch = useDispatch();
-  const { noteId, userId } = useParams()
-  const [setLastChange] = useState()
-  // console.log('USERID: ', userId)
+  const [range, setRange] = useState();
+  const [lastChange, setLastChange] = useState();
+  const [readOnly, setReadOnly] = useState(false);
 
-  //use a ref to access the quill instance directly
+  // Use a ref to access the quill instance directly
   const quillRef = useRef();
-
-  // //update title
-  // //update body
 
   return (
     <div>
-      <div className="title">
-      </div>
-      <div className='editor-container'>
-        <NoteEditor
+      <NoteEditor
         ref={quillRef}
-        defaultValue={new quillDelta()
-          .insert('Insert thoughts here...')
-        }
+        readOnly={readOnly}
+        defaultValue={new Delta()
+          .insert('Hello')}
+        onSelectionChange={setRange}
         onTextChange={setLastChange}
-        />
+      />
+      <div className="controls">
+        <label>
+          Read Only:{' '}
+          <input
+            type="checkbox"
+            value={readOnly}
+            onChange={(e) => setReadOnly(e.target.checked)}
+          />
+        </label>
+        <button
+          className="controls-right"
+          type="button"
+          onClick={() => {
+            alert(quillRef.current?.getLength());
+          }}
+        >
+          Get Content Length
+        </button>
+      </div>
+      <div className="state">
+        <div className="state-title">Current Range:</div>
+        {range ? JSON.stringify(range) : 'Empty'}
+      </div>
+      <div className="state">
+        <div className="state-title">Last Change:</div>
+        {lastChange ? JSON.stringify(lastChange.ops) : 'Empty'}
       </div>
     </div>
   );
