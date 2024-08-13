@@ -6,7 +6,6 @@ import './TaskList.css';
 const TaskList = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(state => state.tasks); // Ensure 'tasks' is set correctly in the store
-
   useEffect(() => {
     dispatch(fetchTasks()); // Fetch tasks on component mount
   }, [dispatch]);
