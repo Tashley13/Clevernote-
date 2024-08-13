@@ -41,9 +41,11 @@ const NoteEditor = forwardRef(
                 container.innerHTML = '';
             };
         }, [ref]); //listen for ref
+
+        return <div ref={containerRef}></div>
     }
 )
 
-Editor.displayName = 'Editor'
+NoteEditor.displayName = 'NoteEditor'
 
 export default NoteEditor;
