@@ -2,6 +2,8 @@ from app.models import db, Note, User, Tag, Notebook, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_notes():
+
+    janes_notes = Note(title='Jane\' Notes', content='Jane content', notebookId=1, userId=4)
     janes_notes = Note(title='Jane\' Notes', content='Jane content', notebookId=1, userId=1)
     janes_notes.tags.append(tag1)
 
@@ -15,15 +17,14 @@ def seed_notes():
     tag3=Tag(tag_name='Demo Tag 1', user_id=1)
     # tag4=Tag(tag_name='tag 4', user_id=1)
 
-    # demo_notes.tags.append(tag1)
 
-    pauls_notes.tags.append(tag2)
-    bobbys_notes.tags.append(tag3)
+    janes_notes.tags.append(tag2)
+    pauls_notes.tags.append(tag3)
+    bobbys_notes.tags.append(tag4)
 
     db.session.add(bobbys_notes)
     db.session.add(pauls_notes)
     db.session.add(janes_notes)
-    # db.session.add(demo_notes)
 
     db.session.add_all([tag1, tag2, tag3])
 
