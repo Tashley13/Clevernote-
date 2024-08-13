@@ -10,7 +10,7 @@ notebook_routes = Blueprint('notebooks', __name__, url_prefix="/notebooks")
 def get_notebooks():
     notebooks = Notebook.query.filter_by(user_id=current_user.id).all()
     # notebooks = Notebook.query.all()
-    return jsonify({'notebooks': [book.to_dict() for book in notebooks]})
+    return jsonify({'notebooks': [book.to_dict() for book in notebooks]}), 200
 
 # POST create a new notebook for the current user
 @notebook_routes.route('', methods=["POST"])
@@ -25,12 +25,13 @@ def create_notebook():
     db.session.add(new_notebook)
     db.session.commit()
 
-    return jsonify(new_notebook.to_dict())
+    return jsonify(new_notebook.to_dict()), 201
 
 # PUT update a notebook
 @notebook_routes.route('/<int:notebook_id>', methods=['PUT'])
 @login_required
 def update_notebook(notebook_id):
+
     notebook = Notebook.query.filter_by(id=notebook_id, user_id=current_user.id).first()
 
     if notebook is None:
@@ -42,22 +43,22 @@ def update_notebook(notebook_id):
 
     db.session.commit()
 
-    return jsonify(notebook.to_dict())
+    return jsonify(notebook.to_dict()), 200
 
 # GET a specific notebook
 @notebook_routes.route('/<int:notebook_id>')
-@login_required
+# @login_required
 def get_notebook_by_id(notebook_id):
     notebook = Notebook.query.filter_by(id=notebook_id, user_id=current_user.id).first()
 
     if notebook is None:
         return jsonify({'error': 'Notebook not found or not authorized'})
 
-    return jsonify(notebook.to_dict())
+    return jsonify(notebook.to_dict()), 200
 
 # DELETE a specific notebook
 @notebook_routes.route('/<int:notebook_id>', methods=["DELETE"])
-@login_required
+# @login_required
 def delete_notebook(notebook_id):
     notebook = Notebook.query.filter_by(id=notebook_id, user_id=current_user.id).first()
 
@@ -67,4 +68,4 @@ def delete_notebook(notebook_id):
     db.session.delete(notebook)
     db.session.commit()
 
-    return jsonify({'message': 'Notebook deleted successfully'})
+    return jsonify({'message': 'Notebook deleted successfully'}), 200
