@@ -49,10 +49,10 @@ export const getAllNotesUser = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-
-        if(data.errors) {
-            return;
-        }
+        console.log('DATA: ', data)
+        // if(data.errors) {
+        //     return;
+        // }
         dispatch(loadNotes(data))
         return data
     }
@@ -66,17 +66,20 @@ export const getAllNotesUser = () => async (dispatch) => {
 //delete a note
 
 const initialState = {
-    byid: {}, //load only the actual notes with ids as keys
-    allIds: [] //grab all the ids
+    // byid: {}, //load only the actual notes with ids as keys
+    // allIds: [] //grab all the ids
 };
 
 const noteReducer = (state= initialState, action) => {
-    const newState = { ...state }
     switch (action.type) {
         case LOAD_NOTES:
-             // spread the state
-            return newState
-        // console.log(action.byid)
+            return action.notes
+        case DETAIL_NOTE:
+            return action.note
+        case ADD_NOTE:
+            return [...state, action.note]
+        // case DELETE_NOTE
+
         default:
             return state
     }
