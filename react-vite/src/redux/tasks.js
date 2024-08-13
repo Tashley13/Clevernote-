@@ -77,18 +77,34 @@ export const removeTask = (taskId) => async (dispatch) => {
 };
 
 // Reducer
-const initialState = [];
+const initialState = {};
 
 const taskReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_TASKS:
-      return action.tasks;
+      const tasksObj = {};
+      action.tasks.forEach(task => {
+        tasksObj[task.id] = task;
+      });
+      return tasksObj;
+
     case CREATE_TASK:
-      return [...state, action.task];
+      return {
+        ...state,
+        [action.task.id]: action.task,
+      };
+
     case UPDATE_TASK:
-      return state.map(task => task.id === action.task.id ? action.task : task);
+      return {
+        ...state,
+        [action.task.id]: action.task,
+      };
+
     case DELETE_TASK:
-      return state.filter(task => task.id !== action.taskId);
+      const newState = { ...state };
+      delete newState[action.taskId];
+      return newState;
+
     default:
       return state;
   }

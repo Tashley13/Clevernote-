@@ -18,7 +18,7 @@ const HomePage = () => {
         <h2>My Notes</h2>
         {/* Render tasks here */}
         <ul>
-          {tasks && tasks.map(task => (
+          {tasks && Object.values(tasks).map(task => (
             <li key={task.id} className="task">
               <p>{task.title}</p>
               <p>{task.due_date}</p>
@@ -31,7 +31,7 @@ const HomePage = () => {
         <h2>My Tasks</h2>
         {/* Render tasks here */}
         <ul>
-          {tasks && tasks.map(task => (
+          {tasks && Object.values(tasks).map(task => (
             <li key={task.id} className="task">
               <p>{task.title}</p>
               <p>{task.due_date}</p>
@@ -44,7 +44,7 @@ const HomePage = () => {
         <h2>My Notebooks</h2>
         {/* Render tasks here */}
         <ul>
-          {tasks && tasks.map(task => (
+          {tasks && Object.values(tasks).map(task => (
             <li key={task.id} className="task">
               <p>{task.title}</p>
               <p>{task.due_date}</p>
@@ -57,7 +57,7 @@ const HomePage = () => {
         <h2>My Tags</h2>
         {/* Render tasks here */}
         <ul>
-          {tasks && tasks.map(task => (
+          {tasks && Object.values(tasks).map(task => (
             <li key={task.id} className="task">
               <p>{task.title}</p>
               <p>{task.due_date}</p>
