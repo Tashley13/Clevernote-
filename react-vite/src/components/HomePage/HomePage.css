@@ -23,7 +23,6 @@
 
 .feature-tile h2 {
     text-align: left;
-    /* Align the header to the left */
     margin-bottom: 20px;
 }
 
@@ -52,19 +51,34 @@
 /* Task item styling */
 .task {
     display: flex;
-    justify-content: flex-start;
-    /* Align content to the left */
+    justify-content: space-between;
     align-items: center;
-    padding: 5px 10px;
+    padding: 10px;
     border-radius: 4px;
     background-color: #333;
-    width: 80%;
-    /* Set the width to a percentage of the parent container */
-    max-width: 250px;
-    /* Set a maximum width */
+    width: 100%;
+    max-width: 300px;
     margin: 5px 0;
-    /* Adjust margin to remove auto centering */
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.task-title {
+    font-weight: bold;
+    flex: 2;
+    margin-right: 10px;
+    /* Add spacing between title and status */
+}
+
+.task-status {
+    flex: 1;
+    text-align: center;
+    margin-right: 10px;
+    /* Add spacing between status and due date */
+}
+
+.task-due-date {
+    flex: 1.5;
+    text-align: right;
 }
 
 .task p {
@@ -83,5 +97,4 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* Aligns the tasks to the left */
 }

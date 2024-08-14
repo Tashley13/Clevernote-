@@ -6,22 +6,27 @@ import './HomePage.css'
 const HomePage = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(state => state.tasks);
-  console.log("TASKS: ", typeof tasks)
+
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);
 
-  return (
+   const formatDate = (dateString) => {
+    const options = { weekday: 'short', month: 'numeric', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+   return (
     <div className="homepage-container">
 
       <div className="notes-feature-tile">
         <h2>My Notes</h2>
-        {/* Render tasks here */}
         <ul>
           {tasks && Object.values(tasks).map(task => (
             <li key={task.id} className="task">
-              <p>{task.title}</p>
-              <p>{task.due_date}</p>
+              <div className="task-title">{task.title}</div>
+              <div className="task-status">{task.completed ? 'Completed' : 'Pending'}</div>
+              <div className="task-due-date">{formatDate(task.due_date)}</div>
             </li>
           ))}
         </ul>
@@ -29,12 +34,12 @@ const HomePage = () => {
 
       <div className="tasks-feature-tile">
         <h2>My Tasks</h2>
-        {/* Render tasks here */}
         <ul>
           {tasks && Object.values(tasks).map(task => (
             <li key={task.id} className="task">
-              <p>{task.title}</p>
-              <p>{task.due_date}</p>
+              <div className="task-title">{task.title}</div>
+              <div className="task-status">{task.completed ? 'Completed' : 'Pending'}</div>
+              <div className="task-due-date">{formatDate(task.due_date)}</div>
             </li>
           ))}
         </ul>
@@ -42,12 +47,12 @@ const HomePage = () => {
 
       <div className="notebooks-feature-tile">
         <h2>My Notebooks</h2>
-        {/* Render tasks here */}
         <ul>
           {tasks && Object.values(tasks).map(task => (
             <li key={task.id} className="task">
-              <p>{task.title}</p>
-              <p>{task.due_date}</p>
+              <div className="task-title">{task.title}</div>
+              <div className="task-status">{task.completed ? 'Completed' : 'Pending'}</div>
+              <div className="task-due-date">{formatDate(task.due_date)}</div>
             </li>
           ))}
         </ul>
@@ -55,12 +60,12 @@ const HomePage = () => {
 
       <div className="tags-feature-tile">
         <h2>My Tags</h2>
-        {/* Render tasks here */}
         <ul>
           {tasks && Object.values(tasks).map(task => (
             <li key={task.id} className="task">
-              <p>{task.title}</p>
-              <p>{task.due_date}</p>
+              <div className="task-title">{task.title}</div>
+              <div className="task-status">{task.completed ? 'Completed' : 'Pending'}</div>
+              <div className="task-due-date">{formatDate(task.due_date)}</div>
             </li>
           ))}
         </ul>
