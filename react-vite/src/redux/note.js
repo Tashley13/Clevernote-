@@ -102,7 +102,7 @@ export const editUserNote = (note) => async (dispatch) => {
 }
 //delete a note
 export const deleteUserNote = (noteId) => async (dispatch) => {
-    const response = await fetch(`/api/notes`, {
+    const response = await fetch("/api/notes", {
         method: "DELETE",
     });
     if (response.ok) {
@@ -125,8 +125,8 @@ const noteReducer = (state = initialState, action) => {
         //     return action.notes
         // }
         case DETAIL_NOTE: {
-            const newState = {};
-            console.log('reducer state: ', action)
+            // const newState = {};
+            // console.log('reducer action: ', action.note)
             // action.notes.forEach(note => {
             //     newState[note.id] = note;
             // });
