@@ -10,6 +10,11 @@ def get_tags():
 	tags = Tag.query.filter_by(user_id = current_user.id).all()
 	return jsonify([tag.to_dict() for tag in tags])
 
+@tag_routes.route('/<int:id>', methods=['GET'])
+def get_details(id):
+	tag = Tag.query.get(id)
+	return jsonify([tag.to_dict()])
+
 # POST create a new tag
 @tag_routes.route('', methods=["POST"])
 # @login_required

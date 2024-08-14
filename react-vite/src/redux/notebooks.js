@@ -1,5 +1,6 @@
 const SET_NOTEBOOKS = "notebook/setNotebooks"
 const ADD_NOTEBOOK = "notebook/addNotebook"
+const GET_NOTES_FOR_NOTEBOOK = "notebook/getNotes"
 const REMOVE_NOTEBOOK = "notebook/removeNotebook"
 
 const setNotebooks = (notebooks) => ({
@@ -10,6 +11,11 @@ const setNotebooks = (notebooks) => ({
 const addNotebook = (notebook) => ({
     type: SET_NOTEBOOKS,
     payload: notebook
+})
+
+const addNotes = (notes) => ({
+    type: GET_NOTES_FOR_NOTEBOOK,
+    payload: notes
 })
 
 const removeNotebook = (id) => ({
@@ -29,6 +35,20 @@ export const thunkGetNotebooks = () => async (dispatch) =>{
         dispatch(setNotebooks({...data.notebooks}))
     }
 }
+
+export const thunkGetNotesForNotebook = (notebookId) => async (dispatch) =>{
+    const res = await fetch("/api/notes/")
+
+    if(res.ok){
+        const data = await res.json()
+        if(data.errors){
+            return;
+        }
+
+        dispatch(setNotebooks({...data.notebooks}))
+    }
+}
+
 
 export const thunkAddNotebook = (newNotebook) => async (dispatch) =>{
     const res = await fetch("/api/notebooks", {

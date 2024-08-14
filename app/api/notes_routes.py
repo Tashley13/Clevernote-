@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request #import request
 #request allows users to send HTTP/1.1 requests
-# from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import db, Note
 from datetime import datetime, timezone
 
@@ -8,16 +8,17 @@ from datetime import datetime, timezone
 notes_routes = Blueprint('notes', __name__, url_prefix="/notes") #create blueprint for notes
 
 # READ route - get all notes of current user
-@notes_routes.route('/notes')
+@notes_routes.route('', methods=['GET'])
 # @login_required
 def get_notes():
-    # return 'Hello World Check'
     notes = Note.query.all()
-    return jsonify({'notes' : [note.to_dict() for note in notes]})
+    return jsonify([note.to_dict() for note in notes])
+
+#create notes route that pulls from notes of current user
 
 
 # CREATE route - create a note for current user
-@notes_routes.route('/notes', methods=["POST"])
+@notes_routes.route('/<int:noteId>', methods=["POST"])
 # @login_required
 def create_note(userId, notebookId): #need to call userid and notebookid?
     new_note= Note(title='Untitled', user_id=userId, notebook_id=notebookId, content="")
@@ -32,7 +33,7 @@ def create_note(userId, notebookId): #need to call userid and notebookid?
 
 
 # UPDATE route - update the note for a current user
-@notes_routes.route('/notes/<int:noteId>', methods=["PUT"]) #need to access the id integer
+@notes_routes.route('/<int:noteId>', methods=["PUT"]) #need to access the id integer
 # @login_required
 def update_note(userId, notebookId, id): #need to call userid, notebookid, and id of current note
     #need to pull previous notes title and content
@@ -49,7 +50,7 @@ def update_note(userId, notebookId, id): #need to call userid, notebookid, and i
     return jsonify(update_note.to_dict())
 
 # DELETE route - delete a note for a current user
-@notes_routes.route('/notes/:noteId', methods=["DELETE"])
+@notes_routes.route('/<int:noteId>', methods=["DELETE"])
 # @login_required
 def delete_note(userId, notebookId, id): #need to call the userid and id of current note
     note = Note.query.filter(Note.id == id).first()

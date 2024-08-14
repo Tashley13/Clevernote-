@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './FeatureTable.css'
 import { thunkGetNotebooks } from '../../redux/notebooks'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import NotebookAddModal from '../NotebookAddModal/NotebookAddModal'
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons/faPenToSquare'
@@ -17,6 +17,19 @@ const NoteCell = ({note}) => {
         </tr>
     )
 }
+//title, created_at
+
+const TaskCell = ({task}) => {
+    return (
+        <tr className='feature-tr-data'>
+            <th>{task.title}</th>
+            <th>{task.dueDate}</th>
+            <th>{task.status}</th>
+            <th>{task.priority}</th>
+        </tr>
+    )
+}
+// Title, due-date, status, priority
 
 const NotebookCell = ({notebook}) => {
 
@@ -46,21 +59,38 @@ const NotebookCell = ({notebook}) => {
 }
 
 const FeatureTable = ({type}) => {
+    const TASK_PROPERTIES = ['Title', 'Due Date', 'Status', 'Priority']
+    const NOTEBOOK_PROPERTIES = ['Name', 'Note Count', 'Created at', 'Priority']
+    const NOTE_PROPERTIES = ['Title', '', 'Created at', 'Priority']
 
-    const { allNotebooks } = useSelector(state => state.notebooks)
-
+    const state = useSelector(state => state)
+    const [data, setData] = useState({})
     const dispatch = useDispatch()
+
+
+    useEffect(() => {
+        switch(type){
+            case 'Notebook': {
+                setData(state?.notebooks?.allNotebooks)
+            }
+            break;
+            case 'Task': {
+                setData(state?.tasks)
+            }
+            break;
+        }
+    }, [state])
+
     useEffect(() => {
         dispatch(thunkGetNotebooks())
-
     }, [dispatch])
 
     return (
-        allNotebooks ?
+        data ?
             <div id='table-main-container'>
-                <h1>Notebooks</h1>
+                <h1>{`${type}s`}</h1>
                 <div id='table-top-toolbar'>
-                    <h3>{Object.keys(allNotebooks).length} {Object.keys(allNotebooks).length === 1 ? 'notebook' : 'notebooks'}</h3>
+                    <h3>{Object.keys(data).length} {Object.keys(data).length === 1 ? type.toLowerCase() : `${type.toLowerCase()}s`}</h3>
                     <OpenModalMenuItem
                         className="toolbar-btn"
                         itemText={"Create a Notebook"}
@@ -70,14 +100,29 @@ const FeatureTable = ({type}) => {
                 <table id='feature-table-container'>
                     <tbody>
                         <tr className='feature-tr-properties'>
-                            <th>Name</th>
-                            <th>Note Count</th>
-                            <th>Created at</th>
+                            {type === 'Notebook' ? NOTEBOOK_PROPERTIES.map(el =>(
+                                <th>{el}</th>
+                            )):
+                            type === 'Task' ? TASK_PROPERTIES.map(el => (
+                                <th>{el}</th>
+                            )):
+                            NOTE_PROPERTIES.map(el => (
+                                <th>{el}</th>
+                            ))
+                            }
+
                         </tr>
-                        {Object.values(allNotebooks).map((el, key) => {
-                        return (
-                            <NotebookCell notebook={el} key={key} />
-                        )
+                        {Object.values(data).map((el, key) => {
+                            if(type === 'Notebook'){
+                                return <NotebookCell notebook={el} key={key} />
+                            }
+                            if(type === 'Task'){
+                                return <TaskCell task={el} key={key}/>
+                            }else{
+                                return <NoteCell note={el} key={key}/>
+                            }
+
+
                         })}
                     </tbody>
 

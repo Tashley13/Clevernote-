@@ -2,6 +2,12 @@ const CREATE_TAG = 'tags/createTag'
 const UPDATE_TAG = 'tags/updateTag'
 const DELETE_TAG = 'tags/deleteTag'
 const LOAD_TAG = 'tags/loadTag'
+const LOAD_DETAILS = 'tags/loadDetails'
+
+const loadDetails = (payload) => ({
+	type: LOAD_DETAILS,
+	payload
+})
 
 const createTag = (payload) => ({
 	type: CREATE_TAG,
@@ -57,6 +63,7 @@ export const thunkEditTag = (tag) => async (dispatch) => {
 		}
 
 		dispatch(updateTag(data))
+		return data
 	}
 }
 
@@ -64,7 +71,6 @@ export const thunkDeleteTag = (tag) => async (dispatch) => {
 	const res = await fetch(`/api/tags/${tag.id}`, {
 		method: 'DELETE',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(tag)
 	})
 
 	if (res.ok) {
@@ -92,6 +98,20 @@ export const thunkGetTag = () => async (dispatch) => {
 	}
 }
 
+export const thunkGetDetails = (id) => async (dispatch) => {
+	const res = await fetch(`/api/tags/${id}`)
+
+	if (res.ok) {
+		const data = await res.json()
+
+		if (data.errors) {
+			return;
+		}
+
+		dispatch(loadDetails(data))
+	}
+}
+
 const initialState = {};
 
 const tagReducer = (state = initialState, action) => {
@@ -101,8 +121,10 @@ const tagReducer = (state = initialState, action) => {
 			action.payload.forEach(tag => {
 				newState[tag.id] = tag
 			});
-			// console.log('TEST ---> ', newState)
 			return {...newState}
+		}
+		case LOAD_DETAILS: {
+			return {...action.payload}
 		}
 		case CREATE_TAG: {
 			const newState = {}
@@ -110,10 +132,13 @@ const tagReducer = (state = initialState, action) => {
 			return {...state, ...newState}
 		}
 		case UPDATE_TAG: {
-			return state.map(tag => tag.id === action.tag.id ? action.tag : tag)
+			const newState = {}
+			newState[action.payload.id] = action.payload.updatedTag
+			return {...state, ...newState}
+			// return Object.values(state).map(tag => tag.id === action.tag.id ? action.tag : tag)
 		}
 		case DELETE_TAG: {
-			return state.filter(tag => tag.id !== action.tag.id)
+			return Object.values(state).filter(tag => tag.id !== action.tag.id)
 		}
 		default:
 			return state

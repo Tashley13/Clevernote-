@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Notebook, db
+from app.models import Notebook, db, Note
 
 notebook_routes = Blueprint('notebooks', __name__, url_prefix="/notebooks")
 
@@ -11,6 +11,14 @@ def get_notebooks():
     notebooks = Notebook.query.filter_by(user_id=current_user.id).all()
     # notebooks = Notebook.query.all()
     return jsonify({'notebooks': [book.to_dict() for book in notebooks]}), 200
+
+@notebook_routes.route('/notes/<int:notebookId>', methods=["POST"])
+# @login_required
+def get_notes_by_notebook_id(notebookId): #need to call userid and notebookid?
+    notes_by_notebook_id= Note.query.filter_by(user_id=current_user.id, notebook_id=notebookId).all()
+    db.session.add(notes_by_notebook_id)
+    db.session.commit()
+    return jsonify(notes_by_notebook_id.to_dict())
 
 # POST create a new notebook for the current user
 @notebook_routes.route('', methods=["POST"])
@@ -29,7 +37,7 @@ def create_notebook():
 
 # PUT update a notebook
 @notebook_routes.route('/<int:notebook_id>', methods=['PUT'])
-@login_required
+# @login_required
 def update_notebook(notebook_id):
 
     notebook = Notebook.query.filter_by(id=notebook_id, user_id=current_user.id).first()
