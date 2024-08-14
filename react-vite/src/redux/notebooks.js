@@ -28,7 +28,7 @@ export const thunkGetNotebooks = () => async (dispatch) => {
 
     if (res.ok) {
         const data = await res.json();
-        console.log('Notebooks data:', data); // Add this line
+        console.log('Notebooks data:', data);
         if (data.errors) {
             return;
         }
