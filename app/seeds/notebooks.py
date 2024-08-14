@@ -5,7 +5,7 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_notebooks():
     janes_notebook = Notebook(
-        title="Jane's Notebook", user_id=4)
+        title="Jane's Notebook", user_id=1)
     pauls_notebook = Notebook(
         title="Paul's Notebook", user_id=2)
     bobbys_notebook = Notebook(
