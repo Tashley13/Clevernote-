@@ -23,18 +23,19 @@ const removeNotebook = (id) => ({
     payload: id
 })
 
-export const thunkGetNotebooks = () => async (dispatch) =>{
-    const res = await fetch("/api/notebooks")
+export const thunkGetNotebooks = () => async (dispatch) => {
+    const res = await fetch("/api/notebooks");
 
-    if(res.ok){
-        const data = await res.json()
-        if(data.errors){
+    if (res.ok) {
+        const data = await res.json();
+        console.log('Notebooks data:', data); // Add this line
+        if (data.errors) {
             return;
         }
 
-        dispatch(setNotebooks({...data.notebooks}))
+        dispatch(setNotebooks({...data.notebooks}));
     }
-}
+};
 
 export const thunkGetNotesForNotebook = (notebookId) => async (dispatch) =>{
     const res = await fetch("/api/notes/")
