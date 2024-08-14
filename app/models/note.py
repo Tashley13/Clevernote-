@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 from sqlalchemy.schema import Column, ForeignKey, Table
 from .db import db, add_prefix_for_prod
-
+from .tags import Tag
 
 note_tag = Table(
 	"note_tag",
