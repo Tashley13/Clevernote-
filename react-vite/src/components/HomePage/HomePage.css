@@ -22,18 +22,30 @@
 }
 
 .feature-tile h2 {
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
 }
 
-.feature-tile ul {
-    list-style: none;
-    padding: 0;
-    width: 100%;
+/* Specific styles for each feature tile (Notes, Tasks, Notebooks, Tags) */
+
+/* Tasks section */
+.tasks-feature-tile h2 {
+    color: white;
 }
 
-.feature-tile li {
-    margin-bottom: 10px;
+/* Notes section */
+.notes-feature-tile h2 {
+    color: white;
+}
+
+/* Notebooks section */
+.notebooks-feature-tile h2 {
+    color: white;
+}
+
+/* Tags section */
+.tags-feature-tile h2 {
+    color: white;
 }
 
 /* Task item styling */
@@ -45,7 +57,38 @@
     border-radius: 4px;
     background-color: #333;
     width: 100%;
+    max-width: 300px;
+    margin: 5px 0;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.task-title {
+    font-weight: bold;
+    color: #6a0dad;
+    /* Set the color to purple */
+    flex: 2;
+    margin-right: 10px;
+    /* Add spacing between title and status */
+}
+
+.task-status {
+    flex: 1;
+    text-align: center;
+    margin-right: 10px;
+    /* Add spacing between status and due date */
+    font-style: italic;
+    /* Make the status text italic */
+}
+
+.task-due-date {
+    flex: 1.5;
+    text-align: right;
+    font-style: italic;
+    /* Make the due date text italic */
+}
+
+.task p {
+    margin: 0;
 }
 
 .task.completed {
@@ -53,24 +96,56 @@
     color: grey;
 }
 
-/* Specific styles for each feature tile (Notes, Tasks, Notebooks, Tags) */
-
-/* Notes section */
-.notes-feature-tile {
-    /* Add any custom styles specific to the Notes tile here */
+/* Center the tasks within the ul */
+.tasks-feature-tile ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-/* Tasks section */
-.tasks-feature-tile {
-    /* Add any custom styles specific to the Tasks tile here */
+/* Tag item styling */
+.tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #333;
+    width: 100%;
+    max-width: 300px;
+    margin: 5px 0;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Notebooks section */
-.notebooks-feature-tile {
-    /* Add any custom styles specific to the Notebooks tile here */
+.tag-title {
+    font-weight: bold;
+    color: #FFA500;
+    /* Set the color to orange */
+    font-style: italic;
+    flex: 1;
 }
 
-/* Tags section */
-.tags-feature-tile {
-    /* Add any custom styles specific to the Tags tile here */
+/* Notebook item styling */
+.notebook {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #333;
+    width: 100%;
+    max-width: 300px;
+    margin: 5px 0;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.notebook-title {
+    font-weight: bold;
+    color: #00BFFF;
+    /* Set the color to a different color (e.g., Deep Sky Blue) */
+    font-style: italic;
+    /* Make the notebook titles italic */
+    flex: 1;
 }
