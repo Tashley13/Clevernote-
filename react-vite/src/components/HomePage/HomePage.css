@@ -22,30 +22,53 @@
 }
 
 .feature-tile h2 {
-    text-align: center;
+    text-align: left;
+    /* Align the header to the left */
     margin-bottom: 20px;
 }
 
-.feature-tile ul {
-    list-style: none;
-    padding: 0;
-    width: 100%;
+/* Specific styles for each feature tile (Notes, Tasks, Notebooks, Tags) */
+
+/* Tasks section */
+.tasks-feature-tile h2 {
+    color: white;
 }
 
-.feature-tile li {
-    margin-bottom: 10px;
+/* Notes section */
+.notes-feature-tile h2 {
+    color: white;
+}
+
+/* Notebooks section */
+.notebooks-feature-tile h2 {
+    color: white;
+}
+
+/* Tags section */
+.tags-feature-tile h2 {
+    color: white;
 }
 
 /* Task item styling */
 .task {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    /* Align content to the left */
     align-items: center;
-    padding: 10px;
+    padding: 5px 10px;
     border-radius: 4px;
     background-color: #333;
-    width: 100%;
+    width: 80%;
+    /* Set the width to a percentage of the parent container */
+    max-width: 250px;
+    /* Set a maximum width */
+    margin: 5px 0;
+    /* Adjust margin to remove auto centering */
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.task p {
+    margin: 0;
 }
 
 .task.completed {
@@ -53,24 +76,12 @@
     color: grey;
 }
 
-/* Specific styles for each feature tile (Notes, Tasks, Notebooks, Tags) */
-
-/* Notes section */
-.notes-feature-tile {
-    /* Add any custom styles specific to the Notes tile here */
-}
-
-/* Tasks section */
-.tasks-feature-tile {
-    /* Add any custom styles specific to the Tasks tile here */
-}
-
-/* Notebooks section */
-.notebooks-feature-tile {
-    /* Add any custom styles specific to the Notebooks tile here */
-}
-
-/* Tags section */
-.tags-feature-tile {
-    /* Add any custom styles specific to the Tags tile here */
+/* Center the tasks within the ul */
+.tasks-feature-tile ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Aligns the tasks to the left */
 }
