@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetTag } from "../../redux/tags";
-import TagDetail from '../TagDetail'
+import { useNavigate } from 'react-router-dom';
 
 const TagList = () => {
   const dispatch = useDispatch();
   const tags = useSelector(state => state.tags)
 	const [isLoaded, setIsLoaded] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(thunkGetTag()).then(() => setIsLoaded(true))
@@ -17,11 +18,11 @@ const TagList = () => {
     <div>
       <h1>your tags</h1>
       {Object.values(tags).map((tag) => (
-        <TagDetail key={tag.id} tag={tag} />
+        <button onClick={() => navigate(`/tags/${tag.id}`)} key={tag.id}>{tag.tag_name}</button>
       ))}
     </div>
     ) : (
-      <div>whoopsie</div>
+      <div></div>
     )
   )
 };
