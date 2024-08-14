@@ -1,6 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-<<<<<<< HEAD
 from sqlalchemy.schema import Column, ForeignKey, Table
 from .db import db, add_prefix_for_prod
 
@@ -10,9 +9,6 @@ note_tag = Table(
 	Column("tag_id", ForeignKey(add_prefix_for_prod("tags.id")), primary_key = True),
 	Column("note_id", ForeignKey(add_prefix_for_prod("notes.id")), primary_key = True)
 )
-=======
-from .note_tag import note_tag
->>>>>>> 4ddcc7361e8ba10b4725b76e466d744868485e39
 
 class Note(db.Model):
     __tablename__= 'notes'
