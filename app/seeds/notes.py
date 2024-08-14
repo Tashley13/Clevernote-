@@ -31,9 +31,9 @@ def seed_notes():
 def undo_notes():
     if environment == 'production':
          db.session.execute(f"TRUNCATE table {SCHEMA}.notes RESTART IDENTITY CASCADE;")
-         db.session.execute(f"TRUNCATE table {SCHEMA}.note_tag RESTART IDENTITY CASCADE;")
+         db.session.execute(f"TRUNCATE table {SCHEMA}.note_tags RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM notes"))
-        db.session.execute(text("DELETE FROM note_tag"))
+        db.session.execute(text("DELETE FROM note_tags"))
 
     db.session.commit()
