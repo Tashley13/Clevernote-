@@ -1,9 +1,18 @@
-from sqlalchemy.schema import Column, ForeignKey, Table
-from sqlalchemy.orm import relationship
-# from .note_tag import note_tag
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-from . import Tag
+<<<<<<< HEAD
+from sqlalchemy.schema import Column, ForeignKey, Table
+from .db import db, add_prefix_for_prod
+
+note_tag = Table(
+	"note_tag",
+	db.Model.metadata,
+	Column("tag_id", ForeignKey(add_prefix_for_prod("tags.id")), primary_key = True),
+	Column("note_id", ForeignKey(add_prefix_for_prod("notes.id")), primary_key = True)
+)
+=======
+from .note_tag import note_tag
+>>>>>>> 4ddcc7361e8ba10b4725b76e466d744868485e39
 
 class Note(db.Model):
     __tablename__= 'notes'
@@ -33,10 +42,3 @@ class Note(db.Model):
             'created_at': self.created_at,
             'updated_at' : self.updated_at
         }
-
-note_tag = Table(
-	"note_tag",
-	db.Model.metadata,
-	Column("tag_id", ForeignKey(add_prefix_for_prod("tags.id")), primary_key = True),
-	Column("note_id", ForeignKey(add_prefix_for_prod("notes.id")), primary_key = True)
-)
