@@ -64,6 +64,8 @@
 
 .task-title {
     font-weight: bold;
+    color: rgb(200, 120, 224);
+    /* Set the color to purple */
     flex: 2;
     margin-right: 10px;
     /* Add spacing between title and status */
@@ -73,12 +75,16 @@
     flex: 1;
     text-align: center;
     margin-right: 10px;
+    color: white;
+    font-style: italic;
     /* Add spacing between status and due date */
 }
 
 .task-due-date {
     flex: 1.5;
     text-align: right;
+    color: white;
+    font-style: italic;
 }
 
 .task p {
