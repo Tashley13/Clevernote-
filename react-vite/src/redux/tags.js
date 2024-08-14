@@ -1,149 +1,147 @@
-const CREATE_TAG = 'tags/createTag'
-const UPDATE_TAG = 'tags/updateTag'
-const DELETE_TAG = 'tags/deleteTag'
-const LOAD_TAG = 'tags/loadTag'
+const CREATE_TAG = 'tags/createTag';
+const UPDATE_TAG = 'tags/updateTag';
+const DELETE_TAG = 'tags/deleteTag';
+const LOAD_TAG = 'tags/loadTag';
+const LOAD_DETAILS = 'tags/loadDetails'; // Add this line
 
 const createTag = (payload) => ({
 	type: CREATE_TAG,
 	payload
-})
+});
 
 const updateTag = (payload) => ({
 	type: UPDATE_TAG,
 	payload
-})
+});
 
 const deleteTag = (payload) => ({
 	type: DELETE_TAG,
 	payload
-})
+});
 
 const loadTag = (payload) => ({
 	type: LOAD_TAG,
 	payload
-})
+});
+
+const loadDetails = (payload) => ({
+	type: LOAD_DETAILS,
+	payload
+});
 
 export const thunkCreateTag = (tag) => async (dispatch) => {
 	const res = await fetch("/api/tags", {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(tag)
-	})
+	});
 
 	if (res.ok) {
-		const data = await res.json()
+		const data = await res.json();
 
-		if(data.errors) {
+		if (data.errors) {
 			return;
 		}
 
-		dispatch(createTag(data))
-		return data
+		dispatch(createTag(data));
+		return data;
 	}
-}
+};
 
 export const thunkEditTag = (tag) => async (dispatch) => {
 	const res = await fetch(`/api/tags/${tag.id}`, {
 		method: 'PUT',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(tag)
-	})
+	});
 
 	if (res.ok) {
-		const data = await res.json()
+		const data = await res.json();
 
-		if(data.errors) {
+		if (data.errors) {
 			return;
 		}
 
-		dispatch(updateTag(data))
-		return data
+		dispatch(updateTag(data));
+		return data;
 	}
-}
+};
 
 export const thunkDeleteTag = (tag) => async (dispatch) => {
 	const res = await fetch(`/api/tags/${tag.id}`, {
 		method: 'DELETE',
 		headers: { 'Content-Type': 'application/json' },
-	})
+	});
 
 	if (res.ok) {
-		const data = await res.json()
+		const data = await res.json();
 
 		if (data.errors) {
 			return;
 		}
 
-		dispatch(deleteTag(data))
+		dispatch(deleteTag(data));
 	}
-}
+};
 
 export const thunkGetTag = () => async (dispatch) => {
-	const res = await fetch('/api/tags')
+	const res = await fetch('/api/tags');
 
 	if (res.ok) {
-		const data = await res.json()
+		const data = await res.json();
 
 		if (data.errors) {
 			return;
 		}
 
-		dispatch(loadTag(data))
+		dispatch(loadTag(data));
 	}
-}
+};
 
-<<<<<<< HEAD
-=======
 export const thunkGetDetails = (id) => async (dispatch) => {
-	const res = await fetch(`/api/tags/${id}`)
+	const res = await fetch(`/api/tags/${id}`);
 
 	if (res.ok) {
-		const data = await res.json()
+		const data = await res.json();
 
 		if (data.errors) {
 			return;
 		}
 
-		dispatch(loadDetails(data))
+		dispatch(loadDetails(data)); // Use loadDetails here
 	}
-}
+};
 
->>>>>>> 5d95b7a (delete tag implemented fully)
 const initialState = {};
 
 const tagReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case LOAD_TAG: {
-			const newState = {}
+			const newState = {};
 			action.payload.forEach(tag => {
-				newState[tag.id] = tag
+				newState[tag.id] = tag;
 			});
-			// console.log('TEST ---> ', newState)
-			return {...newState}
+			return { ...newState };
 		}
-<<<<<<< HEAD
-=======
 		case LOAD_DETAILS: {
-			return {...action.payload}
+			return { ...action.payload };
 		}
->>>>>>> 5d95b7a (delete tag implemented fully)
 		case CREATE_TAG: {
-			const newState = {}
-			newState[action.payload.id] = action.payload
-			return {...state, ...newState}
+			const newState = {};
+			newState[action.payload.id] = action.payload;
+			return { ...state, ...newState };
 		}
 		case UPDATE_TAG: {
-			const newState = {}
-			newState[action.payload.id] = action.payload.updatedTag
-			return {...state, ...newState}
-			// return Object.values(state).map(tag => tag.id === action.tag.id ? action.tag : tag)
+			const newState = {};
+			newState[action.payload.id] = action.payload.updatedTag;
+			return { ...state, ...newState };
 		}
 		case DELETE_TAG: {
-			return Object.values(state).filter(tag => tag.id !== action.tag.id)
+			return Object.values(state).filter(tag => tag.id !== action.tag.id);
 		}
 		default:
-			return state
+			return state;
 	}
-}
+};
 
 export default tagReducer;
