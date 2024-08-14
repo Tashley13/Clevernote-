@@ -22,7 +22,7 @@ const TagList = () => {
       ))}
     </div>
     ) : (
-      <div>whoopsie</div>
+      <div></div>
     )
   )
 };

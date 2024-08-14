@@ -28,7 +28,7 @@ const TagDetail = () => {
     modalComponent={<TagDelete tag={tag[0]} />} />
     </div>
     ) : (
-      <div>whoopsie</div>
+      <div></div>
     )
   );
 };

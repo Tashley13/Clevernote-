@@ -20,7 +20,8 @@ const TagEdit = () => {
       tag_name: tagName || tag.tagName
     }
 
-    const updatedTag = dispatch(thunkEditTag(payload)).then(navigate('/tags'))
+    const updatedTag = dispatch(thunkEditTag(payload))
+    navigate(`/tags`)
 		closeModal()
     return updatedTag
   }
