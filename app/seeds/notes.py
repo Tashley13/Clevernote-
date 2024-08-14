@@ -18,7 +18,7 @@ def seed_notes():
 
     janes_notes.tags.append(tag2)
     pauls_notes.tags.append(tag3)
-    bobbys_notes.tags.append(tag4)
+    bobbys_notes.tags.append(tag1)
 
     db.session.add(bobbys_notes)
     db.session.add(pauls_notes)
