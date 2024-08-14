@@ -100,7 +100,7 @@ function Navigation() {
         </li>
 
         <li>
-				<NavLink className='nav-btn-primary text-white' onClick={openTagModal}><FontAwesomeIcon icon={faTags} /><span className="nav-inner-text">Tags</span></NavLink>
+				<NavLink className='nav-btn-primary text-white' to="/tags" onClick={openTagModal}><FontAwesomeIcon icon={faTags} /><span className="nav-inner-text">Tags</span></NavLink>
         </li>
       </ul>
       <button id="nav-close-btn" onClick={navViewChanger}>
