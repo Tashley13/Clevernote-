@@ -3,13 +3,7 @@ from sqlalchemy.orm import relationship
 # from .note_tag import note_tag
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-
-note_tag = Table(
-	"note_tag",
-	db.Model.metadata,
-	Column("tag_id", ForeignKey("tags.id"), primary_key = True),
-	Column("note_id", ForeignKey("notes.id"), primary_key = True)
-)
+from . import Tag
 
 class Note(db.Model):
     __tablename__= 'notes'
@@ -39,3 +33,10 @@ class Note(db.Model):
             'created_at': self.created_at,
             'updated_at' : self.updated_at
         }
+
+note_tag = Table(
+	"note_tag",
+	db.Model.metadata,
+	Column("tag_id", ForeignKey(add_prefix_for_prod("tags.id")), primary_key = True),
+	Column("note_id", ForeignKey(add_prefix_for_prod("notes.id")), primary_key = True)
+)
