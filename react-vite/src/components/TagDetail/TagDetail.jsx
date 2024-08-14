@@ -5,7 +5,7 @@ import TagEdit from "../TagEdit";
 import TagDelete from "../TagDelete";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { useModal } from "../../context/Modal";
-import { thunkGetDetails } from "../../redux/tags"; 
+import { thunkGetDetails } from "../../redux/tags";
 
 const TagDetail = () => {
   const { setModalContent } = useModal();
@@ -40,3 +40,4 @@ const TagDetail = () => {
 };
 
 export default TagDetail;
+
