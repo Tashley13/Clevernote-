@@ -5,3 +5,4 @@ from .db import environment, SCHEMA
 from .notebooks import Notebook
 from .note import Note
 from .tags import Tag
+from .note_tag import note_tag
