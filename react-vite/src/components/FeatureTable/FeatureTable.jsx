@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './FeatureTable.css'
-import { thunkGetNotebooks } from '../../redux/notebooks'
+import { thunkGetNotebooks, thunkGetNotesForNotebook } from '../../redux/notebooks'
 import { useEffect, useState } from 'react'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import NotebookAddModal from '../NotebookAddModal/NotebookAddModal'
@@ -34,27 +34,25 @@ const TaskCell = ({task}) => {
 const NotebookCell = ({notebook}) => {
 
     return (
-        <>
-            <tr className='feature-tr-data'>
-                <th>{notebook.title}</th>
-                <th>{3}</th>
-                <th>{notebook.created_at}</th>
-                <th id='cell-menu'>
-                <OpenModalMenuItem
-                        className='cell-menu-btn blue'
-                        icon={faPenToSquare}
-                        modalComponent={<NotebookAddModal notebook={notebook} />}
-                        />
-
-                <OpenModalMenuItem
-                    className='cell-menu-btn red'
-                    icon={faTrash}
-                    modalComponent={<NotebookDeleteModal notebookId={notebook.id} />}
+        <tr className='feature-tr-data'>
+            <th>{notebook.title}</th>
+            <th>{3}</th>
+            <th>{notebook.created_at}</th>
+            <th id='cell-menu'>
+            <OpenModalMenuItem
+                    className='cell-menu-btn blue'
+                    icon={faPenToSquare}
+                    modalComponent={<NotebookAddModal notebook={notebook} />}
                     />
 
-                </th>
-            </tr>
-        </>
+            <OpenModalMenuItem
+                className='cell-menu-btn red'
+                icon={faTrash}
+                modalComponent={<NotebookDeleteModal notebookId={notebook.id} />}
+                />
+
+            </th>
+        </tr>
     )
 }
 
@@ -77,6 +75,9 @@ const FeatureTable = ({type}) => {
             case 'Task': {
                 setData(state?.tasks)
             }
+            break;
+            default:
+                setData(state?.notes)
             break;
         }
     }, [state])
@@ -121,7 +122,6 @@ const FeatureTable = ({type}) => {
                             }else{
                                 return <NoteCell note={el} key={key}/>
                             }
-
 
                         })}
                     </tbody>
