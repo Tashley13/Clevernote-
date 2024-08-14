@@ -73,7 +73,7 @@ const HomePage = () => {
         <ul>
           {tags && Object.values(tags).map(tag => (
             <li key={tag.id} className="tag">
-              <div className="tag-title">{tag.name}</div>
+              <div className="tag-title">{tag.tag_name}</div>
             </li>
           ))}
         </ul>
