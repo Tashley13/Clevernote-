@@ -3,7 +3,7 @@ from sqlalchemy.sql import text
 
 def seed_notes():
 
-    janes_notes = Note(title='Jane\' Notes', content='Jane content', notebookId=1, userId=4)
+    janes_notes = Note(title='Jane\' Notes', content='Jane content', notebookId=1, userId=1)
 
 
     pauls_notes = Note(title='Paul\'s Notes', content='Paul content', notebookId=2, userId=2)
