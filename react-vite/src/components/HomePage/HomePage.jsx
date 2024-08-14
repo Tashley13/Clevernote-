@@ -4,22 +4,22 @@ import { fetchTasks } from '../../redux/tasks';
 import { getDetailsofUserNote } from '../../redux/note';
 import { thunkGetNotebooks } from '../../redux/notebooks';
 import { thunkGetTag } from '../../redux/tags';
-import './HomePage.css'
+import './HomePage.css';
 
 const HomePage = () => {
   const dispatch = useDispatch();
 
-  // Select tasks, notes, and notebooks, tags, from the Redux store
+  // Select tasks, notes, notebooks, and tags from the Redux store
   const tasks = useSelector(state => state.tasks);
   const notes = useSelector(state => state.notes);
   const notebooks = useSelector(state => state.notebooks.allNotebooks);
   const tags = useSelector(state => state.tags);
 
   useEffect(() => {
-    dispatch(fetchTasks());  // Fetch tasks
-    dispatch(getDetailsofUserNote());  // Fetch notes
-    dispatch(thunkGetNotebooks());  // Fetch notebooks
-     dispatch(thunkGetTag());  // Fetch tags
+    dispatch(fetchTasks());          // Fetch tasks
+    dispatch(getDetailsofUserNote()); // Fetch notes
+    dispatch(thunkGetNotebooks());    // Fetch notebooks
+    dispatch(thunkGetTag());          // Fetch tags
   }, [dispatch]);
 
   const formatDate = (dateString) => {
@@ -27,7 +27,7 @@ const HomePage = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-   return (
+  return (
     <div className="homepage-container">
 
       <div className="notes-feature-tile">
