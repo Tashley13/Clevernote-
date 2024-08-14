@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useModal } from '../../context/Modal';
 
 const TagDelete = ({tag}) => {
-	// console.log('TEST 2 ----->', tag.id)
 	const dispatch = useDispatch();
 	const navigate = useNavigate()
 	const {closeModal} = useModal()

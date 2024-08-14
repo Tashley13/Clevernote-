@@ -1,40 +1,42 @@
-import TagEdit from "../TagEdit"
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import TagEdit from "../TagEdit";
 import TagDelete from "../TagDelete";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { useModal } from "../../context/Modal";
-
-
-const TagDetail = ({ tag }) => {
-
-  const { setModalContent } = useModal();
-
-  const openEditTagModal = () => {
-    setModalContent(<TagEdit />)
-  }
+import { thunkGetDetails } from "../../redux/tags"; 
 
 const TagDetail = () => {
-  // const { setModalContent } = useModal();
-	const [isLoaded, setIsLoaded] = useState(false);
-  const dispatch = useDispatch()
-  const {tagId} = useParams()
-  const tag = useSelector(state => state.tags)
+  const { setModalContent } = useModal();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const dispatch = useDispatch();
+  const { tagId } = useParams();
+  const tag = useSelector(state => state.tags[tagId]);
 
   useEffect(() => {
-    dispatch(thunkGetDetails(tagId)).then(() => setIsLoaded(true))
-  }, [tagId, dispatch])
+    dispatch(thunkGetDetails(tagId)).then(() => setIsLoaded(true));
+  }, [tagId, dispatch]);
 
-  console.log('TEST 2 ----->', tag)
+  const openEditTagModal = () => {
+    setModalContent(<TagEdit tag={tag} />);
+  };
+
+  if (!isLoaded || !tag) return null;
+
   return (
     <div>
-    {tag.tag_name}
-    <button onClick={openEditTagModal}>Edit</button>
-    <h1>{tag[0].tag_name}</h1>
-    <OpenModalButton buttonText="Edit Tag"
-    modalComponent={<TagEdit tag={tag[0]} />} />
-    <OpenModalButton buttonText="Delete Tag"
-    modalComponent={<TagDelete tag={tag[0]} />} />
+      <h1>{tag.tag_name}</h1>
+      <OpenModalButton
+        buttonText="Edit Tag"
+        modalComponent={<TagEdit tag={tag} />}
+      />
+      <OpenModalButton
+        buttonText="Delete Tag"
+        modalComponent={<TagDelete tag={tag} />}
+      />
     </div>
   );
 };
 
-export default TagDetail
+export default TagDetail;

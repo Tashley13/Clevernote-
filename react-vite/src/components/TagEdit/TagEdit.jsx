@@ -2,22 +2,37 @@ import {thunkEditTag} from '../../redux/tags';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 
 const TagEdit = () => {
+=======
+import { useModal } from '../../context/Modal';
+
+const TagEdit = () => {
+  const {tagId} = useParams()
+  const { closeModal } = useModal();
+	const navigate = useNavigate()
+>>>>>>> 0f75a11 (fully implemented edit tag component)
   const dispatch = useDispatch()
 	const navigate = useNavigate();
   const [tagName, setTagName] = useState('')
-  const {tagId} = useParams()
   const tag = useSelector(state => state.tags)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const editTag = {
-      tagName: tagName || tag.tagName
+    const payload = {
+      id: tagId,
+      tag_name: tagName || tag.tagName
     }
 
+<<<<<<< HEAD
     const updatedTag = await dispatch(thunkEditTag(editTag))
+=======
+    const updatedTag = dispatch(thunkEditTag(payload)).then(navigate('/tags'))
+		closeModal()
+    return updatedTag
+>>>>>>> 0f75a11 (fully implemented edit tag component)
   }
 
   //use effect will go here once i make taglist component
