@@ -15,9 +15,9 @@ def seed_notes():
     tag3=Tag(tag_name='Demo Tag 1', user_id=3)
 
 
-    # janes_notes.tags.append(tag1)
-    # pauls_notes.tags.append(tag2)
-    # bobbys_notes.tags.append(tag3)
+    janes_notes.tags.append(tag1)
+    pauls_notes.tags.append(tag2)
+    bobbys_notes.tags.append(tag3)
 
     db.session.add(bobbys_notes)
     db.session.add(pauls_notes)
