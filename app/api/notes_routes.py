@@ -22,17 +22,17 @@ def get_notes(id):
 
 
 # CREATE route - create a note for current user
-@notes_routes.route('', methods=["POST"])
+@notes_routes.route('/new', methods=["POST"])
 @login_required
 def create_note():
-    title=request.json.get('title') #grab the title or create default
-    notebook_id=request.json.get('notebookId') #grab the notebookId
+    title=request.json.get('title', 'Untitled') #grab the title or create default
+    # notebook_id=request.json.get('notebookId') #grab the notebookId
     user_id=current_user.id #grab the userId
     new_note=Note(
         title=title,
         content='', #blank content
         userId=current_user.id,
-        notebookId=notebook_id,
+        # notebookId=notebook_id,
         created_at=datetime.utcnow()
         # updated_at=datetime.now(timezone.utc)
     )
