@@ -6,6 +6,7 @@ import HomePage from '../components/HomePage';
 import NotebookDetail from '../components/NotebookDetail';
 import NoteList from '../components/NoteList';
 import NoteDetail from '../components/NoteDetail';
+import NoteEdit from "../components/NoteEdit";
 import TaskList from '../components/TaskList';
 import TaskDetail from '../components/TaskDetail';
 import CreateTaskModal from '../components/CreateTaskModal';
@@ -52,8 +53,12 @@ export const router = createBrowserRouter([
         element: <NoteList />,
       },
       {
-        path: "notes/:noteid",
+        path: "notes/new",
         element: <NoteDetail />,
+      },
+      {
+        path: "notes/:noteId/edit",
+        element: <NoteEdit />,
       },
       {
         path: "tasks",

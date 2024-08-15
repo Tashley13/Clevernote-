@@ -7,23 +7,35 @@ from datetime import datetime, timezone
 
 notes_routes = Blueprint('notes', __name__, url_prefix="/notes") #create blueprint for notes
 
-# READ route - get all notes of current user
-@notes_routes.route('', methods=['GET'])
-# @login_required
-def get_notes():
-    notes = Note.query.all()
+#create notes route that pulls from notes of current user
+@notes_routes.route('', methods=["GET"])
+def get_current_notes():
+    notes=Note.query.filter_by(userId = current_user.id).all()
     return jsonify([note.to_dict() for note in notes])
 
-#create notes route that pulls from notes of current user
+# READ route - get specific note of current user
+@notes_routes.route('<int:id>', methods=['GET'])
+@login_required
+def get_notes(id):
+    notes = Note.query.get(id)
+    return jsonify([notes.to_dict()])
 
 
 # CREATE route - create a note for current user
-@notes_routes.route('/<int:noteId>', methods=["POST"])
-# @login_required
-def create_note(userId, notebookId): #need to call userid and notebookid?
-    new_note= Note(title='Untitled', user_id=userId, notebook_id=notebookId, content="")
-    #create a new note with a placeholder title of 'Untitled' and blank content
-    #match the userId and notebookId
+@notes_routes.route('', methods=["POST"])
+@login_required
+def create_note():
+    title=request.json.get('title') #grab the title or create default
+    notebook_id=request.json.get('notebookId') #grab the notebookId
+    user_id=current_user.id #grab the userId
+    new_note=Note(
+        title=title,
+        content='', #blank content
+        userId=current_user.id,
+        notebookId=notebook_id,
+        created_at=datetime.utcnow()
+        # updated_at=datetime.now(timezone.utc)
+    )
     db.session.add(new_note)
     #add the new note to the session
     db.session.commit()
@@ -33,29 +45,34 @@ def create_note(userId, notebookId): #need to call userid and notebookid?
 
 
 # UPDATE route - update the note for a current user
-@notes_routes.route('/<int:noteId>', methods=["PUT"]) #need to access the id integer
-# @login_required
-def update_note(userId, notebookId, id): #need to call userid, notebookid, and id of current note
-    #need to pull previous notes title and content
+@notes_routes.route('/<int:id>/edit', methods=["PUT"]) #need to access the id integer
+@login_required
+def update_note(id):
+    note_to_edit=Note.query.get(id)
+    if not note_to_edit or note_to_edit.userId != current_user.id:
+        return jsonify({"message": "Note not found"}), 404
+    #need to pull previous note and check if it exists
     current_data = request.get_json() #parse to json if not already
-    #create an updated note variable that matches the correct note through id
-    updated_note = Note.query.filter(Note.id == id).first()
-    #update the title, content, and updated_at
-    updated_note.title = current_data.get('title', update_note.title)
-    updated_note.content = current_data.get('content', update_note.content)
-    updated_note.updated_at = datetime.utcnow
+    if 'title' not in current_data or 'content' not in current_data:
+        return jsonify({"message": "Bad Request", "errors": {"title": "Title is required", "content" : "Content is required"}}), 400
+    #begin to update variables
+    note_to_edit.title = current_data.get('title')
+    note_to_edit.content = current_data.get('content')
+    note_to_edit.updated_at = datetime.utcnow()
     #commit the session
     db.session.commit()
     #return the note, sending into the a dictionary for access later
-    return jsonify(update_note.to_dict())
+    return jsonify(note_to_edit.to_dict())
 
 # DELETE route - delete a note for a current user
-@notes_routes.route('/<int:noteId>', methods=["DELETE"])
-# @login_required
-def delete_note(userId, notebookId, id): #need to call the userid and id of current note
-    note = Note.query.filter(Note.id == id).first()
+@notes_routes.route('/<int:id>', methods=["DELETE"])
+@login_required
+def delete_note(id): #need to call the userid and id of current note
+    delete_note = Note.query.get(id)
+    if not delete_note:
+        return jsonify({"message" : "note not found"}), 404
     #need to pull the note to be deleted by matching ids
-    db.session.delete(note)
+    db.session.delete(delete_note)
     #delete the note through the session
     db.session.commit()
     #commit the session
