@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "notebooks",
-        element: <FeatureTable type='Notebook' />,
+        element: <NoteList />,
       },
       {
         path: "notebooks/:id",
@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "notes",
-        element: <NoteList />,
+        element: <FeatureTable type='Note' />,
       },
       {
         path: "notes/:noteid",
@@ -57,7 +57,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "tasks",
-        element: <TaskList />,
+        element: <FeatureTable type='Task' />,
       },
       {
         path: "tasks/:id",
