@@ -1,12 +1,4 @@
-<<<<<<<< HEAD:migrations/versions/42851ba1543a_initial_migration.py
-"""Initial migration
-
-Revision ID: 42851ba1543a
-Revises: 
-Create Date: 2024-08-15 12:24:48.277675
-========
 """empty message
->>>>>>>> origin/dev:migrations/versions/5ca3788d0054_.py
 
 Revision ID: 5ca3788d0054
 Revises:
@@ -17,11 +9,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/42851ba1543a_initial_migration.py
-revision = '42851ba1543a'
-========
 revision = '5ca3788d0054'
->>>>>>>> origin/dev:migrations/versions/5ca3788d0054_.py
 down_revision = None
 branch_labels = None
 depends_on = None
