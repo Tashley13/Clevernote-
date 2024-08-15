@@ -57,7 +57,8 @@
     border-radius: 4px;
     background-color: #333;
     width: 100%;
-    max-width: 300px;
+    max-width: 350px;
+    /* Increased max-width to make the cells wider */
     margin: 5px 0;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }
@@ -78,12 +79,15 @@
     /* Add spacing between status and due date */
     font-style: italic;
     /* Make the status text italic */
+    color: #F5F5F5;
+    /* Set the status color to White Smoke */
 }
 
 .task-due-date {
     flex: 1.5;
     text-align: right;
     font-style: italic;
+    color: red;
     /* Make the due date text italic */
 }
 
@@ -114,7 +118,8 @@
     border-radius: 4px;
     background-color: #333;
     width: 100%;
-    max-width: 300px;
+    max-width: 350px;
+    /* Increased max-width to make the cells wider */
     margin: 5px 0;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }
@@ -136,16 +141,64 @@
     border-radius: 4px;
     background-color: #333;
     width: 100%;
-    max-width: 300px;
+    max-width: 400px;
+   
     margin: 5px 0;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .notebook-title {
     font-weight: bold;
-    color: #00BFFF;
-    /* Set the color to a different color (e.g., Deep Sky Blue) */
+    color: rgb(96, 223, 117);
+
     font-style: italic;
-    /* Make the notebook titles italic */
+
     flex: 1;
+}
+
+.notebook-date {
+    flex: 1.5;
+    text-align: right;
+    font-style: italic;
+    color: #FFD700;
+
+}
+
+/* Note item styling */
+.note {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #333;
+    width: 100%;
+    max-width: 350px;
+    /* Increased max-width to make the cells wider */
+    margin: 5px 0;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.note-title {
+    font-weight: bold;
+    color: rgb(96, 223, 117);
+    /* Set the color to a different color (e.g., Tomato) */
+    font-style: italic;
+    flex: 2;
+}
+
+.note-content {
+    flex: 3;
+    font-style: italic;
+    margin-right: 10px;
+    color: #F5F5F5;
+    /* Set the note content color to White Smoke */
+}
+
+.note-date {
+    flex: 1.5;
+    text-align: right;
+    font-style: italic;
+    color: #FFD700;
+    /* Set the date color to Gold */
 }
