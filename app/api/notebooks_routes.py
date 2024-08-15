@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from sqlalchemy.orm import joinedload
 from flask_login import login_required, current_user
 from app.models import Notebook, db, Note
 
@@ -8,17 +9,21 @@ notebook_routes = Blueprint('notebooks', __name__, url_prefix="/notebooks")
 @notebook_routes.route('')
 # @login_required
 def get_notebooks():
-    notebooks = Notebook.query.filter_by(user_id=current_user.id).all()
-    # notebooks = Notebook.query.all()
+    notebooks = Notebook.query.filter_by(user_id=current_user.id).options(joinedload(Notebook.notes)).all()
     return jsonify({'notebooks': [book.to_dict() for book in notebooks]}), 200
 
 @notebook_routes.route('/notes/<int:notebookId>', methods=["POST"])
 # @login_required
-def get_notes_by_notebook_id(notebookId): #need to call userid and notebookid?
+def get_notes_by_notebook_id(notebookId):
+    notebook = Notebook.query.get(notebookId)
+    if not notebook: return jsonify({"errors": 'Notebook not found'}), 404
+
     notes_by_notebook_id= Note.query.filter_by(user_id=current_user.id, notebook_id=notebookId).all()
-    db.session.add(notes_by_notebook_id)
+    if not notes_by_notebook_id: return jsonify({"errors": 'Note not found'}), 404
+    notebook.notes = notes_by_notebook_id.to_dict()
+    db.session.add(notebook)
     db.session.commit()
-    return jsonify(notes_by_notebook_id.to_dict())
+    return jsonify(notebook.to_dict())
 
 # POST create a new notebook for the current user
 @notebook_routes.route('', methods=["POST"])
