@@ -9,11 +9,12 @@ import './HomePage.css';
 const HomePage = () => {
   const dispatch = useDispatch();
 
-  // Select tasks, notes, notebooks, and tags from the Redux store
+  // Select tasks, notes, notebooks, tags, and the user from the Redux store
   const tasks = useSelector(state => state.tasks);
   const notes = useSelector(state => state.notes);
   const notebooks = useSelector(state => state.notebooks.allNotebooks);
   const tags = useSelector(state => state.tags);
+  const userId = useSelector(state => state.session.user.id); // Get the logged-in user's ID
 
   useEffect(() => {
     dispatch(fetchTasks());          // Fetch tasks
@@ -27,13 +28,20 @@ const HomePage = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  // Filter notes and tags based on the logged-in user's ID
+  const filteredNotes = Object.values(notes).filter(note => note.userId === userId);
+  const filteredTags = Object.values(tags).filter(tag => tag.user_id === userId);
+
+  console.log("User ID:", userId);
+  console.log("Filtered Notes:", filteredNotes);
+  console.log("Filtered Tags:", filteredTags);
+
   return (
     <div className="homepage-container">
-
       <div className="notes-feature-tile">
         <h2>My Notes</h2>
         <ul>
-          {notes && Object.values(notes).map(note => (
+          {filteredNotes.map(note => (
             <li key={note.id} className="note">
               <div className="note-title">{note.title}</div>
               <div className="note-content">{note.content}</div>
@@ -71,14 +79,13 @@ const HomePage = () => {
       <div className="tags-feature-tile">
         <h2>My Tags</h2>
         <ul>
-          {tags && Object.values(tags).map(tag => (
+          {filteredTags.map(tag => (
             <li key={tag.id} className="tag">
               <div className="tag-title">{tag.tag_name}</div>
             </li>
           ))}
         </ul>
       </div>
-
     </div>
   );
 };
