@@ -4,14 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navigation.css";
 import { faArrowRight, faBook, faFileLines, faHouse, faListCheck, faTags} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import * as noteActions from "../../redux/note"
 import CreateTaskModal from "../CreateTaskModal";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import NotebookAddModal from "../NotebookAddModal/NotebookAddModal";
 import TagCreate from "../TagCreate/TagCreate";
 
 function Navigation() {
+  const dispatch = useDispatch();
   const [navOpen, setNavOpen] = useState(true);
   const { user } = useSelector(state => state.session);
   const { setModalContent } = useModal();
@@ -45,6 +47,12 @@ function Navigation() {
     setModalContent(<TagCreate />)
   };
 
+  const handleNewNote = async (e) => {
+    e.preventDefault();
+    const newNote = await dispatch(noteActions.createNote())
+    // console.log("NEWNOTE: ",newNote)
+  }
+
   return (
     <nav id="nav-main">
       <ul id="nav-list">
@@ -64,10 +72,10 @@ function Navigation() {
           )}
         </li>
         <div className="big-btn-container">
-          <NavLink className="nav-btn-primary green" to='/notes/new'>
+          <button className="nav-btn-primary green" onClick={handleNewNote}>
             <FontAwesomeIcon icon={faFileLines} />
             <span className="nav-inner-text">Note</span>
-          </NavLink>
+          </button>
           <button className="nav-btn-primary purple" onClick={openTaskModal}>
             <FontAwesomeIcon icon={faListCheck} />
             <span className="nav-inner-text">Task</span>

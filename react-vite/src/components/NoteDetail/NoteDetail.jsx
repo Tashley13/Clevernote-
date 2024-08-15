@@ -15,6 +15,7 @@ const NoteDetail = () => {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+
   const loggedIn = useSelector((state) => state.session.user)
   const userId=loggedIn.id
   console.log("USERID :", userId)
@@ -28,26 +29,25 @@ const NoteDetail = () => {
 
   const note = useSelector((state) => state.notes[noteId])
 
-  // useEffect(()=> {
-  //   if (noteId) {
-  //     dispatch(noteActions.getDetailsofUserNote(noteId))
-  //   }
-  // },[dispatch, noteId])
+  useEffect(()=> {
+    if (note) {
+      setTitle(note.title);
+      setContent(note.content);
+    }
+  }, [note])
 
-  // useEffect(()=> {
-  //   if (noteId && note) {
-  //     setTitle(note.title);
-  //     setContent(note.content);
-  //   }
-  // }, [noteId, note])
+  useEffect(()=> {
+    if (noteId) {
+      dispatch(noteActions.getDetailsofUserNote(noteId))
+    }
+  },[dispatch, noteId])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     const payload = {
       title,
-      content,
-
+      content
     }
     console.log("PAYLOAD", payload)
     const created_note = await dispatch(noteActions.createNote(payload))
