@@ -59,7 +59,7 @@ const HomePage = () => {
           {tasks && Object.values(tasks).map(task => (
             <li key={task?.id} className="task">
               <div className="task-title">{task.title}</div>
-              <div className="task-status">{task.completed ? 'Completed' : 'Pending'}</div>
+              <div className="task-status">{task.status ? 'Completed' : 'Pending'}</div>
               <div className="task-due-date">{formatDate(task.due_date)}</div>
             </li>
           ))}
