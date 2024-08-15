@@ -8,7 +8,7 @@ const CreateTaskModal = () => {
   const dispatch = useDispatch();
   const { closeModal } = useModal(); // Getting closeModal from context
   const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [description, setDescription] = useState(''); // Rename 'body' to 'description'
   const [status, setStatus] = useState('pending');
   const [dueDate, setDueDate] = useState('');
   const [priority, setPriority] = useState(1);
@@ -34,14 +34,19 @@ const CreateTaskModal = () => {
     e.preventDefault();
     const newTask = {
       title,
-      body,
+      description, // Ensure this matches the expected field name on the backend
       status,
       due_date: dueDate,
       priority,
     };
-    dispatch(addTask(newTask)).then(() => {
-      closeModal(); // Close the modal upon successful task creation
-    });
+
+    dispatch(addTask(newTask))
+      .then(() => {
+        closeModal(); // Close the modal upon successful task creation
+      })
+      .catch((err) => {
+        console.error('Error creating task:', err);
+      });
   };
 
   return (
@@ -59,10 +64,10 @@ const CreateTaskModal = () => {
             />
           </div>
           <div className="form-group">
-            <label>Body</label>
+            <label>Description</label> {/* Update label to match new state name */}
             <textarea
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
+              value={description} // Update this to 'description'
+              onChange={(e) => setDescription(e.target.value)} // Update this to 'setDescription'
               required
             />
           </div>

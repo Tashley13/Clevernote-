@@ -44,14 +44,25 @@ export const fetchTasks = () => async (dispatch) => {
 };
 
 export const addTask = (task) => async (dispatch) => {
-  const response = await fetch('/api/tasks', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(task)
-  });
-  const data = await response.json();
-  if (response.ok) {
-    dispatch(createTask(data));
+  try {
+    const response = await fetch('/api/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(task),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(createTask(data));
+      return data;
+    } else {
+      const errorText = await response.text();
+      console.error('Failed to create task:', errorText);
+      throw new Error('Failed to create task');
+    }
+  } catch (error) {
+    console.error('Error in addTask thunk:', error);
+    throw error;  // Re-throw the error so it can be handled in the component
   }
 };
 
