@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchTasks } from '../../redux/tasks';
 import { getDetailsofUserNote } from '../../redux/note';
 import { thunkGetNotebooks } from '../../redux/notebooks';
@@ -39,7 +40,7 @@ const HomePage = () => {
   return (
     <div className="homepage-container">
       <div className="notes-feature-tile">
-        <h2>My Notes</h2>
+        <Link to="/notes"><h2>My Notes</h2></Link>
         <ul>
           {filteredNotes.map(note => (
             <li key={note.id} className="note">
@@ -65,7 +66,7 @@ const HomePage = () => {
       </div>
 
       <div className="notebooks-feature-tile">
-        <h2>My Notebooks</h2>
+        <Link to="/notebooks"><h2>My Notebooks</h2></Link>
         <ul>
           {notebooks && Object.values(notebooks).map(notebook => (
             <li key={notebook.id} className="notebook">
@@ -77,7 +78,7 @@ const HomePage = () => {
       </div>
 
       <div className="tags-feature-tile">
-        <h2>My Tags</h2>
+        <Link to="/tags"><h2>My Tags</h2></Link>
         <ul>
           {filteredTags.map(tag => (
             <li key={tag.id} className="tag">
