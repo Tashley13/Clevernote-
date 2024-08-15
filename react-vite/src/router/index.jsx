@@ -37,19 +37,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "notebooks",
-        element: <NoteList />,
-      },
-      {
-        path: "notebooks/:id",
-        element: <NotebookDetail />,
-      },
-      {
-        path: "notebooks/:id/edit",
-        element: <NotebookEdit />,
+        element: <FeatureTable type='Notebook' />,
       },
       {
         path: "notes",
-        element: <FeatureTable type='Note' />,
+        element: <NoteList />,
       },
       {
         path: "notes/:noteid",

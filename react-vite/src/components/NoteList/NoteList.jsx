@@ -12,7 +12,7 @@ const NoteList = () => {
 
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.session.user);
-  const userId=loggedIn.id;
+  const userId=loggedIn?.id;
   const notes = useSelector((state) => state.notes);
   const note = Object.values(notes)
   // console.log('NOTE :', note[0])
