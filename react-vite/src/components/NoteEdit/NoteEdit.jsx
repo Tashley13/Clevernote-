@@ -11,23 +11,22 @@ const navigate=useNavigate();
 
 const loggedIn= useSelector((state)=> state.session.user)
 // const userId=loggedIn.id
-// const note_id=Number(noteId)
-console.log("ID: ", +noteId)
+const note_id=Number(noteId)
+// console.log("ID: ", +noteId)
 
-useEffect(()=> {
-    dispatch(noteActions.getDetailsofUserNote(noteId))
-}, [dispatch, noteId])
+
 
 const notes = useSelector((state)=> state.notes.selectedNote)
 // const eachNote=Object.values(notes)
 const note= Object.values(notes)[0]
 console.log("NOTE", note)
 
-
-
 const [title, setTitle ] = useState(note.title)
 const [content, setContent] = useState(note.content)
 
+useEffect(()=> {
+    dispatch(noteActions.getDetailsofUserNote(note_id))
+}, [dispatch, note_id])
 
 useEffect(()=> {
     if (note.id==Number(noteId)) {
@@ -40,11 +39,12 @@ if (!note) {
     return <div>Loading...</div>
 }
 
+
 const handleSubmit = async (e) => {
     e.preventDefault();
 
     const notePayload= {
-        id:noteId,
+        id:note_id,
         title,
         content
     }

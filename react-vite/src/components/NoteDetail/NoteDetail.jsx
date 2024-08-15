@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 
 
 const NoteDetail = () => {
+  const { noteId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

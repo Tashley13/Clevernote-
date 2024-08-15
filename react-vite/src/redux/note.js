@@ -143,9 +143,10 @@ const noteReducer = (state = initialState, action) => {
             }
         }
         case UPDATE_NOTE:
-            return {
+
+            return console.log("STATE: ", state), {
                 ...state,
-                selectedNotes: {[action.note.id]: {...action.note}}
+                selectedNote: {[action.note.id]: {...action.note}}
             }
         case DELETE_NOTE: {
             const newState = { ...state }

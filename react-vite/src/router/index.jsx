@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
         element: <NoteList />,
       },
       {
-        path: "notes/new",
+        path: "notes/:noteId",
         element: <NoteDetail />,
       },
       {
