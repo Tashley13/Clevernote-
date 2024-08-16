@@ -1,6 +1,5 @@
 const SET_NOTEBOOKS = "notebook/setNotebooks"
 const ADD_NOTEBOOK = "notebook/addNotebook"
-const GET_NOTES_FOR_NOTEBOOK = "notebook/getNotes"
 const REMOVE_NOTEBOOK = "notebook/removeNotebook"
 
 const setNotebooks = (notebooks) => ({
@@ -13,31 +12,27 @@ const addNotebook = (notebook) => ({
     payload: notebook
 })
 
-const addNotes = (notes) => ({
-    type: GET_NOTES_FOR_NOTEBOOK,
-    payload: notes
-})
-
 const removeNotebook = (id) => ({
     type: SET_NOTEBOOKS,
     payload: id
 })
 
-export const thunkGetNotebooks = () => async (dispatch) =>{
-    const res = await fetch("/api/notebooks")
+export const thunkGetNotebooks = () => async (dispatch) => {
+    const res = await fetch("/api/notebooks");
 
-    if(res.ok){
-        const data = await res.json()
-        if(data.errors){
+    if (res.ok) {
+        const data = await res.json();
+        console.log('Notebooks data:', data);
+        if (data.errors) {
             return;
         }
 
-        dispatch(setNotebooks({...data.notebooks}))
+        dispatch(setNotebooks({...data.notebooks}));
     }
-}
+};
 
 export const thunkGetNotesForNotebook = (notebookId) => async (dispatch) =>{
-    const res = await fetch("/api/notes/")
+    const res = await fetch(`/api/notebooks/notes/${+notebookId}`)
 
     if(res.ok){
         const data = await res.json()
@@ -45,7 +40,7 @@ export const thunkGetNotesForNotebook = (notebookId) => async (dispatch) =>{
             return;
         }
 
-        dispatch(setNotebooks({...data.notebooks}))
+        dispatch(addNotebook({data}))
     }
 }
 

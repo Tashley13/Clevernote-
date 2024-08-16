@@ -1,4 +1,3 @@
-from sqlalchemy.orm import relationship
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
@@ -26,6 +25,7 @@ class Notebook(db.Model):
                 'id': self.id,
                 'title': self.title,
                 'user_id': self.user_id,
+                'notes': {note.id: note.to_dict() for note in self.notes},
                 'created_at': self.created_at,
                 'updated_at': self.updated_at
           }

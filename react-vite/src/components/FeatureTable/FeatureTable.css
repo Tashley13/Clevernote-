@@ -51,7 +51,7 @@ tr:nth-child(even){
     background-color: rgb(51, 51, 51);
 }
 
-#cell-menu {
+.cell-menu {
     position: absolute;
     display: flex;
     right: 5px;
@@ -59,16 +59,35 @@ tr:nth-child(even){
     height: 100%;
 }
 
-#cell-menu .cell-menu-btn{
+.cell-menu .cell-menu-btn{
     list-style: none;
     margin: 0 8px;
     cursor: pointer;
 }
 
-#cell-menu .red{
+.cell-menu .red{
     color: #ff7272;
 }
 
-#cell-menu .blue{
+.cell-menu .blue{
     color: #72a4ff;
+}
+
+.priority-tag{
+    border-radius: 6px;
+    padding: 1px 2px;
+    color: black;
+    width: fit-content;
+    text-align: center;
+    margin: auto;
+}
+
+#low{
+    background-color: rgb(75, 226, 75);
+}
+#medium{
+    background-color: rgb(255, 255, 73);
+}
+#high{
+    background-color: rgb(248, 84, 84);
 }

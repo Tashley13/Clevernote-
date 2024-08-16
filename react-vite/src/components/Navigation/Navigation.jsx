@@ -81,7 +81,7 @@ function Navigation() {
           </NavLink>
         </li>
         <li>
-          <NavLink className="nav-btn-primary text-white" to="/">
+          <NavLink className="nav-btn-primary text-white" to="/tasks">
             <FontAwesomeIcon icon={faListCheck} />
             <span className="nav-inner-text">Tasks</span>
           </NavLink>
