@@ -9,7 +9,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import NotebookDeleteModal from '../NotebookAddModal/NotebookDeleteModal';
 import CreateTaskModal from '../CreateTaskModal/createTaskModal';
 import { fetchTasks } from '../../redux/tasks';
-import UpdateTask from '../UpdateTaskModal/UpdateTaskModal'; // Import the UpdateTask component
+import UpdateTask from '../UpdateTaskModal/UpdateTaskModal';
+import TaskDeleteModal from '../TaskDeleteModal/TaskDeleteModal'; // Import the TaskDeleteModal component
 import { Navigate } from 'react-router-dom';
 
 const TaskCell = ({ task }) => {
@@ -35,7 +36,7 @@ const TaskCell = ({ task }) => {
                 <OpenModalMenuItem
                     className='cell-menu-btn red'
                     icon={faTrash}
-                    modalComponent={<p>Hi</p>}
+                    modalComponent={<TaskDeleteModal taskId={task.id} />} // Use TaskDeleteModal
                 />
             </th>
         </tr>
@@ -66,10 +67,6 @@ const NotebookCell = ({ notebook }) => {
                     />
                 </th>
             </tr>
-            {/* {children.length > 0 ?
-            children.map(note => <NoteCell note={note}/>):
-            ''
-        } */}
         </>
     );
 };

@@ -67,14 +67,29 @@ export const addTask = (task) => async (dispatch) => {
 };
 
 export const editTask = (task) => async (dispatch) => {
-  const response = await fetch(`/api/tasks/${task.id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(task)
-  });
-  const data = await response.json();
-  if (response.ok) {
-    dispatch(updateTask(data));
+  try {
+    console.log('Sending updated task:', task);
+
+    const response = await fetch(`/api/tasks/${task.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(task),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Updated task received from server:', data);
+
+      dispatch(updateTask(data));
+      return data;  // Return data for any follow-up actions
+    } else {
+      const errorText = await response.text();
+      console.error('Failed to update task:', errorText);
+      throw new Error('Failed to update task');
+    }
+  } catch (error) {
+    console.error('Error in editTask thunk:', error);
+    throw error;  // Re-throw the error for the component to handle
   }
 };
 
