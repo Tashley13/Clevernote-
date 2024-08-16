@@ -1,0 +1,12 @@
+.delete-modal {
+	border-radius: 4px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 25px;
+	gap: 10px;
+}
+
+h1 {
+	text-align: center;
+}

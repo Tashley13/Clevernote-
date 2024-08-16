@@ -1,8 +1,8 @@
 import  { useRef, useState } from 'react';
 // import Editor from './Editor';
-import { useQuill } from 'react-quilljs';
-import 'quill/dist/quill.snow.css';
-import ReactQuill from 'react-quill'
+// import { useQuill } from 'react-quilljs';
+// import 'quill/dist/quill.snow.css';
+// import ReactQuill from 'react-quill'
 
 const NoteDetail = () => {
   const [value, setValue] = useState('');

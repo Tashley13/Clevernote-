@@ -1,0 +1,9 @@
+button {
+	padding: 5px;
+}
+
+.buttons-cell {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
