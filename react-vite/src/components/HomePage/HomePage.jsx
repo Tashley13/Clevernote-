@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchTasks } from '../../redux/tasks';
-import { getDetailsofUserNote } from '../../redux/note';
+import { getAllNotes} from '../../redux/note';
 import { thunkGetNotebooks } from '../../redux/notebooks';
 import { thunkGetTag } from '../../redux/tags';
 import './HomePage.css';
@@ -12,7 +12,7 @@ const HomePage = () => {
 
   // Select tasks, notes, notebooks, tags, and the user from the Redux store
   const tasks = useSelector(state => state.tasks);
-  const notes = useSelector(state => state.notes);
+  const notes = useSelector(state => state.notes.allNotes);
   const notebooks = useSelector(state => state.notebooks.allNotebooks);
   const tags = useSelector(state => state.tags);
   const user = useSelector(state => state.session.user); // Get the logged-in user's ID
@@ -20,7 +20,7 @@ const HomePage = () => {
   useEffect(() => {
     if (user) {
       dispatch(fetchTasks());          // Fetch tasks
-    dispatch(getDetailsofUserNote()); // Fetch notes
+    dispatch(getAllNotes()); // Fetch notes
     dispatch(thunkGetNotebooks());    // Fetch notebooks
     dispatch(thunkGetTag());        // Fetch tags
     }
@@ -32,7 +32,7 @@ const HomePage = () => {
   };
 
   // Filter notes and tags based on the logged-in user's ID
-  const filteredNotes = user ? Object.values(notes).filter(note => note.user_id === user?.id) : []
+  const filteredNotes = user ? Object.values(notes).filter(note => note.user_id !== user?.id) : []
   const filteredTags = user ? Object.values(tags).filter(tag => tag.user_id === user?.id) : []
 
   console.log("User ID:", user?.id);
