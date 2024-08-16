@@ -44,9 +44,9 @@ const NoteList = () => {
 <div className='notes-display'>
   <ul>
     {note.length > 0 ? (
-      note.map(note=> (
+      note.map((note, key)=> (
       note.userId === userId && (
-      <div key={note.id} className="note">
+      <div key={key} className="note">
         <Link to={`/notes/${note.id}/edit`}>
         <div className="note-title">
           {note.title}

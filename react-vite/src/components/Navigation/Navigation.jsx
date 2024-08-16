@@ -5,6 +5,7 @@ import "./Navigation.css";
 import { faArrowRight, faBook, faFileLines, faHouse, faListCheck, faTags} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import * as noteActions from "../../redux/note"
 import CreateTaskModal from "../CreateTaskModal";
@@ -14,6 +15,7 @@ import TagCreate from "../TagCreate/TagCreate";
 
 function Navigation() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [navOpen, setNavOpen] = useState(true);
   const { user } = useSelector(state => state.session);
   const { setModalContent } = useModal();
@@ -50,6 +52,10 @@ function Navigation() {
   const handleNewNote = async (e) => {
     e.preventDefault();
     const newNote = await dispatch(noteActions.createNote())
+    // console.log("OK: " , newNote)
+    if (newNote) {
+      navigate(`/notes/${newNote.id}/edit`)
+    }
     // console.log("NEWNOTE: ",newNote)
   }
 

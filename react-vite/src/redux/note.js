@@ -72,7 +72,7 @@ export const getDetailsofUserNote = (noteId) => async (dispatch) => {
 
 export const createNote = () => async (dispatch) => {
     // console.log("THUNK NOTE: ", note)
-    const response = await fetch(`/api/notes/new`, {
+    const response = await fetch(`/api/notes`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -143,15 +143,17 @@ const noteReducer = (state = initialState, action) => {
             // return { ...state, ...newState }
             return {
                 ...state,
-                allNotes: {[action.note.id] : {...action.note}}
+                allNotes: {...state.allNotes, [action.note.id] : {...action.note}},
+                selectedNote: {[action.note.id] : {...action.note}}
             }
         }
         case UPDATE_NOTE:
 // console.log("STATE: ", state),
-            return {
-                ...state,
-                selectedNote: {[action.note.id]: {...action.note}}
-            }
+return {
+    ...state,
+    allNotes: {...state.allNotes, [action.note.id] : {...action.note}},
+    selectedNote: {[action.note.id] : {...action.note}}
+}
         case DELETE_NOTE: {
             const newState = { ...state }
             delete newState.allNotes[action.noteId];

@@ -16,26 +16,30 @@ const note_id=Number(noteId)
 
 
 
-const notes = useSelector((state)=> state.notes.selectedNote)
+const notes = useSelector((state)=> state.notes.selectedNote[0])
 // const eachNote=Object.values(notes)
-const note= Object.values(notes)[0]
-console.log("NOTE", note)
+// const note= Object.values(notes)[0]
+console.log("NOTE", notes)
 
-const [title, setTitle ] = useState(note.title)
-const [content, setContent] = useState(note.content)
+// const [note, setNote] = useState({})
+const [title, setTitle ] = useState('')
+const [content, setContent] = useState('')
+console.log("TITLE and CONTENT:", title,  '+', content)
+
+
 
 useEffect(()=> {
     dispatch(noteActions.getDetailsofUserNote(note_id))
 }, [dispatch, note_id])
 
 useEffect(()=> {
-    if (note.id==Number(noteId)) {
-        setTitle(note.title);
-        setContent(note.content);
+    if (notes?.id) {
+        setTitle(notes.title);
+        setContent(notes.content);
     }
-}, [note, noteId])
+}, [notes])
 
-if (!note) {
+if (!notes) {
     return <div>Loading...</div>
 }
 
@@ -50,7 +54,7 @@ const handleSubmit = async (e) => {
     }
 
     await dispatch(noteActions.editUserNote(notePayload))
-    // navigate(`/notes`);
+    navigate(`/notes`);
 }
 
 
