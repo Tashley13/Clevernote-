@@ -13,13 +13,15 @@ const UpdateTask = ({ task }) => {
   const [status, setStatus] = useState(task.status);
   const [dueDate, setDueDate] = useState(task.due_date ? task.due_date.split('T')[0] : '');
   const [priority, setPriority] = useState(task.priority);
+  const [body, setBody] = useState(task.body);
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
 
     const updatedTask = {
       ...task,
       title,
+      description: body,
       status,
       due_date: dueDate,
       priority,
@@ -31,7 +33,7 @@ const UpdateTask = ({ task }) => {
     } catch (error) {
       console.error('Failed to update task:', error);
     }
-  };
+};
 
   return (
     <div className="update-task-modal">
@@ -45,12 +47,21 @@ const UpdateTask = ({ task }) => {
             onChange={(e) => setTitle(e.target.value)}
             required
           />
+              </div>
+               <div className="form-group">
+          <label>Body</label>
+          <input
+            type="text"
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            required
+          />
         </div>
         <div className="form-group">
           <label>Status</label>
-          <select value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="pending">Pending</option>
-            <option value="completed">Completed</option>
+          <select value={status} onChange={(e) => setStatus(e.target.value === "true" ? true: false)}>
+            <option value={false}>Pending</option>
+            <option value={true}>Completed</option>
           </select>
         </div>
         <div className="form-group">
