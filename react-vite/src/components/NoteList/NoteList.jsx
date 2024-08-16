@@ -13,6 +13,7 @@ const NoteList = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.session.user);
+  console.log("LOGGED IN: ", loggedIn)
 
   useEffect(()=> {
     if (!loggedIn) {
@@ -24,14 +25,14 @@ const NoteList = () => {
     dispatch(noteActions.getAllNotes())
   }, [dispatch])
 
-  const userId=loggedIn.id;
+  const userId=loggedIn?.id;
   const notes = useSelector((state) => state.notes);
   const eachNote = notes.allNotes
   const note=Object.values(eachNote)
   // console.log("NOTES:", note)
 
 
-  if (!note.length) {
+  if (!note?.length) {
       return <div>Loading...</div>
   }
 
