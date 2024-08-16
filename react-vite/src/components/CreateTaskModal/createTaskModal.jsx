@@ -4,6 +4,7 @@ import { addTask } from '../../redux/tasks';
 import { useModal } from '../../context/Modal';
 import './createTaskModal.css';
 
+
 const CreateTaskModal = () => {
   const dispatch = useDispatch();
   const { closeModal } = useModal(); // Getting closeModal from context
