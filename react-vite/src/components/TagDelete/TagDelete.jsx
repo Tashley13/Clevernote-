@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { thunkDeleteTag } from "../../redux/tags";
 import { useNavigate } from "react-router-dom";
 import { useModal } from '../../context/Modal';
+import './TagDelete.css';
 
 const TagDelete = ({tag}) => {
 	const dispatch = useDispatch();
@@ -19,10 +20,13 @@ const TagDelete = ({tag}) => {
 	}
 
 	return (
-	<form onSubmit={handleSubmit}>
+		<div>
 		<h1>Delete Tag</h1>
+	<form className="delete-modal" onSubmit={handleSubmit}>
 		<button type="submit">Delete</button>
+		<button onClick={() => closeModal()}>Cancel</button>
 	</form>
+		</div>
 	)
 }
 
