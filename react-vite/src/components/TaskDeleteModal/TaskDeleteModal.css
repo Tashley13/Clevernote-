@@ -1,0 +1,41 @@
+.error {
+    color: rgb(255, 63, 63);
+    font-size: 13px;
+}
+
+#task-delete-form {
+    background-color: #202020;
+    padding: 20px;
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#task-delete-form>* {
+    margin: 15px 0;
+}
+
+#task-delete-form>div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#task-delete-form input {
+    border-radius: 4px;
+    padding: 4px;
+    margin: 4px;
+    background-color: #444444;
+    color: white;
+    border: none;
+}
+
+#task-delete-form button {
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 4px;
+}
