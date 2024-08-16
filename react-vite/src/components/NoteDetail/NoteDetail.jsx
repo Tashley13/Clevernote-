@@ -4,6 +4,7 @@ import  { useRef, useState } from 'react';
 import 'quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill'
 
+
 const NoteDetail = () => {
   const [value, setValue] = useState('');
 
