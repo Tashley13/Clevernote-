@@ -26,13 +26,13 @@ def get_notes(id):
 # @login_required
 def create_note():
     title=request.json.get('title') #grab the title or create default
-    # notebook_id=request.json.get('notebookId') #grab the notebookId
+    notebook_id=request.json.get('notebookId') #grab the notebookId
     user_id=current_user.id #grab the userId
     new_note=Note(
         title=title,
         content='', #blank content
         userId=current_user.id,
-        notebookId=1,
+        notebookId=notebook_id,
         created_at=datetime.utcnow()
         # updated_at=datetime.now(timezone.utc)
     )
@@ -56,8 +56,10 @@ def update_note(id):
     if 'title' not in current_data or 'content' not in current_data:
         return jsonify({"message": "Bad Request", "errors": {"title": "Title is required", "content" : "Content is required"}}), 400
     #begin to update variables
+    print(current_data, "CURRENT DATA ======================================================")
     note_to_edit.title = current_data.get('title')
     note_to_edit.content = current_data.get('content')
+    note_to_edit.notebookId = current_data.get('notebookId')
     note_to_edit.updated_at = datetime.utcnow()
     #commit the session
     db.session.commit()

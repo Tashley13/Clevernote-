@@ -2,20 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { editTask } from '../../redux/tasks';
 import { useModal } from '../../context/Modal';
-// import './UpdateTask.css';
 
 const UpdateTask = ({ task }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  // Initialize state with the task's current values
+  // Function to format the date to YYYY-MM-DD
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+
   const [title, setTitle] = useState(task.title);
   const [status, setStatus] = useState(task.status);
-  const [dueDate, setDueDate] = useState(task.due_date ? task.due_date.split('T')[0] : '');
+  const [dueDate, setDueDate] = useState(formatDate(task.due_date));
   const [priority, setPriority] = useState(task.priority);
   const [body, setBody] = useState(task.body);
 
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const updatedTask = {
@@ -29,11 +37,11 @@ const handleSubmit = async (e) => {
 
     try {
       await dispatch(editTask(updatedTask));
-      closeModal(); // Close the modal upon successful task update
+      closeModal(); 
     } catch (error) {
       console.error('Failed to update task:', error);
     }
-};
+  };
 
   return (
     <div className="update-task-modal">
@@ -47,8 +55,8 @@ const handleSubmit = async (e) => {
             onChange={(e) => setTitle(e.target.value)}
             required
           />
-              </div>
-               <div className="form-group">
+        </div>
+        <div className="form-group">
           <label>Body</label>
           <input
             type="text"
@@ -59,7 +67,7 @@ const handleSubmit = async (e) => {
         </div>
         <div className="form-group">
           <label>Status</label>
-          <select value={status} onChange={(e) => setStatus(e.target.value === "true" ? true: false)}>
+          <select value={status} onChange={(e) => setStatus(e.target.value === "true" ? true : false)}>
             <option value={false}>Pending</option>
             <option value={true}>Completed</option>
           </select>
