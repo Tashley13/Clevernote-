@@ -42,9 +42,9 @@ function SignupFormPage() {
 
   return (
     <>
+      <form onSubmit={handleSubmit}>
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
         <label>
           Email
           <input
