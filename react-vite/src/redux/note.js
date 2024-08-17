@@ -96,7 +96,9 @@ export const createNote = () => async (dispatch) => {
             notebookId: '',
             tagId: ''
         })
+
     });
+
 
     if (response.ok) {
         const newNote = await response.json();
