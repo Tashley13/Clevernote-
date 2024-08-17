@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request #import request
 #request allows users to send HTTP/1.1 requests
 from flask_login import login_required, current_user
-from app.models import db, Note
+from app.models import db, Note, Tag
 from datetime import datetime, timezone
 
 
@@ -27,12 +27,14 @@ def get_notes(id):
 def create_note():
     title=request.json.get('title') #grab the title or create default
     notebook_id=request.json.get('notebookId') #grab the notebookId
+    tag_id = request.json.get('tagId')
     user_id=current_user.id #grab the userId
     new_note=Note(
         title=title,
         content='', #blank content
         userId=current_user.id,
         notebookId=notebook_id,
+        tagId=tag_id,
         created_at=datetime.utcnow()
         # updated_at=datetime.now(timezone.utc)
     )
@@ -43,6 +45,19 @@ def create_note():
     return jsonify(new_note.to_dict())
     #return the note, sending into a dictionary for access later
 
+@notes_routes.route('/tags/<int:noteId>', methods=["POST"])
+def add_tag_by_note_id(noteId):
+    note=Note.query.get(noteId)
+    if not note:
+        return jsonify({"errors": "Note not found"}), 400
+
+    tags_by_note = Tag.query.filter_by(user_id=current_user.id, note_id=noteId)
+    if not tags_by_note:
+        return jsonify({"errors": "Tag not found"}), 404
+    note.tags = tags_by_note.to_dict()
+    db.session.add(note)
+    db.session.commit()
+    return jsonify(note.to_dict())
 
 # UPDATE route - update the note for a current user
 @notes_routes.route('/<int:id>/edit', methods=["PUT"]) #need to access the id integer
@@ -56,10 +71,11 @@ def update_note(id):
     if 'title' not in current_data or 'content' not in current_data:
         return jsonify({"message": "Bad Request", "errors": {"title": "Title is required", "content" : "Content is required"}}), 400
     #begin to update variables
-    print(current_data, "CURRENT DATA ======================================================")
+    # print(current_data, "CURRENT DATA ======================================================")
     note_to_edit.title = current_data.get('title')
     note_to_edit.content = current_data.get('content')
     note_to_edit.notebookId = current_data.get('notebookId')
+    note_to_edit.tagId = current_data.get('tagId')
     note_to_edit.updated_at = datetime.utcnow()
     #commit the session
     db.session.commit()
