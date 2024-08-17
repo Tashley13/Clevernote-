@@ -23,11 +23,15 @@ def get_notes(id):
 
 # CREATE route - create a note for current user
 @notes_routes.route('', methods=["POST"])
-# @login_required
+@login_required
 def create_note():
+
+    default_notebookId = None
+    default_tagId = None
+
     title=request.json.get('title') #grab the title or create default
-    notebook_id=request.json.get('notebookId') #grab the notebookId
-    tag_id = request.json.get('tagId')
+    notebook_id=request.json.get('notebookId', default_notebookId) #grab the notebookId
+    tag_id = request.json.get('tagId', default_tagId)
     user_id=current_user.id #grab the userId
     new_note=Note(
         title=title,
