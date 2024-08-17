@@ -40,7 +40,7 @@ class Note(db.Model):
 
     user = db.relationship('User', back_populates='notes')
     notebooks = db.relationship('Notebook', back_populates='notes')
-    tags = db.relationship('Tag', secondary='note_tag', backref='notes')
+    tags = db.relationship('Tag', secondary='note_tag', back_populates='notes')
 
     def to_dict(self):
         return {

@@ -42,6 +42,7 @@ const NoteEdit = () => {
         if (notes?.id) {
             setTitle(notes.title);
             setContent(notes.content);
+            setNoteTag(notes.tagId); //need to keep an eye on setNoteTag
         }
     }, [notes])
 
@@ -103,7 +104,7 @@ const NoteEdit = () => {
                     <label htmlFor='tag-select' id='select-tag'>
                         Tag:
                     </label>
-                    <select name='Select Tags' id='select-tag' value={noteTag} onChange={(e) => setNoteTag(e.target.value)}>
+                    <select name='Select Tags' id='select-tag' onChange={(e) => setNoteTag(e.target.value)}>
                         {/* <option value=''>--Choose your Tag--</option> */}
                         {Object.values(tags).map((tag) => (
 

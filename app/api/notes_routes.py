@@ -11,6 +11,7 @@ notes_routes = Blueprint('notes', __name__, url_prefix="/notes") #create bluepri
 @notes_routes.route('', methods=["GET"])
 def get_current_notes():
     notes=Note.query.filter_by(userId = current_user.id).all()
+    #note.tags will help access list of tags
     return jsonify([note.to_dict() for note in notes])
 
 # READ route - get specific note of current user
