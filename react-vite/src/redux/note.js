@@ -50,7 +50,7 @@ export const getAllNotes = () => async (dispatch) => {
     if (response.ok) {
         const data = await response.json()
         console.log('DATA: ', data)
-        if(data.errors) {
+        if (data.errors) {
             return;
         }
         dispatch(loadNotes(data))//to properly access API
@@ -68,6 +68,19 @@ export const getDetailsofUserNote = (noteId) => async (dispatch) => {
     }
 }
 
+//get tags for notes
+export const getTagsforNote = (noteId) => async (dispatch) => {
+    const response = await fetch(`/api/notes/tags/${+noteId}`)
+
+    if (response.ok) {
+        const data = await response.json()
+        if (data.errors) {
+            return errors
+        }
+        dispatch(addNotes({ data }))
+    }
+}
+
 //create a note
 
 export const createNote = () => async (dispatch) => {
@@ -78,14 +91,16 @@ export const createNote = () => async (dispatch) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            title : 'Untitled',
-            content : ''
+            title: 'Untitled',
+            content: '',
+            notebookId: '',
+            tagId: ''
         })
     });
 
     if (response.ok) {
         const newNote = await response.json();
-        console.log("NEWNOTE: ",newNote)
+        console.log("NEWNOTE: ", newNote)
         dispatch(addNotes(newNote))
         return newNote;
     }
@@ -128,13 +143,13 @@ const initialState = {
 
 const noteReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOAD_NOTES:{
+        case LOAD_NOTES: {
             // console.log("STATE: ", state)
-            return {...state, allNotes:{...action.notes}}
+            return { ...state, allNotes: { ...action.notes } }
         }
         case DETAIL_NOTE: {
             return {
-                ...state, selectedNote: {...action.note}
+                ...state, selectedNote: { ...action.note }
             }
         }
         case ADD_NOTE: {
@@ -143,17 +158,17 @@ const noteReducer = (state = initialState, action) => {
             // return { ...state, ...newState }
             return {
                 ...state,
-                allNotes: {...state.allNotes, [action.note.id] : {...action.note}},
-                selectedNote: {[action.note.id] : {...action.note}}
+                allNotes: { ...state.allNotes, [action.note.id]: { ...action.note } },
+                selectedNote: { [action.note.id]: { ...action.note } }
             }
         }
         case UPDATE_NOTE:
-// console.log("STATE: ", state),
-return {
-    ...state,
-    allNotes: {...state.allNotes, [action.note.id] : {...action.note}},
-    selectedNote: {[action.note.id] : {...action.note}}
-}
+            // console.log("STATE: ", state),
+            return {
+                ...state,
+                allNotes: { ...state.allNotes, [action.note.id]: { ...action.note } },
+                selectedNote: { [action.note.id]: { ...action.note } }
+            }
         case DELETE_NOTE: {
             const newState = { ...state }
             delete newState.allNotes[action.noteId];
