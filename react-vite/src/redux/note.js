@@ -3,6 +3,7 @@ export const DETAIL_NOTE = 'notes/DETAIL_NOTE'
 export const ADD_NOTE = 'notes/ADD_NOTE'
 export const UPDATE_NOTE = 'notes/UPDATE_NOTE'
 export const DELETE_NOTE = 'notes/DELETE_NOTE'
+export const EDIT_TAG = 'notes/EDIT_TAG'
 
 
 //POJO action creators
@@ -41,6 +42,13 @@ const deleteNote = (noteId) => {
     }
 }
 
+const editTag = (note) => {
+    return {
+        type: EDIT_TAG,
+        note
+    }
+}
+
 //thunks
 
 //get all notes of user
@@ -50,7 +58,7 @@ export const getAllNotes = () => async (dispatch) => {
     if (response.ok) {
         const data = await response.json()
         console.log('DATA: ', data)
-        if(data.errors) {
+        if (data.errors) {
             return;
         }
         dispatch(loadNotes(data))//to properly access API
@@ -78,14 +86,14 @@ export const createNote = () => async (dispatch) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            title : 'Untitled',
-            content : ''
+            title: 'Untitled',
+            content: ''
         })
     });
 
     if (response.ok) {
         const newNote = await response.json();
-        console.log("NEWNOTE: ",newNote)
+        console.log("NEWNOTE: ", newNote)
         dispatch(addNotes(newNote))
         return newNote;
     }
@@ -119,6 +127,21 @@ export const deleteUserNote = (noteId) => async (dispatch) => {
     // return response
 }
 
+export const editUserTag = (note) => async (dispatch) => {
+    const response = await fetch(`/api/notes/${note.id}/editTag`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(note)
+    })
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(editTag(data));
+        return data;
+    }
+}
+
 const initialState = {
     allNotes: {},
     selectedNote: {}
@@ -128,13 +151,13 @@ const initialState = {
 
 const noteReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOAD_NOTES:{
+        case LOAD_NOTES: {
             // console.log("STATE: ", state)
-            return {...state, allNotes:{...action.notes}}
+            return { ...state, allNotes: { ...action.notes } }
         }
         case DETAIL_NOTE: {
             return {
-                ...state, selectedNote: {...action.note}
+                ...state, selectedNote: { ...action.note }
             }
         }
         case ADD_NOTE: {
@@ -143,22 +166,29 @@ const noteReducer = (state = initialState, action) => {
             // return { ...state, ...newState }
             return {
                 ...state,
-                allNotes: {...state.allNotes, [action.note.id] : {...action.note}},
-                selectedNote: {[action.note.id] : {...action.note}}
+                allNotes: { ...state.allNotes, [action.note.id]: { ...action.note } },
+                selectedNote: { [action.note.id]: { ...action.note } }
             }
         }
         case UPDATE_NOTE:
-// console.log("STATE: ", state),
-return {
-    ...state,
-    allNotes: {...state.allNotes, [action.note.id] : {...action.note}},
-    selectedNote: {[action.note.id] : {...action.note}}
-}
+            // console.log("STATE: ", state),
+            return {
+                ...state,
+                allNotes: { ...state.allNotes, [action.note.id]: { ...action.note } },
+                selectedNote: { [action.note.id]: { ...action.note } }
+            }
         case DELETE_NOTE: {
             const newState = { ...state }
             delete newState.allNotes[action.noteId];
             return {
                 ...newState
+            }
+        }
+        case EDIT_TAG: {
+            return {
+                ...state,
+                allNotes: { ...state.allNotes, [action.note.id]: { ...action.note } },
+                selectedNote: { [action.note.id]: { ...action.note } }
             }
         }
         default: {

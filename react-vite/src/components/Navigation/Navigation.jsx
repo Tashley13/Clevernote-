@@ -81,7 +81,7 @@ function Navigation() {
             <FontAwesomeIcon icon={faFileLines} />
             <span className="nav-inner-text">Note</span>
           </button>
-          <button className="nav-btn-primary purple" onClick={openTaskModal}>
+          <button className="nav-btn-primary purple" disabled= {!user} onClick={openTaskModal}>
             <FontAwesomeIcon icon={faListCheck} />
             <span className="nav-inner-text">Task</span>
           </button>

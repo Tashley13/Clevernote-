@@ -14,14 +14,14 @@ def seed_notes():
     bobbies_notes3 = Note(title='Bobbie\'s Notes3', content='Bobbie content3', notebookId=1, userId=3)
 
 
-    tag1=Tag(tag_name='Test Tag 1', user_id=1)
-    tag2=Tag(tag_name='Test Tag 2', user_id=2)
-    tag3=Tag(tag_name='Demo Tag 1', user_id=3)
+    # tag1=Tag(tag_name='Test Tag 1', user_id=1)
+    # tag2=Tag(tag_name='Test Tag 2', user_id=2)
+    # tag3=Tag(tag_name='Demo Tag 1', user_id=3)
 
 
-    janes_notes.tags.append(tag1)
-    pauls_notes.tags.append(tag2)
-    bobbys_notes.tags.append(tag3)
+    # janes_notes.tags.append(tag1)
+    # pauls_notes.tags.append(tag2)
+    # bobbys_notes.tags.append(tag3)
 
     db.session.add(bobbys_notes)
     db.session.add(pauls_notes)
@@ -29,7 +29,7 @@ def seed_notes():
     db.session.add(bobbies_notes2)
     db.session.add(bobbies_notes3)
 
-    db.session.add_all([tag1, tag2, tag3])
+    # db.session.add_all([tag1, tag2, tag3])
 
     db.session.commit()
 
