@@ -32,7 +32,7 @@ def create_note():
         title=title,
         content='', #blank content
         userId=current_user.id,
-        notebookId=1,
+        # notebookId=1,
         created_at=datetime.utcnow()
         # updated_at=datetime.now(timezone.utc)
     )
@@ -64,6 +64,21 @@ def update_note(id):
     #return the note, sending into the a dictionary for access later
     return jsonify(note_to_edit.to_dict())
 
+# ADD Tag to Note, different route so as not to interfere with udpating notes
+@notes_routes.route('/<int:id>/editTag', methods=["PUT"])
+@login_required
+def update_tag(id):
+    noteTag_to_edit=Note.query.get(id)
+    if not noteTag_to_edit or noteTag_to_edit.userId != current_user.id:
+        return jsonify({"message" : "Note not found"}), 404
+    current_data=request.get_json()
+    noteTag_to_edit.tagId=current_data.get('tagId')
+
+    db.session.commit()
+
+    return jsonify(noteTag_to_edit.to_dict())
+
+
 # DELETE route - delete a note for a current user
 @notes_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
@@ -78,3 +93,14 @@ def delete_note(id): #need to call the userid and id of current note
     #commit the session
     return jsonify({'message' : 'Note successfully deleted'})
     #return successful deletion method
+
+# # add tag to note
+# @notes_routes.route('/<int:id>/edit', methods=["PUT"])
+# @login_required
+# def update_tag_note(id) :
+#     update_tag_note=Note.query.get(id)
+#         if note update_tag_note:
+#             return jsonify({'message' : "Note does not exist"}), 404
+#     tagId = request.json.get('tagId')
+
+#     update_tag_note.tagId

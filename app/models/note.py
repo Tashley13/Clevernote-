@@ -32,14 +32,15 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     content = db.Column(db.String)
-    notebookId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('notebooks.id')), nullable=False)
+    notebookId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('notebooks.id')))
+    tagId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('tags.id')), nullable=True)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     user = db.relationship('User', back_populates='notes')
     notebooks = db.relationship('Notebook', back_populates='notes')
-    tags = db.relationship('Tag', secondary = note_tag, backref='notes')
+    tags = db.relationship('Tag', secondary='note_tag', backref='notes')
 
     def to_dict(self):
         return {
@@ -47,6 +48,7 @@ class Note(db.Model):
             'title' : self.title,
             'content' : self.content,
             'notebookId' : self.notebookId,
+            'tagId' : self.tagId,
             'userId' : self.userId,
             'created_at': self.created_at,
             'updated_at' : self.updated_at

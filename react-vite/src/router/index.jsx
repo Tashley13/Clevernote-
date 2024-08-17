@@ -3,11 +3,11 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import HomePage from '../components/HomePage';
-import NotebookDetail from '../components/NotebookDetail';
+// import NotebookDetail from '../components/NotebookDetail';
 import NoteList from '../components/NoteList';
 import NoteDetail from '../components/NoteDetail';
 import NoteEdit from "../components/NoteEdit";
-import TaskList from '../components/TaskList';
+// import TaskList from '../components/TaskList';
 import TaskDetail from '../components/TaskDetail';
 import CreateTaskModal from '../components/CreateTaskModal';
 import TaskEdit from '../components/TaskEdit';
@@ -15,7 +15,7 @@ import TagList from '../components/TagList';
 import TagDetail from '../components/TagDetail';
 import TagCreate from '../components/TagCreate';
 import TagEdit from '../components/TagEdit';
-import NotebookEdit from '../components/NotebookEdit/NotebookEdit';
+// import NotebookEdit from '../components/NotebookEdit/NotebookEdit';
 import FeatureTable from '../components/FeatureTable/FeatureTable';
 
 
