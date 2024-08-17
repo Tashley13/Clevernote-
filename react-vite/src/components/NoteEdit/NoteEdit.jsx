@@ -31,7 +31,7 @@ console.log("NOTEBOOKS: ", notebooks)
 const [title, setTitle ] = useState('')
 const [content, setContent] = useState('')
 const [notebookId, setNotebookId] = useState(null)
-const [tagId, setTagId] = useState()
+const [tagId, setTagId] = useState(null)
 console.log("TITLE and CONTENT:", title,  '+', content, '+', notebookId, '+', tagId)
 
 
