@@ -6,17 +6,16 @@ import './createTaskModal.css';
 
 const CreateTaskModal = () => {
   const dispatch = useDispatch();
-  const { closeModal } = useModal(); // Getting closeModal from context
+  const { closeModal } = useModal();
   const [title, setTitle] = useState('');
-  const [description, setDescription] = useState(''); // Rename 'body' to 'description'
+  const [description, setDescription] = useState('');
   const [status, setStatus] = useState('pending');
   const [dueDate, setDueDate] = useState('');
   const [priority, setPriority] = useState(1);
+  const [errors, setErrors] = useState({}); // State for storing error messages
 
-  // Reference for the modal content
   const modalRef = useRef();
 
-  // Function to handle closing the modal when clicking outside of it
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
       closeModal();
@@ -32,9 +31,21 @@ const CreateTaskModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newErrors = {};
+
+    // Validation
+    if (!title) newErrors.title = 'Title is required';
+    if (!description) newErrors.description = 'Description is required';
+    if (!dueDate) newErrors.dueDate = 'Due date is required';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return; // Do not submit if there are errors
+    }
+
     const newTask = {
       title,
-      description, // Ensure this matches the expected field name on the backend
+      description,
       status,
       due_date: dueDate,
       priority,
@@ -42,7 +53,7 @@ const CreateTaskModal = () => {
 
     dispatch(addTask(newTask))
       .then(() => {
-        closeModal(); // Close the modal upon successful task creation
+        closeModal();
       })
       .catch((err) => {
         console.error('Error creating task:', err);
@@ -60,16 +71,16 @@ const CreateTaskModal = () => {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              required
             />
+            {errors.title && <p className="error">{errors.title}</p>}
           </div>
           <div className="form-group">
-            <label>Description</label> {/* Update label to match new state name */}
+            <label>Description</label>
             <textarea
-              value={description} // Update this to 'description'
-              onChange={(e) => setDescription(e.target.value)} // Update this to 'setDescription'
-              required
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
+            {errors.description && <p className="error">{errors.description}</p>}
           </div>
           <div className="form-group">
             <label>Status</label>
@@ -85,6 +96,7 @@ const CreateTaskModal = () => {
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
             />
+            {errors.dueDate && <p className="error">{errors.dueDate}</p>}
           </div>
           <div className="form-group">
             <label>Priority</label>

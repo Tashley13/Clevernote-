@@ -1,3 +1,4 @@
+/* Modal container styling */
 .modal-container {
     display: flex;
     justify-content: center;
@@ -11,7 +12,7 @@
     z-index: 1000;
 }
 
-
+/* Task form styling */
 .task-form {
     background-color: #272727;
     padding: 20px;
@@ -23,16 +24,19 @@
     flex-direction: column;
 }
 
+/* Heading styling */
 .task-form h2 {
     margin-top: 0;
     font-size: 24px;
-    text-align: center
+    text-align: center;
 }
 
+/* Form group styling */
 .form-group {
     margin-bottom: 15px;
 }
 
+/* Label styling */
 .form-group label {
     display: block;
     margin-bottom: 5px;
@@ -40,6 +44,7 @@
     color: #cccccc;
 }
 
+/* Input, textarea, and select styling */
 .form-group input,
 .form-group textarea,
 .form-group select {
@@ -52,6 +57,14 @@
     color: white;
 }
 
+/* Error message styling */
+.error {
+    color: rgb(255, 63, 63);
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* Submit button styling */
 .submit-button {
     margin-top: 20px;
     padding: 10px;

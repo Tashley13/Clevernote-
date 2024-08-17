@@ -22,7 +22,9 @@ const NoteList = () => {
   },[loggedIn, navigate])
 
   useEffect(()=> {
-    dispatch(noteActions.getAllNotes())
+    if (loggedIn) {
+      dispatch(noteActions.getAllNotes())
+    }
   }, [dispatch])
 
   const userId=loggedIn?.id;
@@ -32,7 +34,7 @@ const NoteList = () => {
   // console.log("NOTES:", note)
 
 
-  if (!note?.length) {
+  if (!note.length) {
       return <div>Loading...</div>
   }
 
