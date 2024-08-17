@@ -3,22 +3,22 @@ from datetime import datetime
 from .db import db, add_prefix_for_prod
 from .tags import Tag
 
-# note_tag = db.Table(
-# 	"note_tag",
-# 	db.Model.metadata,
-# 	db.Column(
-#         "tag_id",
-#         db.Integer,
-#         db.ForeignKey(add_prefix_for_prod("tags.id"))
-#         , primary_key = True
-#     ),
-# 	db.Column(
-#         "note_id",
-#         db.Integer,
-#         db.ForeignKey(add_prefix_for_prod("notes.id")),
-#         primary_key = True
-#     )
-# )
+note_tag = db.Table(
+	"note_tag",
+	db.Model.metadata,
+	db.Column(
+        "tag_id",
+        db.Integer,
+        db.ForeignKey(add_prefix_for_prod("tags.id"))
+        , primary_key = True
+    ),
+	db.Column(
+        "note_id",
+        db.Integer,
+        db.ForeignKey(add_prefix_for_prod("notes.id")),
+        primary_key = True
+    )
+)
 
 if environment == "production":
     note_tag.schema = SCHEMA
