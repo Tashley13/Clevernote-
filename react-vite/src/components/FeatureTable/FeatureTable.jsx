@@ -13,16 +13,25 @@ import UpdateTask from '../UpdateTaskModal/UpdateTaskModal';
 import TaskDeleteModal from '../TaskDeleteModal/TaskDeleteModal'; // Import the TaskDeleteModal component
 import { Navigate } from 'react-router-dom';
 
+
+const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0]; // Format the date to 'YYYY-MM-DD'
+};
+
+
 const TaskCell = ({ task }) => {
     const PRIORITY = [
         <p id='low' key={1} className='priority-tag'>Low</p>,
         <p id='medium' key={2} className='priority-tag'>Medium</p>,
         <p id='high' key={3} className='priority-tag'>High</p>
     ];
+
     return (
         <tr className='feature-tr-data child-cell'>
             <th>{task.title}</th>
-            <th>{task.due_date}</th>
+            <th>{formatDate(task.due_date)}</th> {/* Use the formatDate function */}
             <th>{task.status ? "Completed" : "Pending"}</th>
             <th>{PRIORITY[task.priority - 1]}</th>
             <th className='cell-menu'>
