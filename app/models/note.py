@@ -33,7 +33,6 @@ class Note(db.Model):
     title = db.Column(db.String)
     content = db.Column(db.String)
     notebookId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('notebooks.id')), nullable=True)
-    notebookId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('notebooks.id')))
     tagId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('tags.id')), nullable=True)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
