@@ -82,7 +82,7 @@ const NotebookCell = ({ notebook }) => {
 
 const FeatureTable = ({ type }) => {
     const TASK_PROPERTIES = ['Title', 'Due Date', 'Status', 'Priority'];
-    const NOTEBOOK_PROPERTIES = ['Name', 'Note Count', 'Created at', 'Priority'];
+    const NOTEBOOK_PROPERTIES = ['Name', 'Note Count', 'Created at'];
 
     const state = useSelector(state => state);
     const [data, setData] = useState({});
