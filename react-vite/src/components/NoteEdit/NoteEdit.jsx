@@ -2,66 +2,71 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as noteActions from "../../redux/note";
-import { thunkGetTag } from "../../redux/tags";
 import { useParams } from "react-router-dom";
 import { thunkGetNotebooks } from "../../redux/notebooks";
+import { thunkGetTag } from "../../redux/tags";
 
 const NoteEdit = () => {
-    const { noteId } = useParams();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+const {noteId} = useParams();
+const dispatch=useDispatch();
+const navigate=useNavigate();
 
-    const loggedIn = useSelector((state) => state.session.user)
-    // const userId=loggedIn.id
-    const note_id = Number(noteId)
-    // console.log("ID: ", +noteId)
+const loggedIn= useSelector((state)=> state.session.user)
+// const userId=loggedIn.id
+const note_id=Number(noteId)
+// console.log("ID: ", +noteId)
 
 
 
 const notes = useSelector((state)=> state.notes.selectedNote[0])
 const notebooks = useSelector(state => state.notebooks.allNotebooks)
+const tags = useSelector(state=> state.tags)
 // const eachNote=Object.values(notes)
 // const note= Object.values(notes)[0]
-console.log("NOTE", notes)
+console.log("TAGS: ", tags)
+console.log("NOTEBOOKS: ", notebooks)
+
 
 // const [note, setNote] = useState({})
 const [title, setTitle ] = useState('')
 const [content, setContent] = useState('')
 const [notebookId, setNotebookId] = useState(null)
-console.log("TITLE and CONTENT:", title,  '+', content, '+', notebookId)
+const [tagId, setTagId] = useState(null)
+console.log("TITLE and CONTENT:", title,  '+', content, '+', notebookId, '+', tagId)
 
-    useEffect(() => {
-        dispatch(thunkGetTag())
-    }, [dispatch])
 
 
 useEffect(()=> {
     dispatch(noteActions.getDetailsofUserNote(note_id))
     dispatch(thunkGetNotebooks())
+    dispatch(thunkGetTag())
 }, [dispatch, note_id])
 
 useEffect(()=> {
     if (notes?.id) {
         setTitle(notes.title);
         setContent(notes.content);
-        setNotebookId(notes.notebookId)
+        setNotebookId(notes.notebookId);
+        setTagId(notes.tagId)
     }
 }, [notes])
 
-    if (!notes) {
-        return <div>Loading...</div>
-    }
+if (!notes) {
+    return <div>Loading...</div>
+}
 
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+const handleSubmit = async (e) => {
+    e.preventDefault();
 
     const notePayload= {
         id:note_id,
         title,
         content,
-        notebookId: notebookId
+        notebookId: notebookId,
+        tagId : tagId
     }
+    console.log("PAYLOAD: ", notePayload)
     await dispatch(noteActions.editUserNote(notePayload))
     navigate(`/notes`);
 }
@@ -89,9 +94,17 @@ return(
         <select value={notebookId} onChange={(e) => setNotebookId(+e.target.value)}>
             <option>Select a notebook</option>
             {notebooks ? Object.values(notebooks).map( item => (
-                <option value={item.id}>{item.title}</option>
+                <option key={item.id} value={item.id}>{item.title}</option>
             )) : ''}
         </select>
+
+        <select value={tagId} onChange={(e) => setTagId(+e.target.value)}>
+            <option>Select a tag</option>
+            {notebooks ? Object.values(tags).map( tag => (
+                <option key={tag.id} value={tag.id}>{tag.tag_name}</option>
+            )) : ''}
+        </select>
+
         <button type='submit' onClick={handleSubmit}>Edit Note</button>
     </form>
 </div>
