@@ -28,13 +28,14 @@ def get_notes(id):
 def create_note():
     title=request.json.get('title') #grab the title or create default
     notebook_id=request.json.get('notebookId') #grab the notebookId
+    tag_id = request.json.get('tagId')
     user_id=current_user.id #grab the userId
     new_note=Note(
         title=title,
         content='', #blank content
         userId=current_user.id,
         notebookId=notebook_id,
-        # notebookId=1,
+        tagId=tag_id,
         created_at=datetime.utcnow()
         # updated_at=datetime.now(timezone.utc)
     )
@@ -62,6 +63,7 @@ def update_note(id):
     note_to_edit.title = current_data.get('title')
     note_to_edit.content = current_data.get('content')
     note_to_edit.notebookId = current_data.get('notebookId')
+    note_to_edit.tagId = current_data.get('tagId')
     note_to_edit.updated_at = datetime.utcnow()
     #commit the session
     db.session.commit()

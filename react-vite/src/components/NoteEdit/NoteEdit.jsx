@@ -23,8 +23,8 @@ const notebooks = useSelector(state => state.notebooks.allNotebooks)
 const tags = useSelector(state=> state.tags)
 // const eachNote=Object.values(notes)
 // const note= Object.values(notes)[0]
-console.log("TAGS: ", tags)
-console.log("NOTEBOOKS: ", notebooks)
+// console.log("TAGS: ", tags)
+// console.log("NOTEBOOKS: ", notebooks)
 
 
 // const [note, setNote] = useState({})
@@ -32,7 +32,7 @@ const [title, setTitle ] = useState('')
 const [content, setContent] = useState('')
 const [notebookId, setNotebookId] = useState(null)
 const [tagId, setTagId] = useState(null)
-console.log("TITLE and CONTENT:", title,  '+', content, '+', notebookId, '+', tagId)
+// console.log("TITLE and CONTENT:", title,  '+', content, '+', notebookId, '+', tagId)
 
 
 

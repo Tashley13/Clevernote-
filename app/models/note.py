@@ -49,6 +49,7 @@ class Note(db.Model):
             'content' : self.content,
             'notebookId' : self.notebookId,
             'tagId' : self.tagId,
+            # 'tags' : {tag.id: tag.to_dict() for tag in self.tags},
             'userId' : self.userId,
             'created_at': self.created_at,
             'updated_at' : self.updated_at
