@@ -100,7 +100,7 @@ return(
 
         <select value={tagId} onChange={(e) => setTagId(+e.target.value)}>
             <option>Select a tag</option>
-            {notebooks ? Object.values(tags).map( tag => (
+            {tags ? Object.values(tags).map( tag => (
                 <option key={tag.id} value={tag.id}>{tag.tag_name}</option>
             )) : ''}
         </select>
