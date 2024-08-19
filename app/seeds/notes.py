@@ -13,6 +13,7 @@ def seed_notes():
 
     bobbies_notes3 = Note(title='Bobbie\'s Notes3', content='Bobbie content3', notebookId=1, userId=3)
 
+    demo_notes = Note(title='Demo\'s Notes', content='Demo content', notebookId=4, userId=4)
 
     tag1=Tag(tag_name='Test Tag 1', user_id=1)
     tag2=Tag(tag_name='Test Tag 2', user_id=2)
@@ -28,6 +29,7 @@ def seed_notes():
     db.session.add(janes_notes)
     db.session.add(bobbies_notes2)
     db.session.add(bobbies_notes3)
+    db.session.add(demo_notes)
 
     db.session.add_all([tag1, tag2, tag3])
 

@@ -33,6 +33,16 @@ def seed_tasks():
     )
     db.session.add(task3)
 
+    task4 = Task(
+        title='Task Demo',
+        body='Task Demo body',
+        status=False,
+        due_date=datetime(2024, 8, 3),
+        priority=3,
+        user_id=4  # Hardcoded user_id
+    )
+    db.session.add(task4)
+
     db.session.commit()
 
 def undo_tasks():
