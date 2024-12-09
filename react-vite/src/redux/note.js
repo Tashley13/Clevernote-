@@ -76,6 +76,19 @@ export const getDetailsofUserNote = (noteId) => async (dispatch) => {
     }
 }
 
+//get tags for notes
+export const getTagsforNote = (noteId) => async (dispatch) => {
+    const response = await fetch(`/api/notes/tags/${+noteId}`)
+
+    if (response.ok) {
+        const data = await response.json()
+        if (data.errors) {
+            return errors
+        }
+        dispatch(addNotes({ data }))
+    }
+}
+
 //create a note
 
 export const createNote = () => async (dispatch) => {
