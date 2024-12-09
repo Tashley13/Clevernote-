@@ -10,7 +10,9 @@ import { useModal } from "../../context/Modal";
 import * as noteActions from "../../redux/note"
 import CreateTaskModal from "../CreateTaskModal";
 import OpenModalMenuItem from "./OpenModalMenuItem";
-import NotebookAddModal from "../NotebookAddModal/NotebookAddModal";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
+import LoginSignupBtn from "./LoginSignupBtn";
 
 function Navigation() {
   const dispatch = useDispatch();
@@ -63,7 +65,9 @@ function Navigation() {
       <ul id="nav-list">
         <li className="nav-list-profile">
           {!user ? (
-            <ProfileButton />
+            // <ProfileButton />
+
+            <LoginSignupBtn/>
           ) : (
             <div id="nav-logged-in-profile">
               <ProfileButton />
