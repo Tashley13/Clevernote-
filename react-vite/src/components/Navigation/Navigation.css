@@ -118,3 +118,35 @@ nav#nav-main {
 .nav-profile-picture:hover {
   background-color: #777777;
 }
+
+.btn-container {
+  display: flex;
+  color: black;
+  border-radius: 14px;
+
+}
+
+.btn-container > * {
+  padding: 5px;
+  transition: all 120ms ease-in-out;
+  margin: 2px;
+}
+
+.btn-container > :nth-child(2):hover {
+  background-color: rgb(206, 148, 40);
+}
+
+.btn-container > :nth-child(1):hover {
+  border-radius: 4px;
+  box-shadow: rgba(46, 130, 240, 0.4) -2px 2px, rgba(46, 46, 240, 0.3) -4px 4px, rgba(46, 46, 170, 0.2) -6px 6px, rgba(46, 46, 170, 0.1) -8px 8px, rgba(46, 46, 170, 0.05) -10px 10px;
+}
+
+.btn-container > :nth-child(2) {
+  background-color: rgb(255, 184, 52);
+  border-radius: 4px;
+}
+
+.btn-container > :nth-child(1) {
+  color: white;
+
+}
