@@ -10,10 +10,13 @@ def seed_notebooks():
         title="Paul's Notebook", user_id=2)
     bobbys_notebook = Notebook(
         title="Bobby's Notebook", user_id=3)
+    demo_notebook = Notebook(
+        title="Demo's Notebook", user_id=4)
 
     db.session.add(janes_notebook)
     db.session.add(pauls_notebook)
     db.session.add(bobbys_notebook)
+    db.session.add(demo_notebook)
     db.session.commit()
 
 

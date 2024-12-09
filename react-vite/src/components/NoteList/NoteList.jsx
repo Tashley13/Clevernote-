@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react';
 // import { useParams } from "react-router-dom";
 import * as noteActions from "../../redux/note";
 import { Link, useNavigate } from "react-router-dom";
+import "./NoteList"
 // import React from 'react';
 //to view users notes
 
@@ -31,7 +32,7 @@ const NoteList = () => {
   const notes = useSelector((state) => state.notes);
   const eachNote = notes.allNotes
   const note=Object.values(eachNote)
-  // console.log("NOTES:", note)
+  console.log("NOTES:", note)
 
 
   if (!note.length) {
@@ -46,7 +47,7 @@ const NoteList = () => {
   return (
 <div className='notes-display'>
   <ul>
-    {note.length > 0 ? (
+    {note?.length > 0 ? (
       note.map((note, key)=> (
       note.userId === userId && (
       <div key={key} className="note">

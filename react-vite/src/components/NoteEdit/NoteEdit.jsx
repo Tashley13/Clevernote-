@@ -23,16 +23,16 @@ const notebooks = useSelector(state => state.notebooks.allNotebooks)
 const tags = useSelector(state=> state.tags)
 // const eachNote=Object.values(notes)
 // const note= Object.values(notes)[0]
-console.log("TAGS: ", tags)
-console.log("NOTEBOOKS: ", notebooks)
+// console.log("TAGS: ", tags)
+// console.log("NOTEBOOKS: ", notebooks)
 
 
 // const [note, setNote] = useState({})
 const [title, setTitle ] = useState('')
 const [content, setContent] = useState('')
 const [notebookId, setNotebookId] = useState(null)
-const [tagId, setTagId] = useState()
-console.log("TITLE and CONTENT:", title,  '+', content, '+', notebookId, '+', tagId)
+const [tagId, setTagId] = useState(null)
+// console.log("TITLE and CONTENT:", title,  '+', content, '+', notebookId, '+', tagId)
 
 
 
@@ -100,7 +100,7 @@ return(
 
         <select value={tagId} onChange={(e) => setTagId(+e.target.value)}>
             <option>Select a tag</option>
-            {notebooks ? Object.values(tags).map( tag => (
+            {tags ? Object.values(tags).map( tag => (
                 <option key={tag.id} value={tag.id}>{tag.tag_name}</option>
             )) : ''}
         </select>

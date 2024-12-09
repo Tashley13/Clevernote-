@@ -14,6 +14,7 @@ class Tag(db.Model):
 	updated_at = db.Column(db.DateTime, default = datetime.utcnow)
 
 	user = db.relationship('User', back_populates='tags')
+	notes= db.relationship('Note', secondary='note_tag', back_populates='tags')
 
 	def to_dict(self):
 		return {

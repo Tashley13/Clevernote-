@@ -14,11 +14,19 @@ def seed_tags():
 	demo_tag_2 = Tag(
 		tag_name="Demo Tag 2", user_id=1
 	)
+	demo_tag_3 = Tag(
+		tag_name="Demo Tag 2", user_id=4
+	)
+	demo_tag_4 = Tag(
+		tag_name="Demo Tag 2", user_id=4
+	)
 
 	db.session.add(test_tag_1)
 	db.session.add(test_tag_2)
 	db.session.add(demo_tag_1)
 	db.session.add(demo_tag_2)
+	db.session.add(demo_tag_3)
+	db.session.add(demo_tag_4)
 	db.session.commit()
 
 

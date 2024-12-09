@@ -3,6 +3,7 @@ export const DETAIL_NOTE = 'notes/DETAIL_NOTE'
 export const ADD_NOTE = 'notes/ADD_NOTE'
 export const UPDATE_NOTE = 'notes/UPDATE_NOTE'
 export const DELETE_NOTE = 'notes/DELETE_NOTE'
+export const EDIT_TAG = 'notes/EDIT_TAG'
 
 
 //POJO action creators
@@ -38,6 +39,13 @@ const deleteNote = (noteId) => {
     return {
         type: DELETE_NOTE,
         noteId
+    }
+}
+
+const editTag = (note) => {
+    return {
+        type: EDIT_TAG,
+        note
     }
 }
 
@@ -92,9 +100,7 @@ export const createNote = () => async (dispatch) => {
         },
         body: JSON.stringify({
             title: 'Untitled',
-            content: '',
-            notebookId: '',
-            tagId: ''
+            content: ''
         })
     });
 
@@ -132,6 +138,21 @@ export const deleteUserNote = (noteId) => async (dispatch) => {
         // return data
     }
     // return response
+}
+
+export const editUserTag = (note) => async (dispatch) => {
+    const response = await fetch(`/api/notes/${note.id}/editTag`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(note)
+    })
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(editTag(data));
+        return data;
+    }
 }
 
 const initialState = {
@@ -174,6 +195,13 @@ const noteReducer = (state = initialState, action) => {
             delete newState.allNotes[action.noteId];
             return {
                 ...newState
+            }
+        }
+        case EDIT_TAG: {
+            return {
+                ...state,
+                allNotes: { ...state.allNotes, [action.note.id]: { ...action.note } },
+                selectedNote: { [action.note.id]: { ...action.note } }
             }
         }
         default: {
