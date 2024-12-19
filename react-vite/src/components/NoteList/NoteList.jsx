@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react';
 // import { useParams } from "react-router-dom";
 import * as noteActions from "../../redux/note";
 import { Link, useNavigate } from "react-router-dom";
-import "./NoteList"
+import "./NoteList.css"
 // import React from 'react';
 //to view users notes
 
@@ -46,6 +46,7 @@ const NoteList = () => {
 
   return (
 <div className='notes-display'>
+  <h1>My Notes</h1>
   <ul>
     {note?.length > 0 ? (
       note.map((note, key)=> (
@@ -67,7 +68,7 @@ const NoteList = () => {
       <ul className="delete-note">
         <button type="submit" onClick={()=>
           deleteNoteButton(note.id)
-        }>Delete Note</button>
+        }>Delete</button>
         </ul>
     )}
       </div>
