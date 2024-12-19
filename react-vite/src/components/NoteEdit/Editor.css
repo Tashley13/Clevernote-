@@ -1,0 +1,21 @@
+#editor {
+  width: 70%;
+  height: 70%;
+  margin: none;
+}
+
+.ql-toolbar{
+  background-color: rgb(216, 216, 216);
+}
+
+.ql-container{
+  height: 100%;
+  width: 100%;
+  background-color: rgb(58, 58, 58);
+}
+
+.ql-editor{
+  padding: 10px;
+  font-size: 1.2em;
+  color: white;
+}

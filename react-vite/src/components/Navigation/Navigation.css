@@ -50,6 +50,7 @@ nav#nav-main {
   cursor: pointer;
   display: flex;
   justify-content: center;
+  overflow: hidden;
   align-items: center;
   width: 100%;
   border-radius: 4px;

@@ -56,9 +56,9 @@ const NoteList = () => {
           {note.title}
           {/* {note.id} */}
         </div>
-        <div className="note-content">
+        {/* <div className="note-content">
           {note.content.slice(0,10) + "..."}
-        </div>
+        </div> */}
         <div className="note-creation">
           {note.created_at.slice(0,-12)}
         </div>

@@ -46,7 +46,6 @@ const HomePage = () => {
             {filteredNotes.map(note => (
               <li key={note?.id} className="note">
                 <div className="note-title">{note.title}</div>
-                <div className="note-content">{note.content}</div>
                 <div className="note-date">{formatDate(note.created_at)}</div>
               </li>
             ))}

@@ -9,9 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import * as noteActions from "../../redux/note"
 import CreateTaskModal from "../CreateTaskModal";
-import OpenModalMenuItem from "./OpenModalMenuItem";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
 import LoginSignupBtn from "./LoginSignupBtn";
 
 function Navigation() {
@@ -57,7 +54,7 @@ function Navigation() {
     if (newNote) {
       navigate(`/notes/${newNote.id}/edit`)
     }
-    // console.log("NEWNOTE: ",newNote)
+    console.log("NEWNOTE: ", newNote)
   }
 
   return (
@@ -67,7 +64,7 @@ function Navigation() {
           {!user ? (
             // <ProfileButton />
 
-            <LoginSignupBtn/>
+            <LoginSignupBtn navOpen={navOpen}/>
           ) : (
             <div id="nav-logged-in-profile">
               <ProfileButton />
